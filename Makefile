@@ -1,6 +1,8 @@
+.PHONY: serve
 serve:
-	hugo server --minify
+	hugo server --minify --disableFastRender
 
+.PHONY: publish
 publish:
 	$(eval GIT_COMMIT = $(shell git rev-parse --short HEAD))
 	hugo --minify --baseURL https://bphenriques.github.io/knowledge-base

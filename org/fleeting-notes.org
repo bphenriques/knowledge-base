@@ -1,0 +1,6 @@
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: docs
+#+TITLE: Fleeting Notes
+
+* Fleeting notes
+This section groups asorted notes that are either depromoted or promoted to my long-term memory.

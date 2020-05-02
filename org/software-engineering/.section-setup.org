@@ -1,0 +1,8 @@
+#+HUGO_BASE_DIR: ../..
+#+HUGO_SECTION: docs/software-engineering
+
+* Software Engineering
+:PROPERTIES:
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
+:EXPORT_FILE_NAME: _index
+:END:

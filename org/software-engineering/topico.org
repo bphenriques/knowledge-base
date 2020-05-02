@@ -1,0 +1,5 @@
+#+TITLE: Topic
+#+SETUPFILE: ./.section-setup.org
+
+* Something
+Short information about something

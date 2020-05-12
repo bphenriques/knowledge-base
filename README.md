@@ -37,6 +37,10 @@ Would love to use the built-in [go-org](https://github.com/niklasfasching/go-org
 ** [[Some Section]]
 ```
 
+Also, inspired by:
+* https://github.com/jethrokuan/braindump
+* 
+
 # TODO
 
 * Convert this file to `org`

@@ -1,4 +1,4 @@
-![](https://github.com/actions/bphenriques/knowledge-base/.github/workflows/main.yml/badge.svg)
+![Deploy Github Pages on gh-pages](https://github.com/bphenriques/knowledge-base/workflows/Deploy%20Github%20Pages%20on%20gh-pages/badge.svg)
 
 # Knowledge Base
 

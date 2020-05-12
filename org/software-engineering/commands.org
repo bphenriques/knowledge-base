@@ -1,0 +1,8 @@
+#+TITLE: Commands
+#+SETUPFILE: ./.section-setup.org
+
+* Low-Cost Crawler
+
+#+begin_src sh
+wget --spider -o /tmp/wget.log -e robots=off --wait 1 -r -p http://localhost:4000
+#+end_src

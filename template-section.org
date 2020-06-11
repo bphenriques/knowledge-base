@@ -1,0 +1,9 @@
+#+HUGO_BASE_DIR: ../..
+#+HUGO_SECTION: docs/
+#+HUGO_BUNDLE: %(org-hugo-slug knowledge-base-capture-target-section)
+
+* %(identity knowledge-base-capture-target-section)
+:PROPERTIES:
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
+:EXPORT_FILE_NAME: _index
+:END:

@@ -39,7 +39,7 @@ Would love to use the built-in [go-org](https://github.com/niklasfasching/go-org
 
 Also, inspired by:
 * https://github.com/jethrokuan/braindump
-* 
+* https://wiki.nikitavoloboev.xyz/
 
 # TODO
 

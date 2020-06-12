@@ -1,5 +1,6 @@
 #+HUGO_BASE_DIR: ../..
-#+HUGO_SECTION: docs/software-engineering
+#+HUGO_SECTION: docs/
+#+HUGO_BUNDLE: software-engineering
 
 * Software Engineering
 :PROPERTIES:

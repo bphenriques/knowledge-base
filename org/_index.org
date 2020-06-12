@@ -1,0 +1,7 @@
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: docs
+
+* Knowledge Base
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index.md
+:END:

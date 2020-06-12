@@ -1,5 +1,5 @@
 #+TITLE: Emacs
-#+SETUPFILE: ./.section-setup.org
+#+SETUPFILE: ./_index.org
 
 * Keybindings
 ** Spc f - File

@@ -18,6 +18,11 @@ jobs:
           hugo-version: "0.69.2"
           extended: true
 
+      - name: Install emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: 26.3
+
       - name: Build
         run: hugo --minify --cleanDestinationDir --baseURL https://bphenriques.github.io/knowledge-base
 

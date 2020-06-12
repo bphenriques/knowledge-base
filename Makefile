@@ -1,3 +1,5 @@
+SOURCE_ORG_FILES=$(shell pwd)/org
+
 .PHONY: serve
 serve:
 	hugo server --minify --disableFastRender
@@ -9,4 +11,6 @@ publish:
 	git -C public add --all
 	git -C public commit -m "Publish $(GIT_COMMIT)"
 	git -C public push origin gh-pages
+
+
 

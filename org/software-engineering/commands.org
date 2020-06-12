@@ -1,5 +1,5 @@
 #+TITLE: Commands
-#+SETUPFILE: ./.section-setup.org
+#+SETUPFILE: ./_index.org
 
 * Low-Cost Crawler
 

@@ -13,4 +13,8 @@ publish:
 	git -C public push origin gh-pages
 
 
+.PHONE: build
+build:
+	./export-all.sh $(SOURCE_ORG_FILES)
+	hugo --minify --cleanDestinationDir --baseURL https://bphenriques.github.io/knowledge-base
 

@@ -24,7 +24,7 @@ jobs:
           version: 26.3
 
       - name: Build
-        run: hugo --minify --cleanDestinationDir --baseURL https://bphenriques.github.io/knowledge-base
+        run: make build 
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

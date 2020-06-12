@@ -1,6 +1,4 @@
-#+HUGO_BASE_DIR: ../..
-#+HUGO_SECTION: docs/
-#+HUGO_BUNDLE: %(org-hugo-slug knowledge-base-capture-target-section)
-#+TITLE: %(identity knowledge-base-capture-entry-title)
+#+SETUPFILE: ./_index.org
+#+TITLE: %(org-capture-get :knowledge-base-title)
 
 %?

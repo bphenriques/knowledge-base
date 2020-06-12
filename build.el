@@ -17,6 +17,9 @@
 (setq debug-ignored-errors (remq 'user-error debug-ignored-errors))
 (toggle-debug-on-error)
 
+;;; Disable "<file>~" backups.
+(setq make-backup-files nil)
+
 (defun build/export-all ()
   "Invokes ox-hugo export all-subtrees given the current buffer"
   (org-hugo-export-wim-to-md :all-subtrees nil nil))

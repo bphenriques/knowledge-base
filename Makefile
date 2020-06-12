@@ -1,4 +1,6 @@
 SOURCE_ORG_FILES=$(shell pwd)/org
+BASE_URL=https://bphenriques.github.io/knowledge-base
+
 
 .PHONY: serve
 serve:
@@ -7,14 +9,18 @@ serve:
 .PHONY: publish
 publish:
 	$(eval GIT_COMMIT = $(shell git rev-parse --short HEAD))
-	hugo --minify --baseURL https://bphenriques.github.io/knowledge-base
-	git -C public add --all
-	git -C public commit -m "Publish $(GIT_COMMIT)"
-	git -C public push origin gh-pages
+	git -C add --all
+	git -C commit -m "Publish $(GIT_COMMIT)"
+	git -C push origin master
 
-
-.PHONE: build
-build:
+.PHONY: build-content
+build-content:
 	./export-all.sh $(SOURCE_ORG_FILES)
-	hugo --minify --cleanDestinationDir --baseURL https://bphenriques.github.io/knowledge-base
+
+.PHONY: build-site
+build-site:
+	hugo --minify --cleanDestinationDir --baseURL $(BASE_URL)
+
+.PHONY: build
+build: build-content build-site
 

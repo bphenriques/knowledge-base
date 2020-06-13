@@ -1,0 +1,25 @@
+[[https://github.com/bphenriques/knowledge-base/workflows/Build%20&%20Deploy/badge.svg?event=push]]
+
+* Knowledge Base
+Personal wiki page using [[https://orgmode.org/][org-mode]] and [[https://ox-hugo.scripter.co/][ox-hugo]].
+
+* How it works
+The content is written in the ~org~ format in the ~org/~ directory. Each subdirectory represents a section (a [[https://gohugo.io/content-management/page-bundles/][Hugo page bundle]]) and each ~*.org~ file within represents an entry. Both sections and entries creation are automated using ~org-capture~ that will be shared in the future.
+
+Current repository has continous integration setup so that pushed ~*.org~ files will be exported to their ~*.md~ counterpart using ox-hugo (~Makefile~ and ~build.el~), then the ~*.md~ will feed the ~hugo~ to generate the final version of the website. Builds happen on the ~gh-pages~ branch (using [[https://git-scm.com/docs/git-worktree][git-worktree]] and [[https://git-scm.com/docs/git-checkout/#Documentation/git-checkout.txt---orphanltnewbranchgt][orphan branches]]).
+
+* Run locally
+1. Export existing ~*.org~ content and run the website locally:
+   #+BEGIN_SRC bash
+   $ make build-content serve
+   #+END_SRC
+2. Open [[http://localhost:1313][localhost:1313]].
+3. Edit the files in Emacs and save. The content should be automatically reflected as ~org/.dir-locals.el~ enables automatically exports.
+
+* Reference
+- [[https://gohugo.io/][Hugo Static Page Generator]]
+- [[https://github.com/alex-shpak/hugo-book][Hugo Book Theme]]
+- [[https://ox-hugo.scripter.co/][Ox-Hugo]]
+- Inspired by:
+  - [[https://github.com/jethrokuan/braindump]]
+  - [[https://wiki.nikitavoloboev.xyz]]

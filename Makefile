@@ -1,4 +1,5 @@
 SOURCE_ORG_FILES=$(shell pwd)/org
+BUILD_SRC=$(shell pwd)/build.el
 BASE_URL=https://bphenriques.github.io/knowledge-base
 
 
@@ -15,7 +16,7 @@ publish:
 
 .PHONY: build-content
 build-content:
-	./export-all.sh $(SOURCE_ORG_FILES)
+	emacs -Q --batch --load=$(BUILD_SRC) --execute "(build/export-all \"$(SOURCE_ORG_FILES)\")" --kill
 
 .PHONY: build-site
 build-site:

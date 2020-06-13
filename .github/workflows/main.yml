@@ -1,11 +1,16 @@
-name: Deploy Github Pages on gh-pages
+name: Build & Deploy
 on:
   push:
     branches:
       - master
+
+env:
+  HUGO_VERSION: 0.72.0
+  EMACS_VERSION: 26.3
+
 jobs:
   gh-pages-deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -15,13 +20,13 @@ jobs:
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "0.69.2"
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
       - name: Install emacs
         uses: purcell/setup-emacs@master
         with:
-          version: 26.3
+          version: ${{ env.EMACS_VERSION }}
 
       - name: Build
         run: make build 

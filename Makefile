@@ -2,7 +2,6 @@ SOURCE_ORG_FILES=$(shell pwd)/org
 BUILD_SRC=$(shell pwd)/build.el
 BASE_URL=https://bphenriques.github.io/knowledge-base
 
-
 .PHONY: serve
 serve:
 	hugo server --minify --disableFastRender

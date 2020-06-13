@@ -20,7 +20,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("melpa" .  "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 (toggle-debug-on-error)                                       ;; Show debug informaton as soon as error occurs.
 (setq

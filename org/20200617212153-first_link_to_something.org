@@ -1,0 +1,6 @@
+#+SETUPFILE: ./setup.org
+#+title: First link to something
+
+Talking about a topic about something that realy interests me. So let's go!
+
+Let's go another link[[file:idea-ox-hugo-blogpost.org][Idea: Ox-Hugo Blogpost]]

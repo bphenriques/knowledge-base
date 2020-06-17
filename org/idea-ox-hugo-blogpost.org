@@ -1,4 +1,15 @@
-#+SETUPFILE: ./_index.org
+#+SETUPFILE: ./setup.org
 #+TITLE: Idea: Ox-Hugo Blogpost
 
-Share how this website was built.
+
+
+#+EXPORT_FILE_NAME: ../content/idea-ox-hugo-blogpost.md
+#+options: toc:nil
+#+begin_export markdown
+---
+title: some title!
+---
+#+end_export
+
+
+Share how this website was built. Let's add a link to[[file:20200617212153-first_link_to_something][First link to something]].

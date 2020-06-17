@@ -1,4 +1,7 @@
-# Hugo Go
 public/
 resources/_gen/
 content/
+
+#Gatsby
+node_modules
+.cache

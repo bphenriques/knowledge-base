@@ -1,9 +1,0 @@
-#+TITLE: Emacs
-#+SETUPFILE: ./_index.org
-
-* Keybindings
-** Spc f - File
-** Spc f f - Find File
-
-* Cenas
-** Cenas outra veze

@@ -1,0 +1,10 @@
+#+SETUPFILE: ./_index.org
+#+TITLE: Falsehoods
+
+Registering my favorite falsehoods that I encountered. You may find more online [[https://github.com/kdeldycke/awesome-falsehood][here]].
+
+
+* Dates and Time:
+
+- The timezone of the machine will never change.
+- Timezones never change.

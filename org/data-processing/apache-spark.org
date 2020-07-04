@@ -1,0 +1,6 @@
+#+SETUPFILE: ./_index.org
+#+TITLE: Apache Spark
+
+* Glossary
+
+- RDD - Resilient Distributed Datasets

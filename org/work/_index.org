@@ -1,5 +1,6 @@
 #+HUGO_BASE_DIR: ../..
 #+HUGO_SECTION: docs/work
+#+HUGO_WEIGHT: 1
 
 * Work
 :PROPERTIES:

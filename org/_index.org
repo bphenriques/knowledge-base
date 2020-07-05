@@ -1,5 +1,6 @@
 #+HUGO_BASE_DIR: ../
 #+HUGO_SECTION: docs
+#+HUGO_WEIGHT: 100
 
 * Knowledge Base
 :PROPERTIES:

@@ -1,6 +1,7 @@
 #+HUGO_BASE_DIR: ../..
 #+HUGO_SECTION: docs/
 #+HUGO_BUNDLE: data-processing
+#+HUGO_WEIGHT: 1
 
 * Data Processing
 :PROPERTIES:

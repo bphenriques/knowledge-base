@@ -1,0 +1,13 @@
+#+HUGO_BASE_DIR: ..
+#+HUGO_SECTION: .
+#+EXPORT_FILE_NAME: _index.md
+#+HUGO_CUSTOM_FRONT_MATTER: :bookToC false
+#+TITLE: Introduction
+
+* About this Wiki
+
+*Hi!* 👋 Welcome to my Wiki!
+
+Here you will find some notes I gathered throughout the years including research notes and some bits of knowledge that I find interesting to share! It complements my thinking process, therefore, some of these notes may be raw or even innacurate as I work on them.
+
+This Wiki is open-source and available at [[https://github.com/bphenriques/knowledge-base][bphenriques/knowledge-base]] on Github, feel free to send feedback!

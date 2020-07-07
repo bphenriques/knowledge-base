@@ -1,4 +1,4 @@
-#+HUGO_BASE_DIR: ../..
+#+HUGO_BASE_DIR: ../../..
 #+HUGO_SECTION: docs/
 #+HUGO_BUNDLE: data-processing
 #+HUGO_WEIGHT: 1
@@ -6,5 +6,5 @@
 * Data Processing
 :PROPERTIES:
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
-:EXPORT_FILE_NAME: _index
+:EXPORT_FILE_NAME: _index.md
 :END:

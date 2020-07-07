@@ -1,8 +1,31 @@
 #+HUGO_BASE_DIR: ../
-#+HUGO_SECTION: docs
-#+HUGO_WEIGHT: 100
+#+HUGO_SECTION: .
+#+HUGO_CUSTOM_FRONT_MATTER: :bookToC false :editablePage false
+#+TITLE: Introduction
 
-* Knowledge Base
-:PROPERTIES:
-:EXPORT_FILE_NAME: _index.md
-:END:
+Hi!* 👋 Welcome to my Wiki!
+
+* About this Wiki
+
+Here you will find some notes I gathered throughout the years including research notes and some bits of knowledge that I find interesting to share! It complements my thinking process, therefore, some of these notes may be raw or incomplete as I work on them.
+
+* Contributing
+
+Let me know if you find a mistake or if you have suggestions! This Wiki is open-source and available at [[https://github.com/bphenriques/knowledge-base][bphenriques/knowledge-base]].
+# TODO: Possible? Add at the bottom of the page the direct link to the source code to edit.
+# TODO: Add link to create an ticket on Github.
+
+* Contact Information
+
+Feel free to contact me through @@markdown:<a class="invert-text" href="mailto:brunoSPAM-PROTECTIONaphenriques@gmaSPAM-PROTECTIONil.com" onclick="this.href=this.href.replace(/SPAM-PROTECTION/g,'')">moc.liamg(ta)seuqirnehpaonurb</a>@@.
+
+# TODO: Idea, use a simpler hover animation using 'filter': https://codepen.io/sosuke/pen/Pjoqqp
+@@markdown:
+<div class="social-links">
+  <a target="_blank" href="mailto:brunoSPAM-PROTECTIONaphenriques@gmaSPAM-PROTECTIONil.com" onmouseover="this.href=this.href.replace(/SPAM-PROTECTION/g,'')" class="hvr-icon-up"><img class="hvr-icon" src="font-awesome/envelope.svg" alt="Email"/></a>
+  <a target="_blank" href="http://www.github.com/bphenriques" class="hvr-icon-up"><img class="hvr-icon" src="font-awesome/github.svg" alt="github"/></a>
+  <a target="_blank" href="https://pt.linkedin.com/in/bphenriques" class="hvr-icon-up"><img class="hvr-icon" src="font-awesome/linkedin.svg" alt="LinkedIn"/></a>
+  <a target="_blank" href="https://medium.com/@brunoaphenriques" class="hvr-icon-up"><img class="hvr-icon" src="font-awesome/medium.svg" alt="Medium"/></a>
+  <a target="_blank" href="https://github.com/bphenriques/curriculum-vitae-bphenriques/raw/master/bruno_henriques_curriculum_vitae.pdf" class="hvr-icon-up"><img class="hvr-icon" src="font-awesome/id-badge.svg" alt="CV"/></a>
+</div>
+@@

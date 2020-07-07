@@ -1,4 +1,4 @@
-#+HUGO_BASE_DIR: ../..
+#+HUGO_BASE_DIR: ../../..
 #+HUGO_SECTION: docs/
 #+HUGO_BUNDLE: %(org-hugo-slug (org-capture-get :knowledge-base-section))
 #+HUGO_WEIGHT: 1

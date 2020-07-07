@@ -4,3 +4,8 @@ title = "Bruno Henriques"
 [markup.goldmark.renderer]
   unsafe = true
 
+[params]
+  BookRepo = "https://github.com/bphenriques/knowledge-base"
+
+  # Custom as the exported files have `.md` extension and not the original `.org` extension.
+  OrgBookEditPath = 'edit/master/org'

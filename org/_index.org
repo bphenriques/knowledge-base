@@ -3,7 +3,7 @@
 #+HUGO_CUSTOM_FRONT_MATTER: :bookToC false :editablePage false
 #+TITLE: Introduction
 
-Hi!* 👋 Welcome to my Wiki!
+Hi! 👋 Welcome to my Wiki!
 
 * About this Wiki
 
@@ -12,8 +12,6 @@ Here you will find some notes I gathered throughout the years including research
 * Contributing
 
 Let me know if you find a mistake or if you have suggestions! This Wiki is open-source and available at [[https://github.com/bphenriques/knowledge-base][bphenriques/knowledge-base]].
-# TODO: Possible? Add at the bottom of the page the direct link to the source code to edit.
-# TODO: Add link to create an ticket on Github.
 
 * Contact Information
 

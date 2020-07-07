@@ -1,3 +1,5 @@
+#+HUGO_BASE_DIR: ../
+#+HUGO_SECTION: .
 #+HUGO_CUSTOM_FRONT_MATTER: :bookToC false :editablePage false
 #+TITLE: Introduction
 

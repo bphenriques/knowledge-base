@@ -1,1 +1,19 @@
-@import "plugins/_numbered.scss";
+@import "external/hover.scss";
+@import "theme-override.scss";
+
+.invert-text {
+  unicode-bidi: bidi-override;
+  direction: rtl
+}
+
+.social-links {
+  text-align: center;
+}
+
+.social-links a img {
+  height: 1.75em;
+  margin: 0 0.75rem;
+
+  // Change SVG fill to white.
+  filter: brightness(0) invert(1);
+}

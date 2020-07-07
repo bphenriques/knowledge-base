@@ -46,6 +46,7 @@
   "Export all org-files (including nested) in the provided ORG-FOLDER."
   (dolist (org-file (directory-files-recursively org-folder "\.org$"))
     (find-file org-file)
+    (message (format "[build] Exporting %s" org-file)) 
     (org-hugo-export-wim-to-md :allsubtrees nil nil)))
 
 (provide 'build/export-all)

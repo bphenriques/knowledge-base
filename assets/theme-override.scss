@@ -8,6 +8,10 @@ body {
   font-weight: bold;
 }
 
+.book-section-flat>a, .book-section-flat>span {
+  font-size: 1.15em;
+}
+
 .markdown a:visited {
   color: $color-link;
 }

@@ -3,3 +3,4 @@ title = "Bruno Henriques"
 
 [markup.goldmark.renderer]
   unsafe = true
+

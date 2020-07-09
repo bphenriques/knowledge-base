@@ -17,3 +17,15 @@
   // Change SVG fill to white.
   filter: brightness(0) invert(1);
 }
+
+
+// Add top-bottom accent color.
+html {
+  height: 100%;
+
+  body {
+    min-height: 100%;
+    border-top: 4px solid #ffe57f;
+    border-bottom: 4px solid #ffe57f;
+  }
+}

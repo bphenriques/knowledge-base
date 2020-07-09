@@ -1,0 +1,15 @@
+#+SETUPFILE: ./_index.org
+#+TITLE: readme
+
+* Several examples
+
+- https://github.com/matiassingers/awesome-readme
+
+ Key take-ways of some:
+ - Logo top
+ - TOC (horizontally)
+ - Demo (!)
+ - How to use
+ - LICENCE
+
+ Like minimalistic versions as they require less maintenance (hmmm :thinking-face:)

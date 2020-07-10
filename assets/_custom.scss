@@ -1,23 +1,4 @@
-@import "external/hover.scss";
 @import "theme-override.scss";
-
-.invert-text {
-  unicode-bidi: bidi-override;
-  direction: rtl
-}
-
-.social-links {
-  text-align: center;
-}
-
-.social-links a img {
-  height: 1.75em;
-  margin: 0 0.75rem;
-
-  // Change SVG fill to white.
-  filter: brightness(0) invert(1);
-}
-
 
 // Add top-bottom accent color.
 html {
@@ -25,7 +6,7 @@ html {
 
   body {
     min-height: 100%;
-    border-top: 4px solid #ffe57f;
-    border-bottom: 4px solid #ffe57f;
+    border-top: 4px solid $body-accent-background;
+    border-bottom: 4px solid $body-accent-background;
   }
 }

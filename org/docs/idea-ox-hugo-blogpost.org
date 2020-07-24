@@ -1,4 +1,0 @@
-#+SETUPFILE: ./_index.org
-#+TITLE: Idea: Ox-Hugo Blogpost
-
-Share how this website was built.

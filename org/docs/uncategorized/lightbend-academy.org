@@ -1,0 +1,21 @@
+#+SETUPFILE: ./_index.org
+#+TITLE: Lightbend Academy
+
+Some notes regarding Lighbend academy at https://academy.lightbend.com/. Taking this opportunity as it is free during this summer.
+
+Hope to learn more about Akka + Actors + Streams.
+
+Hmmm... is Data Engineering something I would like to work with :thinking:
+
+* Introduction to Reactive Systems
+
+Principles:
+- Remains responsive
+
+* Lightbend
+
+All about reactive architecture.
+
+* Other
+
+** TODO There is a thing called Reactive Manifesto

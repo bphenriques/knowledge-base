@@ -1,4 +1,4 @@
-[[https://img.shields.io/badge/hugo-0.72-blue.svg]]
+[[https://img.shields.io/badge/hugo-0.74.3-blue.svg]]
 [[https://github.com/bphenriques/knowledge-base/workflows/Build%20&%20Deploy/badge.svg?event=push]]
 [[https://img.shields.io/badge/License-MIT-blue.svg]]
 

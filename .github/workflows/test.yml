@@ -5,7 +5,7 @@ on:
       - master
 
 env:
-  HUGO_VERSION: 0.72.0
+  HUGO_VERSION: 0.74.3
   EMACS_VERSION: 26.3
 
 jobs:

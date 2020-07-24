@@ -1,12 +1,2 @@
 @import "theme-override.scss";
 
-// Add top-bottom accent color.
-html {
-  height: 100%;
-
-  body {
-    min-height: 100%;
-    border-top: 4px solid $body-accent-background;
-    border-bottom: 4px solid $body-accent-background;
-  }
-}

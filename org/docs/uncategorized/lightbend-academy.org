@@ -5,12 +5,12 @@ Some notes regarding Lighbend academy at https://academy.lightbend.com/. Taking 
 
 Hope to learn more about Akka + Actors + Streams.
 
-Hmmm... is Data Engineering something I would like to work with :thinking:
+Hmmm... is Data Engineering something I would like to work with? :thinking:
 
 * Introduction to Reactive Systems
 
 Principles:
-- Remains responsive
+- Remain responsive
 
 * Lightbend
 

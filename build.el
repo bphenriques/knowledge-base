@@ -19,8 +19,8 @@
 
 (require 'package)
 
-(add-to-list 'package-archives '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (toggle-debug-on-error)                                       ;; Show debug informaton as soon as error occurs.
 (setq
@@ -46,7 +46,7 @@
   "Export all org-files (including nested) in the provided ORG-FOLDER."
   (dolist (org-file (directory-files-recursively org-folder "\.org$"))
     (find-file org-file)
-    (message (format "[build] Exporting %s" org-file)) 
+    (message (format "[build] Exporting %s" org-file))
     (org-hugo-export-wim-to-md :allsubtrees nil nil)))
 
 (provide 'build/export-all)

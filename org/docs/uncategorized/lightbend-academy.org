@@ -3,19 +3,90 @@
 
 Some notes regarding Lighbend academy at https://academy.lightbend.com/. Taking this opportunity as it is free during this summer.
 
-Hope to learn more about Akka + Actors + Streams.
+Hope to learn more about Reactive + Akka + Actors + Streams.
 
 Hmmm... is Data Engineering something I would like to work with? :thinking:
 
+* Glossary
+
+- **Data at Rest**: Data that is not consumed at the time is injested. It is stored and then consumed later in a batch process.
+
+
 * Introduction to Reactive Systems
 
-Principles:
-- Remain responsive
 
-* Lightbend
+Context: Increasing complexity which requires many nodes (2-3 on simpler) and far more nodes on more complex systems. And the amount of data that is handled today is far larger that it was before, in order to petabytes and is no longer rest, i.e., is actively changing making very hard to catch up.
 
-All about reactive architecture.
+Goal: Provide an experience that is responsive under all conditions:
+- Scale from 10 users to million of users.
+- Consume solely the resources required to support the current work-load (IMO this does not say much, maybe they are referring to the lack of batch jobs that periodically run?)
+- It scales horizontally across several nodes
+- Consistent level of quality and responsiveness
+
+Well.. they provide some explanations regarding avoiding downtime, I am curious which use-cases where this architecture solves as they are use-cases where this can be tricky.
+
+* Reactor Principles
+
+- Most important: Responsive - Always respond in a timely manner.
+- Leads to have to be resiliency even when failures occur.
+- Elastic to keep responsive specially when the system load changes - goes both ways as keeping lots of resources is expensive specially when unjustified.
+- Foundation on Message Driven (or event driven in reactive manifesto) - Async and non-blocking message.
+
+
+
+* On resiliency:
+
+Achieved through:
+- Replication
+- Isolation
+- Containment
+- Delegation
+
+
+Isolation on single components.
+Recovery is delegated to an external component. Hmmm, kinda reminds me k8s when it detects Pods as not ready and forwards traffic to the remaining pods.
+
+* On Elasticicity
+
+Responsivess regardless of the load.
+Zero contention and no central bottlenecks - Seems like to be good be true despite possible. Well.. isn't what we _always_ want regardless of the architecture?
+Predictive Auto-Scaling techniques.
+Responsiveness during peaks while scaling down assures cost effectivness without losing responsiviness.
+
+* On MEssage Driven
+
+All previous principles are supported by this.
+Loose coupling, isolation and location transparency - I kinda disagree with loose coupling, as the systems _still_ will still depend on 3rd party behavior regardless of the communication medium.
+Resources are only consumed while active.
+Idea is that we we stop using resources while waiting for an system to respond, we can do something else while the response haven't arrived (async)
+
+
+* Reactive Principles Example - git
+
+Git is a good example regarding reactive principles:
+- Asyncronous and non-blocking as the work is submitted through PR and I can keep on working locally with no interruptions. Message based as it is basically "please review this".
+- Resiliency as each user has basically a copy of the whole repository locally. The local machine is isolated from the remote.
+- Elastic has we can have multiple copies and does not cause problemas having that repository sync on that many machines.
+- Responsive.
+
+* Reactive Programming vs Reactive Systems
+
+They are not the same.
+
+Reactive systems apply the reactive principles on a architectural level.
+
+Reactive Programming can be (and often is) used to build reactive systems but that does not mean that it is a reactive system.
+
+In order to have a reactive architecture, it means that the reactive systems needs to be separated thorugh asyncronous boundaries.
+
+* TODO https://www.lightbend.com/white-papers-and-reports/reactive-programming-versus-reactive-systems
+
+
+* Domain Driven Design
+
+Goal: Software implementation that is based on an evolving model that is understood by the domain experts.
 
 * Other
 
 ** TODO There is a thing called Reactive Manifesto
+https://github.com/reactivemanifesto/reactivemanifesto

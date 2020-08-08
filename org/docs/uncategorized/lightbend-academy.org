@@ -64,7 +64,7 @@ Idea is that we we stop using resources while waiting for an system to respond, 
 * Reactive Principles Example - git
 
 Git is a good example regarding reactive principles:
-- Asyncronous and non-blocking as the work is submitted through PR and I can keep on working locally with no interruptions. Message based as it is basically "please review this".
+- Asyncronous and non-blocking as the work is submitted through PR and I can keep on working locally with no interruptions. Message based as it is basically "please review this". See[[file:../concurrency/actor-model.org][ Actor Model]].
 - Resiliency as each user has basically a copy of the whole repository locally. The local machine is isolated from the remote.
 - Elastic has we can have multiple copies and does not cause problemas having that repository sync on that many machines.
 - Responsive.

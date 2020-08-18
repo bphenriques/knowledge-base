@@ -1,9 +1,10 @@
 #+HUGO_BASE_DIR: ../..
-#+HUGO_SECTION: %(org-hugo-slug (org-capture-get :knowledge-base-section))
+#+HUGO_SECTION: ${section-slug}
 #+HUGO_WEIGHT: 1
 
-* %(org-capture-get :knowledge-base-section)
+* ${section-title}
 :PROPERTIES:
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
 :EXPORT_FILE_NAME: _index
 :END:
+

@@ -1,8 +1,0 @@
-#+HUGO_BASE_DIR: ../..
-#+HUGO_SECTION: docs
-#+HUGO_WEIGHT: 100
-
-* Fleeting Notes
-:PROPERTIES:
-:EXPORT_FILE_NAME: _index.md
-:END:

@@ -1,5 +1,5 @@
-#+HUGO_BASE_DIR: ../../..
-#+HUGO_SECTION: docs/concurrency
+#+HUGO_BASE_DIR: ../..
+#+HUGO_SECTION: concurrency
 #+HUGO_WEIGHT: 1
 
 * Concurrency

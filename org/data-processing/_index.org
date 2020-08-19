@@ -1,8 +1,8 @@
-#+HUGO_BASE_DIR: ../../..
-#+HUGO_SECTION: docs/monitoring
+#+HUGO_BASE_DIR: ../..
+#+HUGO_SECTION: data-processing
 #+HUGO_WEIGHT: 1
 
-* Monitoring
+* Data Processing
 :PROPERTIES:
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
 :EXPORT_FILE_NAME: _index.md

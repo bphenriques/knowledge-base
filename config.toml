@@ -7,5 +7,7 @@ title = "Bruno Henriques"
 [params]
   BookRepo = "https://github.com/bphenriques/knowledge-base"
 
+  BookSection = '*'
+
   # Custom as the exported files have `.md` extension and not the original `.org` extension.
   OrgBookEditPath = 'edit/master/org'

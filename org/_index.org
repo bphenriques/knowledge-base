@@ -1,18 +1,19 @@
-#+HUGO_BASE_DIR: ../
+#+HUGO_BASE_DIR: ..
 #+HUGO_SECTION: .
-#+HUGO_CUSTOM_FRONT_MATTER: :bookToC false :editablePage false
+#+HUGO_WEIGHT: 100
 #+TITLE: Introduction
 
 Hi! 👋 Welcome to my Wiki!
 
 * About this Wiki
 
-Here you will find some notes I keep as a reference and some bits of knowledge I find interesting to share! It complements my thinking process, therefore, some of these notes may be raw or incomplete as I work on them.
+Here you will find some notes I keep as a reference and some bits of knowledge I find interesting to share! It complements my thinking process, therefore, some of these notes may be raw or incomplete as I work on them.	
 
-* Contributing
+* Contributing	
 
-Let me know if you find a mistake or if you have suggestions! This Wiki is open-source and available at [[https://github.com/bphenriques/knowledge-base][bphenriques/knowledge-base]].
+Let me know if you find a mistake or if you have suggestions! This Wiki is open-source and available at [[https://github.com/bphenriques/knowledge-base][bphenriques/knowledge-base]].	
 
-* Contact Information
+* Contact Information	
 
 You can find my contacts on my homepage [[https://bphenriques.github.io][bphenriques.github.io]].
+

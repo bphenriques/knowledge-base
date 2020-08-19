@@ -1,6 +1,8 @@
 #+SETUPFILE: ./_index.org
 #+TITLE: Lightbend Academy
 
+TEST LINK: [[file:../concurrency/actor-model.org][Actor Model]]
+
 Some notes regarding Lighbend academy at https://academy.lightbend.com/. Taking this opportunity as it is free during this summer.
 
 Hope to learn more about Reactive + Akka + Actors + Streams.

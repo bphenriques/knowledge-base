@@ -4,12 +4,12 @@
 
 * Knowledge Base
 
-Source code of my personal wiki available at [[https://bphenriques.github.io/knowledge-base][bphenriques.github.io/knowledge-base]] using [[https://orgmode.org/][org-mode]] and [[https://ox-hugo.scripter.co/][ox-hugo.]]
+Source code of my personal wiki available at [[https://bphenriques.github.io/knowledge-base][bphenriques.github.io/knowledge-base]] using [[https://orgmode.org/][org-mode]], [[https://github.com/org-roam/org-roam][org-roam]] and [[https://ox-hugo.scripter.co/][ox-hugo.]]
 
 * How it works
 
 The content is written in the ~org-mode~ format in the ~org~ directory where:
-- Each subdirectory under ~org/docs~ represents a section (a [[https://gohugo.io/content-management/page-bundles/][Hugo page bundle]]).
+- Each subdirectory under ~org~ represents a Hugo Section.
 - Each ~*.org~ file within represents an entry.
 - Each ~_index.org~ file contains mostly setup information which eases migrating entries between folders.
 
@@ -17,22 +17,19 @@ For example:
 #+BEGIN_SRC
 .
 ├── _index.org
-└── docs
+├── first-section
+│   ├── _index.org
+│   └── entry.org
+└── second-section
     ├── _index.org
-    ├── assorted-note.org
-    ├── first-section
-    │   ├── _index.org
-    │   └── entry.org
-    └── second-section
-        ├── _index.org
-        └── entry.org
+    └── entry.org
 #+END_SRC
 
-Then, ~build.el~ acts as the key component to automate transforming the ~*.org~ files to their ~*.md~ counterpart using ox-hugo, which in turn feeds ~gohugo~ to generate the final version of the website. Builds happen on the ~gh-pages~ branch (using [[https://git-scm.com/docs/git-worktree][git-worktree]] and [[https://git-scm.com/docs/git-checkout/#Documentation/git-checkout.txt---orphanltnewbranchgt][orphan branches]]).
+Then, the elisp files under ~tools~ will transform the ~*.org~ to ~*.md~ counterpart using ox-hugo, which in will be feeded to ~gohugo~ to generate the final version of the website. Builds happen on the ~gh-pages~ branch (using [[https://git-scm.com/docs/git-worktree][git-worktree]] and [[https://git-scm.com/docs/git-checkout/#Documentation/git-checkout.txt---orphanltnewbranchgt][orphan branches]]).
 
-** Org Capture
+** Org Roam Capture
 
-In the root of the project you will find two ~org-capture~ templates that I personally use. Feel free to contact me for the dotfiles while they are not available.
+In order to automate this process, I use ~org-roam-capture~ templates to create new entries and sections if they are not present already. Feel free to contact me for the dotfiles while they are not available.
 
 * Run locally
 

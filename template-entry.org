@@ -1,4 +1,4 @@
 #+SETUPFILE: ./_index.org
-#+TITLE: %(org-capture-get :knowledge-base-title)
-
-%?
+#+ROAM_TAGS: 
+#+ROAM_ALIAS:
+#+TITLE: ${title}

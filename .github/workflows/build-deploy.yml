@@ -17,6 +17,10 @@ jobs:
         with:
           submodules: true
 
+      - name: Install org-roam dependencies
+        run: |
+          sudo apt-get install sqlite3
+
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
         with:

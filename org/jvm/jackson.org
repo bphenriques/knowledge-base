@@ -3,11 +3,15 @@
 #+ROAM_ALIAS:
 #+TITLE: Jackson
 
+* Sane Settings
+
 After working a while with this I want to register these sane defaults:
 #+BEGIN_SRC kotlin
 configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true)
 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 #+END_SRC
+
+** ~FAIL_ON_NULL_FOR_PRIMITIVES~
 
 Setting ~FAIL_ON_NULL_FOR_PRIMITIVES~ forces clients to explicitely provide all values including primitives. Consider the following POJO:
 #+BEGIN_SRC kotlin
@@ -16,6 +20,8 @@ data class(foo: Boolean)
 
 Without the setting, this would set ~foo~ as ~false~ during serialization despite the lack of default value. Given this, to guarantee consistency between the source-code and the external contract, I advise enabling this.
 
+** ~FAIL_ON_UNKNOWN_PROPERTIES~
+
 Setting ~FAIL_ON_UNKNOWN_PROPERTIES~ is useful when working on two systems in paralel. Settings this to ~false~ enables clients to send fields to the server that are not yet supported but will be. The alternative would be:
 1. Server includes those fields as *optional* fields (to avoid breaking current clients).
 2. Server roll-out.
@@ -23,3 +29,34 @@ Setting ~FAIL_ON_UNKNOWN_PROPERTIES~ is useful when working on two systems in pa
 4. Once all-known clients support the new fields, make the same fields mandatory.
 
 By setting this to ~true~, this whole orchestration is not required.
+
+* TODO Sub-Types
+
+Consider the following example that attempts to model a DSL that supports ~+~ and ~-~ operations.
+
+#+BEGIN_SRC kotlin
+sealed class Expression
+class Sum(val a: Int, val b: Int): Expression()
+class Sub(val a: Int, val b: Int): Expression()
+
+data class Request(
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXTERNAL_PROPERTY, property = "type", visible = true)
+    @JsonSubTypes(
+        JsonSubTypes.Type(value = Sum::class, name = "+")
+        JsonSubTypes.Type(value = Sub::class, name = "-")
+    )
+    val operation: T? = null
+)
+#+END_SRC
+
+In short, this is saying if the JSON contains a field name ~type~ with value ~+~ it would deserialize to ~Sum~ and to ~Sub~ if ~type~ had value ~-~. I.e., a sum operation between 1 and 2 would require the following JSON payload:
+
+#+BEGIN_SRC json
+{
+    "type": "+",
+    "operation": {
+         "a": 1,
+         "b": 2
+    }
+}
+#+END_SRC

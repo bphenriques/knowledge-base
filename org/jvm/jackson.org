@@ -1,0 +1,25 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: serialization
+#+ROAM_ALIAS:
+#+TITLE: Jackson
+
+After working a while with this I want to register these sane defaults:
+#+BEGIN_SRC kotlin
+configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true)
+configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+#+END_SRC
+
+Setting ~FAIL_ON_NULL_FOR_PRIMITIVES~ forces clients to explicitely provide all values including primitives. Consider the following POJO:
+#+BEGIN_SRC kotlin
+data class(foo: Boolean)
+#+END_SRC
+
+Without the setting, this would set ~foo~ as ~false~ during serialization despite the lack of default value. Given this, to guarantee consistency between the source-code and the external contract, I advise enabling this.
+
+Setting ~FAIL_ON_UNKNOWN_PROPERTIES~ is useful when working on two systems in paralel. Settings this to ~false~ enables clients to send fields to the server that are not yet supported but will be. The alternative would be:
+1. Server includes those fields as *optional* fields (to avoid breaking current clients).
+2. Server roll-out.
+3. Clients update their HTTP clients to include the new fields.
+4. Once all-known clients support the new fields, make the same fields mandatory.
+
+By setting this to ~true~, this whole orchestration is not required.

@@ -1,0 +1,11 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS:
+#+ROAM_ALIAS: security token
+#+TITLE: JWT
+
+* What it is
+JSON Web Tokens
+
+* What it solves
+
+* What it does not solve

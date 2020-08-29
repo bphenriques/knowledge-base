@@ -1,0 +1,80 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: system-design lightbend
+#+ROAM_ALIAS:
+#+TITLE: Domain Driven Design
+
+See raw in [[file:../uncategorized/lightbend-academy.org][Lightbend Academy]]
+
+Useful for modelling use-cases before attempting to implement it whether in Software or mere Diagrams.
+
+* Subject-Verb-Object notation
+
+Allows having a consistent way to phrase activies our events in the domain.
+
+Example: Host checks current reservation.
+- *Subject*: Host
+- *Verb*: Checks
+- *Object*: Reservation
+
+Note that "current" can be seen as a modifier.
+
+Sometimes there may be multiple objects. E.g., "Bartender collects Payment for a Drink Order":
+- Both are objects
+- "Payment" is a direct object.
+- "Drink Order" is a indirect object.
+
+Regardless, diferentiation is not that relevant.
+
+* Bounded Context
+
+Each one have unique domain concepts and not all contexts are compatible with others.
+
+
+* Anti-Corruption Layer
+
+Solves issues where coupling starts. This layer leaves right next to the bounded context to avoid leaking info from/to that bounded context.
+
+Typical example: Let's put everything in the same bag.
+
+What happens is that we have a layer responsible for translating similar concepts from one bounded context to another.
+
+How to implement: Abstract interface as it represents the contract in its purest way without compromising - Sometimes abstractions are too much indirection but do understand. :shrug:
+
+#+BEGIN_SRC plantuml :file anti-corruption-layer.png
+actor User
+control "Anti Corruption Layer" as ACL
+entity Component
+
+User -> ACL: Process X
+ACL -> ACL: Translate concept X to Y
+ACL -> Component: Process Y
+Component --> ACL: Z
+ACL --> User: Z
+#+END_SRC
+
+#+RESULTS:
+[[file:anti-corruption-layer.png]]
+
+This is also useful for legacy systems. In this case a Anti Corruption Layer would be preferable on either end.
+
+** TODO Simpler diagram (if plantuml is able to generate one and I understand how..)
+
+* Context Map
+
+Are a way of of visualizating Bounded contexts and the relationships between them.
+
+#+BEGIN_SRC plantuml :file context-map.png
+[Bounded Context A] -> [Bounded Context B]
+[Bounded Context A] -> [Bounded Context C]
+[Bounded Context B] -> [Bounded Context C]
+[Bounded Context C] -> [Bounded Context D]
+#+END_SRC
+
+#+RESULTS:
+[[file:context-map.png]]
+
+- Arrows represent dependencies.
+- Lines are labelled to indicate the nature of the relationship.
+
+
+* TODO Discovery Process using Event Storming

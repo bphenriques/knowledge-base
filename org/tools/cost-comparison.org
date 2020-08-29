@@ -1,8 +1,0 @@
-#+SETUPFILE: ./_index.org
-#+TITLE: Cost Comparison
-
-Not sure the best place to place this.
-
-* Comparing if it is worth purchasing a service
-
-https://isitworththecost.com/

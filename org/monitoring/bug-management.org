@@ -1,4 +1,5 @@
 #+SETUPFILE: ./_index.org
+#+ROAM_TAGS: monitoring
 #+TITLE: Bug Management
 
 Some personal notes on simplifying the process so that one can focus on getting back to the other tasks at hand.

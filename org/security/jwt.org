@@ -1,6 +1,6 @@
 #+SETUPFILE: ./_index.org
-#+ROAM_TAGS:
-#+ROAM_ALIAS: security token
+#+ROAM_TAGS: security
+#+ROAM_ALIAS: 
 #+TITLE: JWT
 
 * What it is

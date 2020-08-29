@@ -1,4 +1,5 @@
 #+SETUPFILE: ./_index.org
+#ROAM_TAGS: data
 #+TITLE: Apache Spark
 
 * Glossary

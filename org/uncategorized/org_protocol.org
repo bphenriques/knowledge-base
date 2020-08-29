@@ -1,0 +1,6 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: uncategorized
+#+ROAM_ALIAS:
+#+TITLE: Org-Protocol
+
+Useful guide: https://github.com/xuchunyang/setup-org-protocol-on-mac

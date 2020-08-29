@@ -7,8 +7,49 @@ Hope to learn more about Reactive + Akka + Actors + Streams.
 
 Hmmm... is Data Engineering something I would like to work with? :thinking:
 
-* Glossary
+* TODO TENHO QUE FAER ISTO
+* DONE CENAS
 
+* [X] DONE
+
+#+BEGIN_QUOTE
+CENAS AQUI
+#+END_QUOTE
+
+#+BEGIN_SRC scala
+case class Cenas(val a: Int)
+case class Outras(val b: Int)
+#+END_SRC
+
+#+RESULTS:
+: defined class Cenas
+: defined class Outras
+
+#+begin_src scala
+sealed trait Maybe[+T]
+final case object Empty extends Maybe[Nothing]
+final case class Just[T](t: T) extends Maybe[T]
+println(2)
+
+val a = Just(2)
+println(a)
+#+end_src
+
+#+RESULTS:
+: 2
+: Just(2)
+: defined trait Maybe
+: defined object Empty
+: defined class Just
+: a: Just[Int] = Just(2)
+
+* Glossary
+**
+** Cenas
+*** Cenas
+**** Cenas
+***** Cenas
+****** Cenas
 - **Data at Rest**: Data that is not consumed at the time is injested. It is stored and then consumed later in a batch process.
 
 

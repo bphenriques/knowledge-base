@@ -1,5 +1,5 @@
 #+SETUPFILE: ./_index.org
-#+ROAM_TAGS: serialization
+#+ROAM_TAGS: jvm json
 #+ROAM_ALIAS:
 #+TITLE: Jackson
 

@@ -1,4 +1,5 @@
 #+SETUPFILE: ./_index.org
+#+ROAM_TAGS: concurrency
 #+TITLE: Actor Model
 
 In the context of Reactive Systems, Actor model is a reactive tool, a paradigm that:

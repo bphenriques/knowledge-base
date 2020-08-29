@@ -1,4 +1,5 @@
 #+SETUPFILE: ./_index.org
+#+ROAM_TAGS: docs
 #+TITLE: readme
 
 * Several examples
@@ -8,7 +9,7 @@
  Key take-ways of some:
  - Logo top
  - TOC (horizontally)
- - Demo (!)
+ - Demo
  - How to use
  - LICENCE
 

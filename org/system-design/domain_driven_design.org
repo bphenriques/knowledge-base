@@ -85,3 +85,17 @@ Are a way of of visualizating Bounded contexts and the relationships between the
 - *Query*: Requestfor information about the domain. Usually delievered to a specific destination. Do not change the state of the domain.
 
 All of these represent the types of messages in a Reactive System and form the API for a Bounded Context.
+
+* Domain Objects
+
+- *Value objects*: Defined by its attribute. Immuatable. Messages in Reactive Systems are implemented as Value Objects.
+- *Entity*: Defined by an unique identity. The fields may change but not its identitity. Are the soruce of truth - Actors in Akka or Entitities in Lagom (hopefully will /click/ later)
+- *Aggregate*: Collection of domain objects bound to a root entity:
+  - Example: Person (Aggregate Root), Name (Aggregate), Address (Aggregate).
+  - Transactions should not span multiple aggregate roots.
+  - The Aggregate Root may change between bounded contexts. Aggregate Root == Root Entity.
+  - Good cadnidates for distribution in Reactive Systems.
+  - Question: How to determine?
+    - Is the entity involved in more operations in the same bounded context?
+    - Does it make sense deleting other entities when this one is deleted?
+    - Will a single transaction span multiple entities?

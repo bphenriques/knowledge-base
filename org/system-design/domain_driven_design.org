@@ -70,11 +70,18 @@ Are a way of of visualizating Bounded contexts and the relationships between the
 [Bounded Context C] -> [Bounded Context D]
 #+END_SRC
 
-#+RESULTS:
 [[file:context-map.png]]
 
 - Arrows represent dependencies.
-- Lines are labelled to indicate the nature of the relationship.
+- Lines may be labelled to indicate the nature of the relationship.
 
 
 * TODO Discovery Process using Event Storming
+
+* Types of Domain Activities
+
+- *Command*: A request yet to happen and can be rejected. Usually delivered to a specific destination and changes the state of the domain.
+- *Events*: Action that happened in the past. Hence they can not be rejected. Often broadcast to many destinations. Record a change to the state of the domain, often the result of a command (what are the alternatives?).
+- *Query*: Requestfor information about the domain. Usually delievered to a specific destination. Do not change the state of the domain.
+
+All of these represent the types of messages in a Reactive System and form the API for a Bounded Context.

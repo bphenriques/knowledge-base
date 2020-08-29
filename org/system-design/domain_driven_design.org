@@ -53,7 +53,8 @@ ACL --> User: Z
 #+END_SRC
 
 #+RESULTS:
-[[file:anti-corruption-layer.png]]
+[[file:../../static/anti-corruption-layer.png]]
+
 
 This is also useful for legacy systems. In this case a Anti Corruption Layer would be preferable on either end.
 
@@ -69,6 +70,9 @@ Are a way of of visualizating Bounded contexts and the relationships between the
 [Bounded Context B] -> [Bounded Context C]
 [Bounded Context C] -> [Bounded Context D]
 #+END_SRC
+
+#+RESULTS:
+[[file:../../static/context-map.png]]
 
 - Arrows represent dependencies.
 - Lines may be labelled to indicate the nature of the relationship.

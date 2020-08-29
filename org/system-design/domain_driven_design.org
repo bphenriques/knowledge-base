@@ -40,7 +40,7 @@ What happens is that we have a layer responsible for translating similar concept
 
 How to implement: Abstract interface as it represents the contract in its purest way without compromising - Sometimes abstractions are too much indirection but do understand. :shrug:
 
-#+BEGIN_SRC plantuml :file ../../static/anti-corruption-layer.png
+#+BEGIN_SRC plantuml :file anti-corruption-layer.png
 actor User
 control "Anti Corruption Layer" as ACL
 entity Component
@@ -52,10 +52,6 @@ Component --> ACL: Z
 ACL --> User: Z
 #+END_SRC
 
-#+RESULTS:
-[[file:../../static/anti-corruption-layer.png]]
-
-
 This is also useful for legacy systems. In this case a Anti Corruption Layer would be preferable on either end.
 
 ** TODO Simpler diagram (if plantuml is able to generate one and I understand how..)
@@ -64,15 +60,13 @@ This is also useful for legacy systems. In this case a Anti Corruption Layer wou
 
 Are a way of of visualizating Bounded contexts and the relationships between them.
 
-#+BEGIN_SRC plantuml :file ../../static/context-map.png
+#+BEGIN_SRC plantuml :file context-map.png
 [Bounded Context A] -> [Bounded Context B]
 [Bounded Context A] -> [Bounded Context C]
 [Bounded Context B] -> [Bounded Context C]
 [Bounded Context C] -> [Bounded Context D]
 #+END_SRC
 
-#+RESULTS:
-[[file:../../static/context-map.png]]
 
 - Arrows represent dependencies.
 - Lines may be labelled to indicate the nature of the relationship.

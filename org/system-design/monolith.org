@@ -1,0 +1,36 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: system-design
+#+ROAM_ALIAS:
+#+TITLE: Monolith
+
+Some notes taken during the lightbend course on Reactive Microservices. Some of these ideas are familiar as they are intuitive.
+
+- Deployed as a single unit.
+- No Clear Isolation.
+- Complex Depedencies -> Hard to understand and modify.
+- Communication using syncronous calls. Hmmm, I disagree and I think that it depends.. E.g., Spring allows services call another with asyncronous methods within the same /monolith/. I guess that it depends on the /spectrum/ of monolith we are talking about.
+- Big Bang Style Releases
+- Long Cycle Times
+- Careful releases
+- Scalation is done with multiple copies and uses the database as consistency between them.
+
+
+Advantages:
+- Easy Cross Module Refactor
+- Easier to maitain consistency
+- Single Deploy Process
+- Single thing to monitor
+- Simple Scalability Model
+
+Disavantages:
+- Limited by the maximum size of a single phyisical machine.
+- Only scales as the database allows.
+- Components are scaled as a group.
+- Deep coupling.
+- Long Dev Cycle.
+- Lack of reliaability given that one failure may impact the whole monolith.
+
+
+* Tearing it up
+
+Introduce domain boundaries within the application itself (e.g., libraries). Also possible to look for [[file:service_oriented_architecture.org][Service Oriented Architecture]].

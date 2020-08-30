@@ -95,3 +95,42 @@ All of these represent the types of messages in a Reactive System and form the A
     - Is the entity involved in more operations in the same bounded context?
     - Does it make sense deleting other entities when this one is deleted?
     - Will a single transaction span multiple entities?
+
+* Domain Abstractiosn
+** Services
+
+Busines Logic encapsulated. Should be stateless otherwise they become an entity or a value object.
+
+Should be fairly thin.
+
+** Factories
+
+Constructing domain object may not be trivial as they may have to access external resources (DBs, files, REst APIs, etc).
+
+** Repositories
+
+Similar to factories but used to get or modify existing objects. They work often over databases but can work with files or Rest Apis (I actually prefer "Gateways" for Rest APIs).
+
+Note: Factories and Repositories can be the same in practice.
+
+* Hexagonal Architecutre
+
+Is not directly related with domain driven design but is very compatible.
+
+Domain is at the core and is at teh center becoming the architectural focus. Then there are ports to communicate with the domain exposed as API for the domain. INfrastructure contains adapters that map to the ports.
+
+Like an Onion
+
+- Domain
+  - API - The ports
+    Infrastructure - Adapts incoming and outgoing traffic in to the ports.
+
+Outer layers depends on inner layers. And inner layers have no knowledge of other layers.
+
+:thinking: This does not seem different from the typical layered design with DB -> Services -> API
+
+Ensures proper spearation of infrastructure from domain.
+
+These layers may be modelled through packages or projects. Details are not important. The important thing is to make the domain portable.
+
+Would like a concrete example on how it really differents from the N tiered design.

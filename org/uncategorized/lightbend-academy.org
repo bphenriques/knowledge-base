@@ -151,10 +151,9 @@ Strategy: Take the large domain and seperate onto sub domains by grouping relate
 
 However it is normal having conceps that span multiple sub domains however it is important to avoid abstract already as there may be slight changes. For example, a customer in the context of an online order is different from a customer in the context of in-store purchase. Therefore, there should be modeled as different entities.
 
-Bounded Context: Ubiquotious Language and model for a :w:sub-domain. The meaning of a concept by change from one bounded context to another.
+Bounded Context: Ubiquotious Language and model for a sub-domain. The meaning of a concept by change from one bounded context to another.
 
 Microservices are built around bounded contexts.
-
 
 How to determine those boundaries? Some guidelines:
 - IMO Use-cases...

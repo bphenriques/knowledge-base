@@ -1,0 +1,15 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: uncategorized
+#+ROAM_ALIAS:
+#+TITLE: Akka
+
+* Akka Distributed Data
+
+CRDTs in distributed data are stored in memory. Can be copied to disk to speed up recovery if a replica fails.
+
+Best used for small data sets with infrequent updates that require high availability.
+
+Limitations CRDT: Do not work with every data type that require a merge function. Some data types are too complex to merge and require the use of /tombstone/:
+- A marker that shows something was deleted.
+- Can result in data types that only get larger and never smaller.
+- Aka CRDT Garbage

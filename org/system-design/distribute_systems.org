@@ -1,0 +1,8 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: system-design
+#+ROAM_ALIAS:
+#+TITLE: Distributed Systems
+
+*Definition*: Systems that are separated by space.
+
+Issue: Consistency. By the time the receiver receives the state of the sender, the state may have already changed!

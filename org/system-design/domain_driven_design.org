@@ -83,10 +83,13 @@ Are a way of of visualizating Bounded contexts and the relationships between the
 All of these represent the types of messages in a Reactive System and form the API for a Bounded Context.
 
 * Domain Objects
+:PROPERTIES:
+:ID:       5cb5d960-9faf-4ab2-8f89-2315cddc747c
+:END:
 
 - *Value objects*: Defined by its attribute. Immuatable. Messages in Reactive Systems are implemented as Value Objects.
 - *Entity*: Defined by an unique identity. The fields may change but not its identitity. Are the soruce of truth - Actors in Akka or Entitities in Lagom (hopefully will /click/ later)
-- *Aggregate*: Collection of domain objects bound to a root entity:
+[[file:monolith.org][Monolith]]- *Aggregate*: Collection of domain objects bound to a root entity:
   - Example: Person (Aggregate Root), Name (Aggregate), Address (Aggregate).
   - Transactions should not span multiple aggregate roots.
   - The Aggregate Root may change between bounded contexts. Aggregate Root == Root Entity.

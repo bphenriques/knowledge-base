@@ -107,6 +107,9 @@ How:
 - Avoid direct, syncronous dependencies on external services.
 
 ** API Gateway Services
+:PROPERTIES:
+:ID:       c5b773a4-a9bd-4260-9ed0-5aad137619d9
+:END:
 
 Microservices can lead to complexity in the API. How can we manage complex APIs that access many microservices?
 

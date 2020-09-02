@@ -1,0 +1,77 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: scala
+#+ROAM_ALIAS:
+#+TITLE: Hands-on Scala Programming
+
+Follows my notes on the Haoyi Li.'s book: "Hands-on Scala Programming".
+
+As an experiment, I coding directly in the org-mode file using Babel to execute the Scala blocks:
+
+* TODO Some introduction
+- [ ] Point to dotfiles
+- [ ] Point to the Babel package
+
+* Notes
+
+- Lack of auto-complete when writing here.
+
+* Exercises 3.5
+
+** 3.63
+#+begin_quote
+“Write a short program that prints each number from 1 to 100 on a new line.
+
+For each multiple of 3, print "Fizz" instead of the number.
+
+For each multiple of 5, print "Buzz" instead of the number.
+
+For numbers which are multiples of both 3 and 5, print "FizzBuzz" instead of the number.”
+#+end_quote
+
+#+begin_quote
+"Define a def flexibleFizzBuzz method that takes a String => Unit callback function as its argument, and allows the caller to decide what they want to do with the output. The caller can choose to ignore the output, println the output directly, or store the output in a previously-allocated array they already have handy.”
+#+end_quote
+
+#+BEGIN_SRC scala
+def flexibleFizBuzz(callback: String => Unit) {
+ (1 to 100).foreach { i =>
+   if (i % 3 == 0 && i % 5 == 0) callback("FizzBuzz")
+   else if (i % 3 == 0) callback("Fizz")
+   else if (i % 5 == 0) callback("Buzz")
+   else callback(i.toString)
+ }
+}
+
+flexibleFizBuzz(s => println(s))
+#+END_SRC
+
+** 3.64
+
+#+begin_quote
+“Write a recursive method printMessages that can receive an array of Msg class instances, each with an optional parent ID, and use it to print out a threaded fashion. That means that child messages are print out indented underneath their parents, and the nesting can be arbitrarily deep.”
+#+end_quote
+
+#+BEGIN_SRC scala
+class Msg(val id: Int, val parent: Option[Int], val txt: String)
+
+def printMessages(messages: Array[Msg]) {
+  def printMessages(remainingMessages: Array[Msg], level: Int) {
+
+
+  }
+}
+
+printMessages(Array(
+  new Msg(0, None,      "Hello"),
+  new Msg(1, Some(0),   "World"),
+  new Msg(2, None,      "I am Cow"),
+  new Msg(3, Some(2),   "Hear me moo"),
+  new Msg(4, Some(2),   "Here I stand"),
+  new Msg(5, Some(2),   "I am Cow"),
+  new Msg(6, Some(5),   "Here me moo, moo")
+))
+#+END_SRC
+
+#+RESULTS:
+: defined class Msg
+: defined function printMessages

@@ -14,10 +14,15 @@ As an experiment, I coding directly in the org-mode file using Babel to execute 
 * Notes
 
 - Lack of auto-complete when writing here.
+- Compilation errors are hard to track. Workaround is to open a separate buffer with the ammonite REPL console.
+- For sure will have to move to a dedicated project once I use Mill. Or maybe not.
 
 * Exercises 3.5
 
 ** 3.63
+:PROPERTIES:
+:ID:       b96b1d1d-f7bf-4399-a38a-7f30def759f8
+:END:
 #+begin_quote
 “Write a short program that prints each number from 1 to 100 on a new line.
 
@@ -51,14 +56,27 @@ flexibleFizBuzz(s => println(s))
 “Write a recursive method printMessages that can receive an array of Msg class instances, each with an optional parent ID, and use it to print out a threaded fashion. That means that child messages are print out indented underneath their parents, and the nesting can be arbitrarily deep.”
 #+end_quote
 
+- I assume that the items are ordered by their identifier which is incremental with each /new/ message.
+
 #+BEGIN_SRC scala
 class Msg(val id: Int, val parent: Option[Int], val txt: String)
 
 def printMessages(messages: Array[Msg]) {
-  def printMessages(remainingMessages: Array[Msg], level: Int) {
+  val padding = 2
+  def printMessages(index: Int, msgLevel: Map[Int, Int]) {
+    if (index < messages.length) {
+      val message = messages(index)
+      val level = message.parent match {
+        case Some(parent) => msgLevel.getOrElse(parent, 0) + 1
+        case None => 0
+      }
 
-
+      println(" " * level * padding + message.txt)
+      printMessages(index + 1, msgLevel + (message.id -> level))
+    }
   }
+
+  printMessages(index = 0, msgLevel = Map())
 }
 
 printMessages(Array(
@@ -73,5 +91,12 @@ printMessages(Array(
 #+END_SRC
 
 #+RESULTS:
+: Hello
+:   World
+: I am Cow
+:   Hear me moo
+:   Here I stand
+:   I am Cow
+:     Here me moo, moo
 : defined class Msg
 : defined function printMessages

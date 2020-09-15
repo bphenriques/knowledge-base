@@ -1,0 +1,51 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: blog-ideas
+#+ROAM_ALIAS:
+#+TITLE: Using PSQL as job queue
+
+Use-case: Process event queue stored in PSQL. Useful for [[file:../system-design/outbox_pattern.org][Outbox Pattern]]:
+1. Dequeue ~size~ item.
+2. Process each item.
+
+As expected, resiliency and concurrent systems leads to devious details where the resolution largely depends on the use-case:
+- Multiple nodes accessing the same queue.
+- What happens if the node crashes while it processes the item. Will the event loss?
+
+Consider the following table:
+#+BEGIN_SRC SQL
+DROP TABLE IF EXISTS "queue";
+CREATE TABLE "queue" (
+  "id" SERIAL,
+  "dequeued_at" TIMESTAMP NULL,
+
+  -- remaining fields relevant for the use-case. For the outbox pattern, one would be storing the event in JSON format, the event id and the event's timestamp.
+);
+#+END_SRC
+
+This table represent a queue in the database. In order to fetch ~size~ elements from the queue:
+
+#+BEGIN_SRC sql
+UPDATE event_queue SET dequeued_at = current_timestamp
+WHERE id IN (
+      SELECT id FROM queue
+      WHERE dequeued_at IS NULL OR current_timestamp >= (dequeued_at + interval '1 second' second * :seconds)
+      ORDER BY event_timestamp ASC
+      LIMIT :size
+      FOR UPDATE SKIP LOCKED
+)
+RETURNING *
+#+END_SRC
+
+- One can simplify this to solely fetch one element at at a time but this reduces the connections done in the DB. It depends on the use-case.
+
+Breaking down:
+- ~UPDATE event_queue SET dequeued_at = current_timestamp + ~FOR UPDATE SKIP LOCKED~ - Guarantees that multiple nodes reading N elements from the queue will have disjoint sets.
+- ~WHERE dequeued_at IS NULL~ - Condition to check if the item was dequeued.
+- ~current_timestamp >= (dequeued_at + interval '1 second' second * :seconds)~ - Guarantees that multiple nodes will not process the same elements.
+
+
+Alternatives:
+- Just delete the entity, however it incurs the risk if processing the element fails leading to the loss.
+
+References:
+-

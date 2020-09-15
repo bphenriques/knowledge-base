@@ -6,7 +6,7 @@ on:
 
 env:
   HUGO_VERSION: 0.74.3
-  EMACS_VERSION: 26.3
+  EMACS_VERSION: 27.1
 
 jobs:
   gh-pages-deploy:

@@ -3,7 +3,7 @@
 #+ROAM_ALIAS:
 #+TITLE: Using PSQL as job queue
 
-Use-case: Process event queue stored in PSQL. Useful for [[file:../system-design/outbox_pattern.org][Outbox Pattern]]:
+Use-case: Process event queue stored in PSQL:
 1. Dequeue ~size~ item.
 2. Process each item.
 

@@ -1,0 +1,44 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: system-design
+#+ROAM_ALIAS:
+#+TITLE: Reactive Systems
+
+* Goal
+
+Provide an experience that is responsive under all conditions.
+
+This requires:
+- Ability to scale from 10 users to million of users.
+- Consume _solely_ the resources required to support the current work-load.
+
+* Reactor Principles
+
+** Responsive
+
+Always respond in a timely manner.
+
+** *Resiliency*
+
+Isolate failures on single components - Similar to how a boat is designed.
+
+** *Elastic*
+
+- Keep responsive specially when the system load changes which provides a more efficient usage of resources.
+- Reduce contentions.
+- Avoid central bottlenecks.
+- Predictive Auto-Scaling policies.
+
+** Message Driven
+
+- Losse coupling
+- Isolatation - Kinda disagree with loose coupling, as the systems _still_ will still depend on 3rd party behavior regardless of the communication medium.
+- Resources are only consumed while active
+
+Avoce all, make sure that the systems is not actively waiting so that it can do something else in the mean time which leads to a *Async and non-blocking* messages.
+
+* Git as example
+
+- Asyncronous and non-blocking as the work is submitted through PR and I can keep on working locally with no interruptions. Message based as it is basically "please review this".
+- Resiliency as each user has basically a copy of the whole repository locally. The local machine is isolated from the remote.
+- Elastic has we can have multiple copies and does not cause problemas having that repository sync on that many machines.
+- Responsive.

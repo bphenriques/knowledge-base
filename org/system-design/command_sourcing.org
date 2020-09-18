@@ -1,0 +1,15 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: system-design
+#+ROAM_ALIAS:
+#+TITLE: Command Sourcing
+
+* Command Sourcing
+
+Similar to [[file:event_sourcing.org][Event Sourcing]] but persists commands as opposed to events so:
+1. Issue command
+2. Persist command
+3. Run asyncronous the command
+
+- They should be idempotent as they run multiple times (e.g., failures).
+- Must be validated so that they do not become stuck in the queue forever.
+- Bad: The sender might not be notified if the command fails due to the decouple nature.

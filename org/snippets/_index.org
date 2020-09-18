@@ -1,8 +1,8 @@
 #+HUGO_BASE_DIR: ../..
-#+HUGO_SECTION: blog-ideas
-#+HUGO_WEIGHT: 5
+#+HUGO_SECTION: snippets
+#+HUGO_WEIGHT: 4
 
-* Blog Ideas
+* Snippets
 :PROPERTIES:
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
 :EXPORT_FILE_NAME: _index

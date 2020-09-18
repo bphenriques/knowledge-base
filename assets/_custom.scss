@@ -3,7 +3,7 @@
 .backlinks {
     padding: 0.001em 1.5rem 0.001rem 1.5rem;
     border-radius: .5rem;
-    background-color: #40515a;
+    background-color: var(--backlinks-background);
 
     ul li {
         font-size: 0.9em;

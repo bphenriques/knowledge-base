@@ -1,0 +1,30 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: snippets
+#+ROAM_ALIAS:
+#+HUGO_DRAFT: true
+#+TITLE: Kotlin
+
+* Alternative when CountdownLatch is not present
+
+Sometimes ~CountdownLatch~ is not possible, leading to ~Thread.sleep(...)~ that is not ideal as it blocks the system longer than required.
+As an alternative, follows a snippet that implements a pooling mechanism. Ideally, opt for CountdownLatch.
+
+Better alternatives are welcome.
+
+#+BEGIN_SRC kotlin
+fun assertWaitFor(timeoutMs: Long = 5000, intervalMs: Long = 250, fn: () -> Unit) {
+    val start = Instant.now()
+    var lastError: Throwable? = null
+    while (Duration.between(start, Instant.now()).toMillis() <= timeoutMs) {
+        try {
+            fn()
+            return
+        } catch (ex: AssertionError) {
+            lastError = ex
+        }
+        Thread.sleep(intervalMs)
+    }
+
+    fail("Failed to reach expected condition within $timeoutMs ms.", lastError!!)
+}
+#+END_SRC

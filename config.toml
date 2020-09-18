@@ -5,6 +5,7 @@ title = "Bruno Henriques"
   unsafe = true
 
 [params]
+  BookTheme = 'dark'
   BookRepo = "https://github.com/bphenriques/knowledge-base"
 
   BookSection = '*'

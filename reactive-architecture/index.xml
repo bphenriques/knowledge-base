@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reactive Architecture on Bruno Henriques</title><link>https://bphenriques.github.io/knowledge-base/reactive-architecture/</link><description>Recent content in Reactive Architecture on Bruno Henriques</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://bphenriques.github.io/knowledge-base/reactive-architecture/index.xml" rel="self" type="application/rss+xml"/><item><title>Patterns</title><link>https://bphenriques.github.io/knowledge-base/reactive-architecture/patterns/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bphenriques.github.io/knowledge-base/reactive-architecture/patterns/</guid><description>CQRS/ES: Command Query Responsibility Segregation and Event Sourcing.
-Two tools that can be combined.
-Use Cases:
-Auditing (e.g., banking, accounting) High Scalability High Resiliency There are trade-offs, what are they?
-State Based Persistence # CQRS # State Based Persistence. Every time an update is applied to the database it obliterates previous state.
-Can&amp;rsquo;t fix bad state due to previous error. Can&amp;rsquo;t retroactively apply new domain insights (because we do not have the previous states).</description></item></channel></rss>

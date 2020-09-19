@@ -1,6 +1,6 @@
+#+TITLE: Messaging Systems Comparison
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: messaging
-#+TITLE: Messaging Systems Comparison
 
 * Kafka
 

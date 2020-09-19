@@ -1,8 +1,8 @@
+#+TITLE: Using PSQL as job queue
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: blog-ideas
 #+ROAM_ALIAS:
 #+HUGO_DRAFT: true
-#+TITLE: Using PSQL as job queue
 
 Use-case: Process event queue stored in PSQL:
 1. Dequeue ~size~ item.

@@ -1,7 +1,7 @@
+#+TITLE: Event Sourcing
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: Event Sourcing
 
 
 * Event Sourcing (ES)

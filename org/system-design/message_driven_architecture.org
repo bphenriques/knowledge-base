@@ -1,7 +1,7 @@
+#+TITLE: Message Driven Architecture
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: Message Driven Architecture
 
 Asyncronous and non-blocking. The sender does not actively wait for a response.
 

@@ -1,7 +1,7 @@
+#+TITLE: Monolith
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: Monolith
 
 Some notes taken during the lightbend course on Reactive Microservices. Some of these ideas are familiar as they are intuitive.
 

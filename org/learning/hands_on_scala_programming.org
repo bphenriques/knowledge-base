@@ -1,7 +1,7 @@
+#+TITLE: Hands-on Scala Programming
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: scala
 #+ROAM_ALIAS:
-#+TITLE: Hands-on Scala Programming
 
 Follows my notes on the Haoyi Li.'s book: "Hands-on Scala Programming".
 

@@ -1,7 +1,7 @@
+#+TITLE: Domain Driven Design
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design lightbend
 #+ROAM_ALIAS:
-#+TITLE: Domain Driven Design
 
 See raw in [[file:../uncategorized/lightbend-academy.org][Lightbend Academy]]
 

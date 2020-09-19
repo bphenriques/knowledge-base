@@ -1,16 +1,9 @@
+#+TITLE: Readme
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: docs
-#+TITLE: readme
 
 * Several examples
 
 - https://github.com/matiassingers/awesome-readme
 
- Key take-ways of some:
- - Logo top
- - TOC (horizontally)
- - Demo
- - How to use
- - LICENCE
-
- Like minimalistic versions as they require less maintenance (hmmm :thinking-face:)
+Like minimalistic versions as they require less maintenance (hmmm :thinking-face:)

@@ -1,7 +1,7 @@
+#+TITLE: Command Sourcing
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: Command Sourcing
 
 * Command Sourcing
 

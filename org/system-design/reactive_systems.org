@@ -1,7 +1,7 @@
+#+TITLE: Reactive Systems
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: Reactive Systems
 
 * Goal
 

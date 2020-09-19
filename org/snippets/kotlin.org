@@ -1,8 +1,8 @@
+#+TITLE: Kotlin
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: snippets
 #+ROAM_ALIAS:
 #+HUGO_DRAFT: true
-#+TITLE: Kotlin
 
 * Alternative when CountdownLatch is not present
 

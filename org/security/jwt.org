@@ -1,7 +1,7 @@
+#+TITLE: JWT
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: security
 #+ROAM_ALIAS: 
-#+TITLE: JWT
 
 * What it is
 JSON Web Tokens

@@ -1,5 +1,5 @@
-#+SETUPFILE: ./_index.org
 #+TITLE: Lightbend Academy
+#+SETUPFILE: ./_index.org
 
 * Reactive Programming vs Reactive Systems
 

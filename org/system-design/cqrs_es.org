@@ -1,7 +1,7 @@
+#+TITLE: CQRS/ES
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: CQRS/ES
 
 CQRS/ES stands for Command Query Responsibility Segregation and Event Sourcing.
 

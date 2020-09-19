@@ -1,5 +1,5 @@
-#+SETUPFILE: ./_index.org
 #+TITLE: Random Memories
+#+SETUPFILE: ./_index.org
 
 Curious ideas/sentences and what not from now and then. Some things are pretty obvious but worthwhile remembering (:
 

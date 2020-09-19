@@ -1,7 +1,7 @@
+#+TITLE: Microservices
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
-#+TITLE: Microservices
 
 Subset of [[file:service_oriented_architecture.org][Service Oriented Architecture]] where each service is deployed separately:
 - Microservices can be physically separated and independently deployed.

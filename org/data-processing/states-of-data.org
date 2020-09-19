@@ -1,6 +1,6 @@
+#+TITLE: States of Data
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: data
-#+TITLE: States of Data
 
 States of data:
 - *At Rest*: Data that is not consumed at the time is injested. It is stored and then consumed later in a batch process.

@@ -1,0 +1,20 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: editors
+#+ROAM_ALIAS:
+#+TITLE: Emacs
+
+* Org-Mode
+
+Org-protocol is cool and opens possibilities (like there weren't enoguh :overwhelmed:):
+- https://orgmode.org/worg/org-contrib/org-protocol.html#orgheadline8
+
+* Configuring
+
+Literate config is a thing but unfortunately as far as I researched it has to be contained in a single file. I rather have separate files per use-case.
+
+Cool reference links:
+- https://tecosaur.github.io/emacs-config/config.html
+- http://doc.norang.ca/org-mode.html:w
+- https://github.com/jethrokuan/dots/blob/0064ea2aab667f115a14ce48292731db46302c53/.doom.d/config.el#L495
+- https://github.com/nmartin84/.doom.d#orgb81fe7f
+- https://github.com/howardabrams/dot-files/blob/master/emacs-org.org

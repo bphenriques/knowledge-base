@@ -1,0 +1,10 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: uncategorized
+#+ROAM_ALIAS:
+#+TITLE: Nix
+
+TODO: Investigate more on this.
+
+Links:
+- https://wiki.nikitavoloboev.xyz/package-managers/nix
+- https://nixcloud.io/tour/?id=1

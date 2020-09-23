@@ -1,0 +1,10 @@
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: uncategorized
+#+ROAM_ALIAS:
+#+TITLE: dotfiles
+
+Want to migrate to [[file:nix.org][Nix]].
+
+* Emacs Configuration
+
+See more on Emacs (some reason it gives ambiguous reference).

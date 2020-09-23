@@ -32,3 +32,24 @@ Solution: Ocasionally persist a snapshot and we replay the events from that poin
 ** Versioning
 
 Issue when we have to change the event's schema. This leads to ~ModelV1~, ~ModelV2~, etc. This requires _supporting_ all versions. And requires flexibile formats: JSON, ProtoBuf or AkkA Event Adapters in the lightbend ecosystem that is between the system and the DB translating the ~V1~, ~V2~, ~VN~ to the corresponding and unique Domain entity.
+
+** Problems
+
+When we need to perform queries that involve several aggregate roots. Because entities need to be rebuilt from events everytime they are visited.
+
+#+begin_quote
+The model used to persist are not compatible with the model required during queries.
+#+end_quote
+
+See [[file:../system-design/command_query_responsibility_segregation.org][Command Query Responsibility Segregation]].
+
+* Command Sourcing
+
+Similar to command sourcing but persists commands as opposed to events so:
+1. Issue command
+2. Persist command
+3. Run asyncronous the command
+
+- They should be idempotent as they run multiple times (e.g., failures).
+- Must be validated so that they do not become stuck in the queue forever.
+- Bad: The sender might not be notified if the command fails due to the decouple nature.

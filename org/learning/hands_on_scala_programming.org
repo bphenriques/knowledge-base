@@ -3,7 +3,7 @@
 #+ROAM_TAGS: scala
 #+ROAM_ALIAS:
 
-Follows my notes on the Haoyi Li.'s book: "Hands-on Scala Programming".
+Follows my notes on the Haoyi Li.'s book: "Hands-on Scala Programming" (https://www.handsonscala.com/).
 
 As an experiment, I coding directly in the org-mode file using Babel to execute the Scala blocks:
 

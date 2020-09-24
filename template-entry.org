@@ -3,4 +3,3 @@
 #+ROAM_TAGS: %(org-hugo-slug (org-capture-get :knowledge-base-section)) 
 #+ROAM_ALIAS:
 
-

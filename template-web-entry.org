@@ -1,0 +1,7 @@
+#+TITLE: Web Note - ${title}
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web 
+#+ROAM_KEY: ${ref}
+
+Source: ${ref}
+

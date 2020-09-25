@@ -1,0 +1,6 @@
+#+TITLE: Overview
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: databases
+#+ROAM_ALIAS:
+
+https://medium.com/@rakyll/things-i-wished-more-developers-knew-about-databases-2d0178464f78

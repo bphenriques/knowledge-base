@@ -1,0 +1,6 @@
+#+TITLE: SSH Agent
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web ssh
+#+ROAM_KEY: https://smallstep.com/blog/ssh-agent-explained/
+
+Source: https://smallstep.com/blog/ssh-agent-explained/

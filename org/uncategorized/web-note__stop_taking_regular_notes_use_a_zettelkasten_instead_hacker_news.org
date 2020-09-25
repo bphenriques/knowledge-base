@@ -1,0 +1,6 @@
+#+TITLE: Web Note - Stop Taking Regular Notes; Use a Zettelkasten Instead | Hacker News
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web notes
+#+ROAM_KEY: https://news.ycombinator.com/item?id=23386630
+
+Source: https://news.ycombinator.com/item?id=23386630

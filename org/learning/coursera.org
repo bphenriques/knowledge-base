@@ -1,0 +1,7 @@
+#+TITLE: Coursera
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: learning
+#+ROAM_ALIAS:
+
+Interested in:
+- https://www.coursera.org/learn/learning-how-to-learn

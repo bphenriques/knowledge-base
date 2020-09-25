@@ -1,0 +1,19 @@
+#+TITLE: Stack Web Notes
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web uncategorized
+
+* How To Drive Change as a Software Engineer
+
+Source: https://www.lihaoyi.com/post/HowToDriveChangeasaSoftwareEngineer.html
+
+* The Dark Side of Events - YouTube
+
+Source: https://www.youtube.com/watch?v=URYPpY3SgS8&feature=youtu.be&t=1884
+
+* Ask HN: How to Take Good Notes? | Hacker News
+
+Source: https://news.ycombinator.com/item?id=22473209
+
+* Unlearning toxic behaviors in a code review culture | by Sandya Sankarram | Medium
+
+Source: https://medium.com/@sandya.sankarram/unlearning-toxic-behaviors-in-a-code-review-culture-b7c295452a3c

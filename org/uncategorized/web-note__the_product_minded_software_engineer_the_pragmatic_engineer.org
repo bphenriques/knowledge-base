@@ -1,0 +1,6 @@
+#+TITLE: Web Note - The Product-Minded Software Engineer - The Pragmatic Engineer
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web
+#+ROAM_KEY: https://blog.pragmaticengineer.com/the-product-minded-engineer/
+
+Source: https://blog.pragmaticengineer.com/the-product-minded-engineer/

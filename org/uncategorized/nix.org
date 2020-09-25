@@ -8,3 +8,5 @@ TODO: Investigate more on this.
 Links:
 - https://wiki.nikitavoloboev.xyz/package-managers/nix
 - https://nixcloud.io/tour/?id=1
+- https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
+- https://engineering.shopify.com/blogs/engineering/what-is-nix

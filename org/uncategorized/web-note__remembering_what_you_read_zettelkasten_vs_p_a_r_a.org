@@ -1,0 +1,6 @@
+#+TITLE: Web Note - Remembering what you Read: Zettelkasten vs P.A.R.A.
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web notes zettelkasten para
+#+ROAM_KEY: https://www.zainrizvi.io/blog/remembering-what-you-read-zettelkasten-vs-para/
+
+Source: https://www.zainrizvi.io/blog/remembering-what-you-read-zettelkasten-vs-para/

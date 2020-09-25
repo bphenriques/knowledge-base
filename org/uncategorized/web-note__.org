@@ -1,0 +1,6 @@
+#+TITLE: Linux Tips
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: web linux
+#+ROAM_KEY: https://www.usenix.org/sites/default/files/conference/protected-files/lisa19_maheshwari.pdf
+
+Source: https://www.usenix.org/sites/default/files/conference/protected-files/lisa19_maheshwari.pdf

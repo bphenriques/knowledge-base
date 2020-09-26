@@ -1,6 +1,0 @@
-#+TITLE: Web Note - 1x Engineer
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: web
-#+ROAM_KEY: https://1x.engineer/
-
-Source: https://1x.engineer/

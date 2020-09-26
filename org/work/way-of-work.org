@@ -8,3 +8,8 @@
 - *Corollary 3*: if you're right, but it doesn't work, then you're wrong.
 - *Corollary 4*: if you prove someone else wrong, but their answer works and yours doesn't, then they're right and you're wrong.
 - *Corollary 5*: if you prove someone's solution to be wrong even though it does provide value, then you have not yet provided any value until you propose something better.
+
+* Balancing Work/Life
+
+There is much in life beyond working. Follows an interesting article that contrasts with the tendency:
+-  https://1x.engineer/

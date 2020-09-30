@@ -3,10 +3,12 @@
 #+ROAM_ALIAS:
 #+TITLE: Nix
 
-TODO: Investigate more on this.
+- Reproducible
+- Each reproduction (a build) produces a pp generation
 
 Links:
 - https://wiki.nikitavoloboev.xyz/package-managers/nix
 - https://nixcloud.io/tour/?id=1
 - https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
 - https://engineering.shopify.com/blogs/engineering/what-is-nix
+- https://www.nmattia.com/posts/2018-03-21-nix-reproducible-setup-linux-macos.html

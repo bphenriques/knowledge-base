@@ -25,3 +25,11 @@ Source: http://doc.norang.ca/org-mode.html#GettingOrgModeWithGit
 * 🧠 Own Your Second Brain: Set Up org-roam on Your Own Machine
 
 Source: https://www.ianjones.us/own-your-second-brain
+
+* Nicolas Mattia – Nix: A Reproducible Setup for Linux and macOS
+
+Source: https://www.nmattia.com/posts/2018-03-21-nix-reproducible-setup-linux-macos.html
+
+* Writing a book: is it worth it? | Hacker News
+
+Source: https://news.ycombinator.com/item?id=24628549

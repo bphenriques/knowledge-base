@@ -1,0 +1,8 @@
+#+TITLE: Design
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: resources
+#+ROAM_ALIAS:
+
+Follows Open Source resources:
+
+- Icons: https://remixicon.com/

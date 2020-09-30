@@ -1,6 +1,6 @@
 SOURCE_ORG_FILES=$(shell pwd)/org
-EMACS_INSTALLATION_SRC=$(shell pwd)/tools/init.el
-BUILD_SRC=$(shell pwd)/tools/build.el
+EMACS_BUILD_SRC=$(shell pwd)/tools
+EMACS_BUILD_DIR=/tmp/knowledge-base-home-build
 BASE_URL=https://bphenriques.github.io/knowledge-base
 
 .PHONY: clean
@@ -13,9 +13,10 @@ serve:
 
 .PHONY: build-content
 build-content:
-	# Temporary change the HOME so that the Emacs installation is independent from the one in the machine.
-	# Note that given that the packages are not pinned, it may install newer versions.
-	HOME=/tmp/knowledge-base-home-build/ emacs -Q --batch --load=$(EMACS_INSTALLATION_SRC) --load=$(BUILD_SRC) --execute "(build/export-all \"$(SOURCE_ORG_FILES)\")" --kill
+	mkdir -p $(EMACS_BUILD_DIR)
+	cp -r $(EMACS_BUILD_SRC)/* $(EMACS_BUILD_DIR)
+	# Build temporary minimal EMACS installation separate from the one in the machine.
+	HOME=$(EMACS_BUILD_DIR) KNOWLEDGE_BASE_ORG_SRC=$(SOURCE_ORG_FILES) emacs -Q --batch --load $(EMACS_BUILD_DIR)/init.el --execute "(build/export-all)" --kill
 
 .PHONY: build-site
 build-site:

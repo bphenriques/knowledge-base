@@ -33,3 +33,7 @@ Source: https://www.nmattia.com/posts/2018-03-21-nix-reproducible-setup-linux-ma
 * Writing a book: is it worth it? | Hacker News
 
 Source: https://news.ycombinator.com/item?id=24628549
+
+* Presets | Starship
+
+Source: https://starship.rs/presets/#nerd-font-symbols

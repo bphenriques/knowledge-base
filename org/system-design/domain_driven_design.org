@@ -52,6 +52,8 @@ Component --> ACL: Z
 ACL --> User: Z
 #+END_SRC
 
+[[file:anti-corruption-layer.png]]
+
 This is also useful for legacy systems. In this case a Anti Corruption Layer would be preferable on either end.
 
 ** TODO Simpler diagram (if plantuml is able to generate one and I understand how..)

@@ -1,5 +1,6 @@
 theme = "book"
 title = "Bruno Henriques"
+canonifyURLs = "true"
 
 [markup.goldmark.renderer]
   unsafe = true

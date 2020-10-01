@@ -9,7 +9,7 @@ clean:
 
 .PHONY: serve
 serve:
-	hugo server --minify --disableFastRender
+	hugo server --minify --disableFastRender --baseURL localhost:1313
 
 .PHONY: build-content
 build-content:

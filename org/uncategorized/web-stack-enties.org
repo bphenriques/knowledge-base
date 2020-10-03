@@ -37,3 +37,11 @@ Source: https://news.ycombinator.com/item?id=24628549
 * Presets | Starship
 
 Source: https://starship.rs/presets/#nerd-font-symbols
+
+* Miniflux Hosting
+
+Source: https://miniflux.app/hosting.html
+
+* RemoteRetro.org | Free. World-class. Agile retrospectives.
+
+Source: [[https://remoteretro.org/retros/]]

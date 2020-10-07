@@ -52,11 +52,9 @@ Definition: Any two things that contend for a single limited resource and only o
 
 As the number of resources disputing for the resource, more time time it will take to finally free up the resources.
 
-**** Amdahl's law
-
-In short, contention limits paralelization.
-
-Defines the maximum improvement gaines by parallel procesing. Improvements from paralelization are limited to the code that can be paralelized. Contention limits such paralism reducing the advantages of the improvements. Does not matter as long as the contention exist.
+See:
+- [[file:../concurrency/amdah_s_law.org][Amdah's Law.]]
+- [[file:../concurrency/gunther_s_universal_scalability_law.org][Gunther's Universal Scalability Law]]
 
 **** Coherence Delay
 
@@ -65,14 +63,6 @@ Definition: Time it takes for synchronization to complete on a distributed syste
 Syncronization is done using crosstalk or gossip - Each system sends messages to each other node informing of any state changes. The time it takes for the cynscronization to complete is called *Coeherency Delay*.
 
 Increasing the number of nodes increases the delay.
-
-**** Gunther's Universal Scalability Law
-
-Increasing concurrency can cause negative resutrns due to contention and coherency delay.
-
-Picks from Amdahl's law. In addition to contention, it accounts for coeherency delay.
-
-As the system scales up, the cost to coordinate between nodes exceeds any benefits.
 
 **** Laws of scalability
 

@@ -3,13 +3,75 @@
 #+ROAM_TAGS: uncategorized
 #+ROAM_ALIAS:
 
-* Akka Distributed Data
+* Akka Cluster :ATTACH:
+:PROPERTIES:
+:ID:       62d85f71-cd98-4533-884a-510c0ec6ff0b
+:END:
+
+[[attachment:_20201007_224746screenshot.png]]
+
+Allows actors to communicate across the network, greatly simplifying the process. All members must share the same.
+
+- What is the purpose of the name? :thinking:
+
+* Akka Cluster Aware Routers :ATTACH:
+
+Context: High workload.
+
+Scalling vertically has limits (including expenses). Introducing Akka Cluster Aware Routers, that allows work to be distributed across cluster. A large task is broken on smaller tasks that is routed to an instance of our application. This means that we may scale horizontally.
+
+
+* Akka Cluster Sharding :ATTACH:
+:PROPERTIES:
+:ID:       9f4cb9cf-22d6-4773-9c1f-86b730ca5e01
+:END:
+
+Context: Database becomes the bottleneck.
+
+Many applications leverage the database, specially to create consistency however this leads to contention (see [[file:../concurrency/amdah_s_law.org][Amdah's Law]]). As the application scales, the database cannot keep up.
+
+Akka distributes actors across the cluster. And each actor maintains state for a specific database identifier. This eliminates database's reads for a specific database identifier. The actor may reply directly. The actor model guarantees that the state and the database are always consistent (how exactly?).
+
+[[attachment:_20201007_221440screenshot.png]]
+
+* Akka Distributed Data :ATTACH:
+:PROPERTIES:
+:ID:       e7db5a7a-5fc2-43d7-adca-0ad7aa3dcb75
+:END:
+
+Context: Shared State/Data problem
+
+Either in the database, or sometimes offload to a dedicated cache service like Memcached or Redis, essentially moving the bottleneck. Additionally, it leads to additional infrastructure burden.
+
+Akka Distributed Data provides local, replicated, in-memory data storage.
+
+[[attachment:_20201007_222154screenshot.png]]
+
+The data is asyncronously replicated to another nodes, ensuring all nodes have access to the data. This is made with low latency and ensures fast updates across the cluster (Why given that each nodes is responsible for a specific database identifier? What happens if a node goes down?).
+
+** Other
 
 CRDTs in distributed data are stored in memory. Can be copied to disk to speed up recovery if a replica fails.
 
 Best used for small data sets with infrequent updates that require high availability.
 
-Limitations CRDT: Do not work with every data type that require a merge function. Some data types are too complex to merge and require the use of /tombstone/:
 - A marker that shows something was deleted.
 - Can result in data types that only get larger and never smaller.
 - Aka CRDT Garbage
+
+Limitations CRDT: Do not work with every data type that require a merge function. Some data types are too complex to merge and require the use of /tombstone/:
+
+* Akka Address :ATTACH:
+:PROPERTIES:
+:ID:       b1cecd55-afad-40c2-a613-7ef86d00f655
+:END:
+
+[[attachment:_20201007_224144screenshot.png]]
+
+May be local or remote in the form:
+~akka://<ActorSystem>@<HostName>:<Post>/<ActorPath>~
+
+Several protocols are available and depend on the use-case:
+- ~aeron-udp~: High throughput and low latency (and probabilly lacks delivery guarantees?)
+- ~tcp~: Good thorughout and latency but lower.
+- ~tls-tcp~: When encryption is required.

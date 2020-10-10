@@ -2,5 +2,4 @@
 public/
 resources/_gen/
 content/
-static/
 *.db

@@ -75,3 +75,195 @@ Several protocols are available and depend on the use-case:
 - ~aeron-udp~: High throughput and low latency (and probabilly lacks delivery guarantees?)
 - ~tcp~: Good thorughout and latency but lower.
 - ~tls-tcp~: When encryption is required.
+
+* Joining a Cluster
+
+Requires "Seed Nodes", i.e., contact nodes. Any node is eligible. Best practice is to use "Akka Cluster Bootstrap" to avoid static configuration.
+
+Must be enabled! And it does not bring any advantage until we set the application to leverage this:
+
+#+BEGIN_SRC scala
+  val loyaltyActorSupervisor = ClusterSharding(system).start(
+     "shared-region-name",
+      MyActorActor.props(someProp),
+      ClusterShardingSettings(system),
+      MyActorSupervisor.idExtractor,
+      MyActorSupervisor.shardIdExtractor
+    )
+#+END_SRC
+
+* Akka Cluster Management
+
+Set of tools served through a HTTP Api to manage the cluster. Must start after the actor system.
+
+Must be enabled!
+
+** Akka Discovery
+
+Service to locate and discover services.
+
+** Akka Cluster Bootstrap
+
+Automated seed node discovery using Akka Discovery.
+
+** Health Check Endpoints
+
+Useful when integrating with orchestrating platforms (e.g., K8S).
+
+* Communication
+
+It is done by using [[file:../protocols/gossip_protocol.org][Gossip Protocol]].
+
+* Network Partitions
+
+This issue cannot be recovered by simply rebooting the affected node. In order to fix this:
+1. Decide which partitions needs to be cleaned up - How?
+2. Shutdown the members
+3. Inform the cluster that those members are down - ~PUT -F operation=down /cluster/members/<member address>~.
+4. Create new members to replace the old.
+
+Step 2. is important otherwise it continues to operate unware that it has been removed from the cluster which can lead to multiple copies of the same shard.
+
+* Split Brain :ATTACH:
+:PROPERTIES:
+:ID:       bca2ddfb-c2b7-4090-93e0-f6642ccdb697
+:END:
+
+[[attachment:_20201008_232738screenshot.png]]
+
+Occurs when single cluster splits into two or more distinctive clusters. It normally does not occur unless poor management (not stopping processes that are /Down/) or configuration (there are strategies to solve this automatically). Can be caused by improper /Downing/ a member leading to the node creating another cluster as the process was not terminated.
+
+It may also occur with a network partition. If this extend, the /Unreachable Nodes/ will be marked as downed but will not be terminated.
+
+Simpler solutions may be solved automatically through orchestration platforms that automatically stop the process. More complicated split brains may be solved using /Lightbend Split Brain Resolver/.
+
+** When using sharding or singleton for data consistency
+
+Each cluster can have a copy of the actor leading to a inconsistency and data corruption specially if both shards have access to the database.
+
+* Lighbend Split Brain Resolver
+
+Set of customizable strategies for terminating members in order to avoid Split Brain scenarios. Terminating members allow orchestration platforms to take over and heal the problem.
+
+** Static Quorum :ATTACH:
+:PROPERTIES:
+:ID:       89abe15f-3741-4e3d-ad2a-fb43a90a996f
+:END:
+
+[[attachment:_20201008_235124screenshot.png]]
+
+Fixed sized quorom of node. All nodes will evaluate their situation and /Down/ unreachable. If quorum is set then a smaller cluster will prevail, otherwise the nodes will shutdown themselves. The quorum value must at least ~n/2 + 1~.
+
+** Keep Majority
+
+Similar to previous but dynamically tracks the size of the cluster.
+
+** Keep Oldest :ATTACH:
+:PROPERTIES:
+:ID:       527e04ad-ca16-4ccd-9af2-cd2be498d0d1
+:END:
+
+[[attachment:_20201008_235425screenshot.png]]
+
+Monitors the oldest node in the cluster. Members that are not communicating with that node will be marked as down and the nodes will terminate themselves. If the oldest node has crashed so will the cluster  but is configurable in a way, that in that case only the oldest will be /Downed/.
+
+** Keep Referee
+
+Similar to the other one but designate a specific node as /referee/ (based on its address). As far as I can see, it is not configurable to avoid crashing the cluster if the /referee/ is down.
+
+** Down Allows
+
+All nodes terminate themselves relying on good orchestration tools to reduce downtime - Me not like this one.
+
+** Lease Majority :ATTACH:
+:PROPERTIES:
+:ID:       3d14bc4a-d116-43aa-9e63-057947c8b597
+:END:
+
+Reserved for Kubernetes deployments.
+
+[[attachment:_20201008_235848screenshot.png]]
+
+It uses a distributed /lock/ (lock) to make it's decision. Each partition will attempt to obtain it the loser terminates and the winnner remains.
+
+There is a bit of nice hack (IMO but can't understand exactly how this is achieved) which is that the side that is theoretically smaller will delay the attempt to obtain the lock so that the majority wins.
+
+** Some Edge Cases :ATTACH:
+:PROPERTIES:
+:ID:       276475f5-6d13-4603-a6f2-60f9e00daa1e
+:END:
+
+[[attachment:_20201009_000309screenshot.png]]
+
+
+- Indirect connected Edges (for some reason is connected to only one member).
+- Unstable nodes (keeps on disconnecting from some nodes).
+
+These edge-caes are automatically handled.
+
+* Orphaned Node
+
+Is down but not terminated.
+
+* TODO Cluster Singleton
+
+* Akka Cluster Sharding
+
+Distribute actors across a cluster.
+
+** Entities :ATTACH:
+:PROPERTIES:
+:ID:       221c9b10-cf9e-4fc8-a16d-1b53649a232a
+:END:
+
+
+[[attachment:_20201010_164050screenshot.png]]
+
+
+Unique within the cluster. Acts as a single source of truth leading to /Strong Consistency/.
+
+Entities agre grouped into Shards.
+
+Typically they correspond to the domain concept that the entity is modelling and the identifier is usually the aggregate root's identifier (e.g. /UserId/).
+
+For this purpose we can use ~Extractor~ that is often modeled using a Envelope (which is not mandatory if the mssage contains the identifier):
+#+BEGIN_SRC scala
+case class Envelope(entityId: String, message: Any)
+
+val idExtractor: ExtractEntityId = {
+   case Envelope(id, msg) => (id, msg)
+}
+#+END_SRC
+
+** Shard :ATTACH:
+:PROPERTIES:
+:ID:       ef307079-4de6-4452-9eb6-dad21d460e7b
+:END:
+
+[[attachment:_20201010_165840screenshot.png]]
+
+Holds entities. The distribution depends on a function which procuces the /Shard Id/ (usually based on the /Entity Id)/. Mapping entities to /Shard Id/ dictates how to control the distribution of the entities across the cluster. Improper distribution may lead to hotspots in the cluster (unbalance).
+
+Rule of thumb: ~10 shards per node. Too many shards have a cost to find them. And too short reduces capability to distribute the nodes on the cluster (e.g., 2 shard across 3 nodes).
+
+Example of unbalanced ids:
+- Names of people: Creates hotspots for common names.
+- Dates: Hotspots for recent dates.
+- Auto-incrementing ids: Hotspots for recent ids.
+
+Usually the best is ~Math.abs(hashCode % number_shards)~.
+
+** Shard Region :ATTACH:
+:PROPERTIES:
+:ID:       343865ec-484a-419e-9dec-6817fcbdd6a5
+:END:
+
+[[attachment:_20201010_170205screenshot.png]]
+
+Holds Shards. For a type of entity, there is usually one Shard Region per JVM.
+
+** Shard Coordinator
+
+Runs as a Akka Cluster Singleton. It is responsible to route the messages addressed to a specific entity. It provides the location of the shard which can then be used to acccess the entity.
+
+Backed by Akka Distributed Data or Akka Persistence.

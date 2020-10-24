@@ -3,12 +3,16 @@
 #+ROAM_TAGS: uncategorized
 #+ROAM_ALIAS:
 
-* Akka Cluster :ATTACH:
-:PROPERTIES:
-:ID:       62d85f71-cd98-4533-884a-510c0ec6ff0b
-:END:
+* Akka
 
-[[attachment:_20201007_224746screenshot.png]]
+Toolkit and runtime for building highly concurrent, distributed and fault tolerant message-driven application in the JVM. It can be used to build [[file:../system-design/reactive_systems.org][Reactive Systems.]]
+
+Proposes unified programming model for:
+- Simpler concurrency: single threaded ilusion as each actor processes a messsage at a time).
+- Simpler distribution: is distributed by default).
+- Simpler fualt tolerancy: Decouples communication from failure handling.
+
+* Akka Cluster
 
 Allows actors to communicate across the network, greatly simplifying the process. All members must share the same.
 
@@ -267,3 +271,282 @@ Holds Shards. For a type of entity, there is usually one Shard Region per JVM.
 Runs as a Akka Cluster Singleton. It is responsible to route the messages addressed to a specific entity. It provides the location of the shard which can then be used to acccess the entity.
 
 Backed by Akka Distributed Data or Akka Persistence.
+
+* Handling Messages Asyncronously :ATTACH:
+:PROPERTIES:
+:ID:       8ed48992-2f51-44fe-a39e-aac6d2d90d5e
+:END:
+
+Blocking threads inside the actors creates contention therefore the handling of the messages must happen in a async fashion, including any DB writes and DB reads when starting the actor. For example, using interfaces such as ~Future[T]~. However this may lead to concurrency within the actor itself removing the ilusion of a single thread. This means that messages must be /stash/ until other operations complete.
+
+In essence the actor has 3 states:
+- Loading - Load the state from the DB.
+- Running - Regular behavior.
+- Waiting.
+
+[[attachment:_20201011_002542screenshot.png]]
+
+
+[[attachment:_20201011_002523screenshot.png]]
+Question: If DB fails, then it is recommended to throw the exception leading to a restart of the Actor that in turn will re-read the state from the DB. So:
+- It is explained that the stash is not lost, how?
+- What happens if there is a persistent issue in the DB? Will there be a loop?
+
+* Passivation
+
+This fenomenon can be observer through small dips in the throughput. This happens as the Actors attempts to manage the number of actors in-memory as keep all of them is unreasonable. E.g., idle actors.
+
+Each actor tracks the time it processed a message. If it hadn't processed a message within a configured time period, it will /Passivate/, leading to the removal of the actor in-memory.
+
+The period must be tune-up, too long may lead to OOM and too short may lead to constant reads from the DB. Best practise is to determine and then tune up by watching the memory usage.
+
+It can also be done manually by sending a /Passivate/ message to the parent.
+
+* Rebalancing
+
+Occurs whenever the size of the cluster changes. The Shard coordinator will initiate the rebalancing process by distributing the shards across the all available nodes in order to keep an even distribution of entities.
+
+This can only occur in a healthy cluster. Therefore any unreachable nodes must be removed (and terminated *before*) either manually through /Akka Management/ or using the /Lightbend Split Brain Resolver/.
+
+Steps:
+1. Coordinator informs Regions that a rebalance has started.
+2. Messages to an entity on a moving shard are buffered.
+3. Oce shared was rebalanced, the queued messages are sent
+
+** Remember Entities
+
+The entities are not autoamtically restarted until they are requested again. It can be configured otherwise by enabling ~remember-entities~. When a node restarts/rebalances, it will restore those entities.  This works by informing every member every time each entity starts or stops (using Akka distributed data) and stored in a durable storage in the disk (it can be recovered even after full cluster restart) - Hmm, but what if this is running in K8S where the disks are ephemeral? :thinking:
+
+Warning!
+- Enabling this disables *automatic* passivation.
+- It is not cheap as every node will track every running entity and adds overhead when starting/stopping entities.
+
+Best practice is to limit when we have a limited number of active entities. Most of times is not really needed as entities will be removed automatically through /Passivation/ brought back when needed. However some use-cases:
+- When the entity has a scheduled process that may not have completed.
+- When the time to restart an entity on demand could cause the system to backup (long startup times).
+- When the resource savings of passivating the Entities are insignificant.
+
+With this feature, the node's ~ExtractShardIf~ function must handle ~ShardRegion.StartEntity(entityId)~.
+
+* Semantics
+
+Message delivery in Akka is is best effort (at-most-once, the default). Not sure if I like this :thinking:
+
+* Akka Actor Lifecycle
+
+Can be stopped by himself or by others.
+
+Lifecycle (without faults):
+#+BEGIN_SRC
+hook:preStart() -> started -[stop]-> stopped -> hook:postStop() -> terminated
+#+END_SRC
+
+The actor is created assyncronously and available right away through the ~ActorRef~.
+
+Stopping an actor will:
+- Finishes the processing the current message.
+- Suspends message processing.
+- *Stop its children* - See [[file:../concurrency/actor-model.org][Actor Model]].
+- Waits for their termination confirmations and then stops himself.
+
+How to stop: ~PoisonPill~ (~context.stop(self())~) and ~actorRef ! Kill~ messages (throw ~ActorKilledException~). They are *not* appropriate to perform a cleanup before shutting down as the Actor does not "see" those messages (it is handled internally). It is best to use a dedicated message such as ~StopMeGraciouslyMessage~.
+
+** Monitor
+
+/Dead Watch/ allows monitoring another actor's termination (regular ~Terminated~ message in the ~receive~ block).
+
+* Failure Handling
+
+Akka deals with failures at the level of the individual actor (bulkheading has it only affects that actor).
+
+Does not throw the message back to the sender (b/c the sender does not know how to handle it). Instead the error is sent to a responsibile entity (e.g., "Manager") that determines the required steps to recover.
+
+When an actor fails, Akka provides two configurable strategies:
+- /OneForOneStrategy/: Only the faulty child is affected.
+- /AllForOneStrategy/: All children are affected by one faulty child.
+
+Both are configured with a ~type Decider = PartialFunction[Throwable, Directive]~. If not defined a directive, then the parent is consired faulty. Where ~Directive~:
+- Resume: Resume message processing. Use if the state remains valid.
+- Restart: Start a new actor in its place and resume, however all childs are stopped (by default unless ~preRestart~ hook is changed). It supports max number of retries and within a time limit.
+- Stop.
+- Escalate: Delegate the decision to the supervisor's parent.
+
+By default it is /OneForOneStrategy/ with some directives that are too specific to group here and we can check the documentation. In short, by default, the actor will be restarted. In any case, message processing is suspended.
+- All descendants of the actor are suspended.
+- The actor's parent handles the failure.
+
+Proper tuning leads to a self-healing system. Some exceptions are worth stopping the actor while others are worth recovering.
+
+** Full Lifecycle :ATTACH:
+:PROPERTIES:
+:ID:       b7b0935e-b412-4c9a-a2f5-2b03332cea88
+:END:
+
+[[attachment:_20201012_203109screenshot.png]]
+
+* Ask vs Tell
+
+Ask: ~actorRef ? Message~
+Tell: ~actorRef ! Message~
+
+Use Ask when:
+- Bridging non-actor code to actor-code (e.g., bridging with HTTP controllers ?).
+- We are expecting a response within a timeout. In this case we use ~actorRef ? Message pipeTo self~ which in turn will will handle the response, e.g., ~val receive: Receive = { case MessageResponse => stuff }~.
+
+Use tell when:
+- We do not care about the response.
+
+* TODO Router
+
+It is something I have more questions about :thinking:
+
+* Akka Streams
+
+Use cases: live-data, ETL systems, streaming.
+
+- It is more efficient to consume asyncronously.
+- Avoid flooding a slow consumer (backpressure).
+
+Initiative to provide a standard for async stream processing with non-blocking backpressure.
+
+Components of a Reactive Stream:
+- Publisher: Publishes data to stream
+- Subscriber: Consumes data from the stream.
+- Processor: Acts as both a publisher and a subscriber, obeying the contract for each.
+- Subscription: Connects a subscriber to a publisher to initiate a message flow.
+
+Streams of data are Messages that will be consumed by actors.
+
+** How
+
+Data flows through a chain of processing stages. Each stage has zero or more inputs/outputs depending on the type. By default these stages run *sync* inside a single actor but can also be configured to run asyncronously in separate actors.
+
+*** Linear Streams :ATTACH:
+:PROPERTIES:
+:ID:       1b4e9928-73cf-4e25-8ad9-d67c831a22c3
+:END:
+
+[[attachment:_20201013_222125screenshot.png]]
+
+- Sources: the source of the data in the stream. E.g., CSV.
+- Sinks: the "destination" for the data. E.g., CSV file.
+- Flows: Transformations. E.g., Concatenate columns.
+- Runnable Graph: A stream where all the inputs and outputs are connected.
+
+Each stage can be run sync or async. In most cases the order is preserved.
+
+Backpressure is propagated downstream stages to upstream.
+
+**** Source
+
+Stage with single output: ~Source[+Out, +Mat]~:
+- ~Out~: The type of each element that is produced.
+- ~Mat~: Type of the materialized value. Usually ~NotUsed~.
+
+Source only push data as long as there is demand. The source will have to deal with incoming data until demand resumes (how how largely demands on the use-case).
+
+E.g., ~empty~, ~single~, ~repeat~ (repeat), ~tick~ (schedule), from iterables, cycle (same as iterable but repeats), stateful source ~unfold(initial)(fn), from actors, from files, tcp connections (!= data sent through it), java streams.
+
+**** Sink
+
+Stage with a single input: ~Sink[-In, +Mat]~:
+- In: The type of each element that is consumed.
+- Mat The type of each element that is produced. E.g., Future[Int].
+
+It creates backpressure by controlling /Demand/.
+
+E.g., ignore, foreach (pure side effects as it does not return values), head/last, headOption/lastOption, seq (materialized all elements), stateful sinks such as fold and reduce, actorRef (no backpressure mechanism), actorRefAck (provides backpressure), FileIO.toPath, StreamConverts.fromJavaStream.
+
+Note that if the stream is infinite, these sinks may never complete.
+
+**** Flows
+
+Single input and single output: ~Flow[-In, +Out, +Mat]~.
+
+Acts both as producer and consumer therefore it propagates demand to the producer as well propagating (and transforming) messages produced to downstream stages.
+
+E.g., map, mapAsync(Parallelism) that still guarantees order, mayAsyncUnordered, mapConcat (similar to flatMap but not the same), grouped, sliding, fold, scan (emits each new computed result), filter, collect, limit by time using takeWithin(Duration), dropWithin(Duration), groupedWithin(Number, Duration), zip, flatMapConcat (similar mapConcat but operates on Sources rather than iterables), flatMapMerge (similar to flatMapContact but the substreams are consumed consumed therefore order is not guaranteed), buffer(size, strategy) (smooth incosistencies in the flow rate), for slow consumers/producers we have expand (extrapolate for slow producers), batch (for slow consumer) and conflate (create summary of the elements when the producer is faster), log.
+
+Some of these operations are directly accessible from ~Source~ and does not require additional typing.
+
+**** Runnable Graphs
+
+Connects source, flows, sinks so that data can start flowing.
+
+E.g.,:
+- to: materializes the value from left to right. - Returns Cancellable.
+- toMat: Transform/combine materialized values: ~source.viaMat(flow)(Keep.right).to(sink).run()~ - Returns NotUsed.
+- viaMat: Similar but operates on a flow as opposed to sink - Returns Future[Done].
+
+**** Fault Tolerancy.
+
+Default strategy is to stop processing the stream and can be overriden within the ~ActorMaterializer~ by passing a decider that given an exception it either decides:
+- Stop: terminate with an error.
+- Resume: Drop the failing element.
+- Restart: The element is dropped and the stream continues after restarting the stage. Any state acumulated by that stage will be cleared.
+
+Each stage can be fine-tuned to choose a dispatchet, bufferSize, log levels and supervision.
+
+Sometimes errors are recoverable which is a ~Throwable -> T~.
+
+**** Graphs :ATTACH:
+
+Introduces Junctions which take multiple inputs and multiple outputs. Basic ones are:
+- Fan in: N inputs + 1 output. E.g., Merge (random selects from the inputs), MergePreferred (give one input higher priority), ZipWith (arity N), Zip (arity 2), Concat.
+- Fan out: 1 input + N outputs. E.g., Broadcast,  Balance (to just one of the outputs), UnzipWithin to for example split a tuple to send to the outputs, UnZip splits a tuple[A, B] onto 2 streams A and B.
+
+[[attachment:_20201014_220602screenshot.png]]
+
+**** Fusion :ATTACH:
+
+Until now all of this runs syncronously as Akka "fuses" all stages onto a single syncronous one.
+
+
+[[attachment:_20201014_224503screenshot.png]]
+
+When fused on, buffers are not present in each stage. When turned-off each stage has a dedicated buffer once we start processing stages asyncronously.
+
+We can disable fusing for everything however we can be more selective: ~Source(1 to 10).async.runForEach(println)~. This creates overhead of:
+- Actors.
+- Mailboxes.
+- Buffers.
+
+It is not a magic bullet. Performance gain/loss depends on the use-case.
+
+Fusion optimization principles is: "insert an async boundary to bisect the stream into two subsections of roughly equal processing time.". In other words, check at the current pipeline where the stages can be split so that they can be performed in paralell and joined almost at the same time. This implies looking at Grafana, analyse each stage and compare with the stream graph we have.
+
+Lesson: Do not multitask on your computer while you are doing benchmarks :P This affected the exercises throughput by /a lot/.
+*** Graphs :ATTACH:
+:PROPERTIES:
+:ID:       eac6cced-263d-4255-b074-a75311139262
+:END:
+
+[[attachment:_20201013_222507screenshot.png]]
+
+Linear streams are most of the times sufficient. However, there are some cases where there are multiple inputs and outputs. Leading to additional components:
+- Junctions: Branch points in the stream (e.g., fan-in, fan-out).
+
+All the introduced components are immutable and can be reused in different scenarios as they solely contain instructions to do /something/ with the data.
+
+*** Example
+
+Simple stream:
+#+BEGIN_SRC scala
+Source(1 to 10)                  // source
+  .via(Flow[Int].map(_ * 2))     // stage
+  .to(Sink.foreach(println))     // sink
+  .run                           // materialize the graph
+#+END_SRC
+
+** Backpressure :ATTACH:
+:PROPERTIES:
+:ID:       15a14326-71d7-4fbd-b3b5-0d93c153b266
+:END:
+
+
+[[attachment:_20201013_221335screenshot.png]]
+
+
+- pull/push mechanism.
+
+  Subscribers signal demand that is sent upstream via subscription. Publishers then push data (if available), this way publisher does not send more information than that it was demanded.

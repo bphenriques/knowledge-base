@@ -69,3 +69,7 @@ Source: https://degoogle.jmoore.dev/#useful-links-tools-and-advice
 * LPT_LISA - lisa19_maheshwari.pdf
 
 Source: https://www.usenix.org/sites/default/files/conference/protected-files/lisa19_maheshwari.pdf
+
+* No, Microsoft is not rebasing Windows to Linux
+
+Source: https://boxofcables.dev/no-microsoft-is-not-rebasing-windows-to-linux/

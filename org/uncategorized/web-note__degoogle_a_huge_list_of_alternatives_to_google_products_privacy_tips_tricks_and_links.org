@@ -1,8 +1,0 @@
-#+TITLE: Web Note - degoogle | A huge list of alternatives to Google products. Privacy tips, tricks, and links.
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: web google
-#+ROAM_KEY: https://degoogle.jmoore.dev/#useful-links-tools-and-advice
-
-Source: https://degoogle.jmoore.dev/#useful-links-tools-and-advice
-
-Degoogle

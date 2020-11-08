@@ -1,6 +1,6 @@
 #+TITLE: Stack Web Notes
 #+SETUPFILE: ./_index.org
-#+ROAM_TAGS: web uncategorized
+#+ROAM_TAGS: uncategorized
 
 * How To Drive Change as a Software Engineer
 
@@ -45,3 +45,27 @@ Source: https://miniflux.app/hosting.html
 * RemoteRetro.org | Free. World-class. Agile retrospectives.
 
 Source: [[https://remoteretro.org/retros/]]
+
+* Write code that is easy to delete, not easy to... — programming is terrible
+
+Source: https://programmingisterrible.com/post/139222674273/how-to-write-disposable-code-in-large-systems
+
+* The Product-Minded Software Engineer - The Pragmatic Engineer
+
+Source: https://blog.pragmaticengineer.com/the-product-minded-engineer/
+
+* SSH Agent Explained
+
+Source: https://smallstep.com/blog/ssh-agent-explained/
+
+* Remembering what you Read: Zettelkasten vs P.A.R.A.
+
+Source: https://www.zainrizvi.io/blog/remembering-what-you-read-zettelkasten-vs-para/
+
+* degoogle | A huge list of alternatives to Google products. Privacy tips, tricks, and links.
+
+Source: https://degoogle.jmoore.dev/#useful-links-tools-and-advice
+
+* LPT_LISA - lisa19_maheshwari.pdf
+
+Source: https://www.usenix.org/sites/default/files/conference/protected-files/lisa19_maheshwari.pdf

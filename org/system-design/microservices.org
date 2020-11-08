@@ -24,7 +24,7 @@ Subset of [[file:service_oriented_architecture.org][Service Oriented Architectur
 
 Mention that cross team coordination become less necessary. That is true but often it still is and requires coordination.
 
-* Disanvantages
+* Disavantages
 - Require multiple complex deployment nad monitoring approaches.
 - Cross service refactors are more challenging.
 - Require supporting old versions.
@@ -32,8 +32,9 @@ Mention that cross team coordination become less necessary. That is true but oft
 
 * Designing one
 
-- Single responsibility. A change to the internals of one microservice should not necessitate a change to another microservice.
-- [[file:domain_driven_design.org][Bounded Contexts]] are a good place to start as they have clear boundaries with its own domain - Question: Can multiple microservices collectively encapsulate a bounded context?
+Business domains are typically large and complicated. Several ideas, actions and rules interact with one another in complex ways. A good approach on understanding such complex systems and how to model them is through a process named [[file:domain_driven_design.org][Domain Driven Design]].
+
+A correct separation of concerns (i.e., clear and single responsibilities) leads to smoother workflows. Awkarwdness when modelling may indicate lack of understanding of the domain.
 
 * Principles of Isolation
 

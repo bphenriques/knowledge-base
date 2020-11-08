@@ -1,6 +1,0 @@
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: uncategorized
-#+ROAM_ALIAS:
-#+TITLE: Event Sourcing
-
-* TODO - can this be deleted?.

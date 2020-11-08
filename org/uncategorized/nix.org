@@ -4,7 +4,7 @@
 #+TITLE: Nix
 
 - Reproducible
-- Each reproduction (a build) produces a pp generation
+- Each reproduction (a build) produces a generation
 
 Links:
 - https://wiki.nikitavoloboev.xyz/package-managers/nix
@@ -12,3 +12,4 @@ Links:
 - https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
 - https://engineering.shopify.com/blogs/engineering/what-is-nix
 - https://www.nmattia.com/posts/2018-03-21-nix-reproducible-setup-linux-macos.html
+- https://shopify.engineering/what-is-nix

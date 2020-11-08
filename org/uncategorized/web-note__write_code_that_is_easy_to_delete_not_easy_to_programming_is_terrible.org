@@ -1,6 +1,0 @@
-#+TITLE: Web Note - Write code that is easy to delete, not easy to... — programming is terrible
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: web
-#+ROAM_KEY: https://programmingisterrible.com/post/139222674273/write-code-that-is-easy-to-delete-not-easy-to
-
-Source: https://programmingisterrible.com/post/139222674273/write-code-that-is-easy-to-delete-not-easy-to

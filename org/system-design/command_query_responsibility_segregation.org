@@ -3,11 +3,19 @@
 #+ROAM_ALIAS: CQRS
 #+TITLE: Command Query Responsibility Segregation (CQRS)
 
-Eventually consistent by design which always present but now is explicit about it.
+* Use Cases
+
+- Auditing (e.g., banking, accounting)
+- High Scalability
+- High Resiliency
 
 Some Aggregate Roots are a better fit for write models but do not fit other read models. Requirements for both models are different.
 
+* What
+
 Command Query Responsibility Segregation (CQRS) aims to separate read models from write models. This is specially problematic when using [[file:../uncategorized/event_sourcing.org][Event Sourcing]]. Note that [[file:../uncategorized/event_sourcing.org][Event Sourcing]] is not a requirement for CQRS but are often combined.
+
+Eventually consistent by design which always present but now is explicit about it.
 
 * How:
 

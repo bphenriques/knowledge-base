@@ -1,5 +1,0 @@
-#+TITLE: Test
-#+SETUPFILE: ./_index.org
-#+EXPORT_FILE_NAME: uncategorized_test
-#+ROAM_TAGS: uncategorized
-#+ROAM_ALIAS:

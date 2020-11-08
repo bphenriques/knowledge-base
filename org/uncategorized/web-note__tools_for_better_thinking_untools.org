@@ -1,6 +1,0 @@
-#+TITLE: Web Note - Tools for better thinking | Untools
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: web
-#+ROAM_KEY: https://untools.co/
-
-Source: https://untools.co/

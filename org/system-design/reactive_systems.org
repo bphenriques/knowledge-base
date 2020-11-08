@@ -5,13 +5,15 @@
 
 * Goal
 
-Provide an experience that is responsive under all conditions.
+Provide an experience that is responsive under all conditions. Note that reactive programming is not the same as reactive systems.
 
 This requires:
 - Ability to scale from 10 users to million of users.
 - Consume _solely_ the resources required to support the current work-load.
 
-* Reactor Principles
+* Reactive Principles
+
+Systems that apply the following principles are considered reactive systems (see more [[https://github.com/reactivemanifesto/reactivemanifesto][here]]).
 
 ** Responsive
 
@@ -42,3 +44,6 @@ Avoce all, make sure that the systems is not actively waiting so that it can do 
 - Resiliency as each user has basically a copy of the whole repository locally. The local machine is isolated from the remote.
 - Elastic has we can have multiple copies and does not cause problemas having that repository sync on that many machines.
 - Responsive.
+
+
+* TODO https://www.lightbend.com/white-papers-and-reports/reactive-programming-versus-reactive-systems

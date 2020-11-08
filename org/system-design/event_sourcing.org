@@ -3,7 +3,6 @@
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
 
-
 * Event Sourcing (ES)
 
 In addition to persisting state, one persists audit logs. This captures the history. It is better to have this in a database as it provides transactionality.

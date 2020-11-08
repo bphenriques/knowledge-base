@@ -1,8 +1,0 @@
-#+TITLE: Web Note - What Is Nix – Shopify Engineering
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: web nix
-#+ROAM_KEY: https://engineering.shopify.com/blogs/engineering/what-is-nix
-
-[[file:nix.org][Nix]]
-
-Source: https://engineering.shopify.com/blogs/engineering/what-is-nix

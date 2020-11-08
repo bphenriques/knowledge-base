@@ -1,6 +1,5 @@
 #+TITLE: Gossip Protocol
 #+SETUPFILE: ./_index.org
-#+EXPORT_FILE_NAME: protocols_gossip-protocol
 #+ROAM_TAGS: protocols
 #+ROAM_ALIAS:
 

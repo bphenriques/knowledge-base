@@ -1,6 +1,5 @@
 #+TITLE: Heartbeat
 #+SETUPFILE: ./_index.org
-#+EXPORT_FILE_NAME: protocols_heartbeat
 #+ROAM_TAGS: protocols
 #+ROAM_ALIAS:
 

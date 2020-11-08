@@ -18,17 +18,14 @@ Allows actors to communicate across the network, greatly simplifying the process
 
 - What is the purpose of the name? :thinking:
 
-* Akka Cluster Aware Routers :ATTACH:
+* Akka Cluster Aware Routers
 
 Context: High workload.
 
 Scalling vertically has limits (including expenses). Introducing Akka Cluster Aware Routers, that allows work to be distributed across cluster. A large task is broken on smaller tasks that is routed to an instance of our application. This means that we may scale horizontally.
 
 
-* Akka Cluster Sharding :ATTACH:
-:PROPERTIES:
-:ID:       9f4cb9cf-22d6-4773-9c1f-86b730ca5e01
-:END:
+* Akka Cluster Sharding
 
 Context: Database becomes the bottleneck.
 
@@ -36,7 +33,7 @@ Many applications leverage the database, specially to create consistency however
 
 Akka distributes actors across the cluster. And each actor maintains state for a specific database identifier. This eliminates database's reads for a specific database identifier. The actor may reply directly. The actor model guarantees that the state and the database are always consistent (how exactly?).
 
-[[attachment:_20201007_221440screenshot.png]]
+[[file:_20201007_221440screenshot.png]]
 
 * Akka Distributed Data :ATTACH:
 :PROPERTIES:
@@ -49,7 +46,7 @@ Either in the database, or sometimes offload to a dedicated cache service like M
 
 Akka Distributed Data provides local, replicated, in-memory data storage.
 
-[[attachment:_20201007_222154screenshot.png]]
+[[file:_20201007_222154screenshot.png]]
 
 The data is asyncronously replicated to another nodes, ensuring all nodes have access to the data. This is made with low latency and ensures fast updates across the cluster (Why given that each nodes is responsible for a specific database identifier? What happens if a node goes down?).
 
@@ -70,7 +67,7 @@ Limitations CRDT: Do not work with every data type that require a merge function
 :ID:       b1cecd55-afad-40c2-a613-7ef86d00f655
 :END:
 
-[[attachment:_20201007_224144screenshot.png]]
+[[file:_20201007_224144screenshot.png]]
 
 May be local or remote in the form:
 ~akka://<ActorSystem>@<HostName>:<Post>/<ActorPath>~
@@ -133,7 +130,7 @@ Step 2. is important otherwise it continues to operate unware that it has been r
 :ID:       bca2ddfb-c2b7-4090-93e0-f6642ccdb697
 :END:
 
-[[attachment:_20201008_232738screenshot.png]]
+[[file:_20201008_232738screenshot.png]]
 
 Occurs when single cluster splits into two or more distinctive clusters. It normally does not occur unless poor management (not stopping processes that are /Down/) or configuration (there are strategies to solve this automatically). Can be caused by improper /Downing/ a member leading to the node creating another cluster as the process was not terminated.
 
@@ -154,7 +151,7 @@ Set of customizable strategies for terminating members in order to avoid Split B
 :ID:       89abe15f-3741-4e3d-ad2a-fb43a90a996f
 :END:
 
-[[attachment:_20201008_235124screenshot.png]]
+[[file:_20201008_235124screenshot.png]]
 
 Fixed sized quorom of node. All nodes will evaluate their situation and /Down/ unreachable. If quorum is set then a smaller cluster will prevail, otherwise the nodes will shutdown themselves. The quorum value must at least ~n/2 + 1~.
 
@@ -167,7 +164,7 @@ Similar to previous but dynamically tracks the size of the cluster.
 :ID:       527e04ad-ca16-4ccd-9af2-cd2be498d0d1
 :END:
 
-[[attachment:_20201008_235425screenshot.png]]
+[[file:_20201008_235425screenshot.png]]
 
 Monitors the oldest node in the cluster. Members that are not communicating with that node will be marked as down and the nodes will terminate themselves. If the oldest node has crashed so will the cluster  but is configurable in a way, that in that case only the oldest will be /Downed/.
 
@@ -186,7 +183,7 @@ All nodes terminate themselves relying on good orchestration tools to reduce dow
 
 Reserved for Kubernetes deployments.
 
-[[attachment:_20201008_235848screenshot.png]]
+[[file:_20201008_235848screenshot.png]]
 
 It uses a distributed /lock/ (lock) to make it's decision. Each partition will attempt to obtain it the loser terminates and the winnner remains.
 
@@ -197,7 +194,7 @@ There is a bit of nice hack (IMO but can't understand exactly how this is achiev
 :ID:       276475f5-6d13-4603-a6f2-60f9e00daa1e
 :END:
 
-[[attachment:_20201009_000309screenshot.png]]
+[[file:_20201009_000309screenshot.png]]
 
 
 - Indirect connected Edges (for some reason is connected to only one member).
@@ -221,7 +218,7 @@ Distribute actors across a cluster.
 :END:
 
 
-[[attachment:_20201010_164050screenshot.png]]
+[[file:_20201010_164050screenshot.png]]
 
 
 Unique within the cluster. Acts as a single source of truth leading to /Strong Consistency/.
@@ -244,7 +241,7 @@ val idExtractor: ExtractEntityId = {
 :ID:       ef307079-4de6-4452-9eb6-dad21d460e7b
 :END:
 
-[[attachment:_20201010_165840screenshot.png]]
+[[file:_20201010_165840screenshot.png]]
 
 Holds entities. The distribution depends on a function which procuces the /Shard Id/ (usually based on the /Entity Id)/. Mapping entities to /Shard Id/ dictates how to control the distribution of the entities across the cluster. Improper distribution may lead to hotspots in the cluster (unbalance).
 
@@ -262,7 +259,7 @@ Usually the best is ~Math.abs(hashCode % number_shards)~.
 :ID:       343865ec-484a-419e-9dec-6817fcbdd6a5
 :END:
 
-[[attachment:_20201010_170205screenshot.png]]
+[[file:_20201010_170205screenshot.png]]
 
 Holds Shards. For a type of entity, there is usually one Shard Region per JVM.
 
@@ -284,10 +281,10 @@ In essence the actor has 3 states:
 - Running - Regular behavior.
 - Waiting.
 
-[[attachment:_20201011_002542screenshot.png]]
+[[file:_20201011_002542screenshot.png]]
 
 
-[[attachment:_20201011_002523screenshot.png]]
+[[file:_20201011_002523screenshot.png]]
 Question: If DB fails, then it is recommended to throw the exception leading to a restart of the Actor that in turn will re-read the state from the DB. So:
 - It is explained that the stash is not lost, how?
 - What happens if there is a persistent issue in the DB? Will there be a loop?
@@ -382,7 +379,7 @@ Proper tuning leads to a self-healing system. Some exceptions are worth stopping
 :ID:       b7b0935e-b412-4c9a-a2f5-2b03332cea88
 :END:
 
-[[attachment:_20201012_203109screenshot.png]]
+[[file:_20201012_203109screenshot.png]]
 
 * Ask vs Tell
 
@@ -426,7 +423,7 @@ Data flows through a chain of processing stages. Each stage has zero or more inp
 :ID:       1b4e9928-73cf-4e25-8ad9-d67c831a22c3
 :END:
 
-[[attachment:_20201013_222125screenshot.png]]
+[[file:_20201013_222125screenshot.png]]
 
 - Sources: the source of the data in the stream. E.g., CSV.
 - Sinks: the "destination" for the data. E.g., CSV file.
@@ -495,14 +492,14 @@ Introduces Junctions which take multiple inputs and multiple outputs. Basic ones
 - Fan in: N inputs + 1 output. E.g., Merge (random selects from the inputs), MergePreferred (give one input higher priority), ZipWith (arity N), Zip (arity 2), Concat.
 - Fan out: 1 input + N outputs. E.g., Broadcast,  Balance (to just one of the outputs), UnzipWithin to for example split a tuple to send to the outputs, UnZip splits a tuple[A, B] onto 2 streams A and B.
 
-[[attachment:_20201014_220602screenshot.png]]
+[[file:_20201014_220602screenshot.png]]
 
 **** Fusion :ATTACH:
 
 Until now all of this runs syncronously as Akka "fuses" all stages onto a single syncronous one.
 
 
-[[attachment:_20201014_224503screenshot.png]]
+[[file:_20201014_224503screenshot.png]]
 
 When fused on, buffers are not present in each stage. When turned-off each stage has a dedicated buffer once we start processing stages asyncronously.
 
@@ -521,7 +518,7 @@ Lesson: Do not multitask on your computer while you are doing benchmarks :P This
 :ID:       eac6cced-263d-4255-b074-a75311139262
 :END:
 
-[[attachment:_20201013_222507screenshot.png]]
+[[file:_20201013_222507screenshot.png]]
 
 Linear streams are most of the times sufficient. However, there are some cases where there are multiple inputs and outputs. Leading to additional components:
 - Junctions: Branch points in the stream (e.g., fan-in, fan-out).
@@ -544,7 +541,7 @@ Source(1 to 10)                  // source
 :END:
 
 
-[[attachment:_20201013_221335screenshot.png]]
+[[file:_20201013_221335screenshot.png]]
 
 
 - pull/push mechanism.

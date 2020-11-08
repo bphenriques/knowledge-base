@@ -32,7 +32,7 @@ Messages are sent to an Actor Address which are enqued in the mailbox and only t
 
 It is important that that actors communicate exclusively through messages and do not shared state to ensure /Strong Consistency/! Moreover messages must be immutable.
 
-[[attachment:_20201011_180936screenshot.png]]
+[[file:_20201011_180936screenshot.png]]
 
 * Reactive Systems
 

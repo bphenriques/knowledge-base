@@ -1,5 +1,4 @@
 #+TITLE: ${title}
 #+SETUPFILE: ./_index.org
-#+EXPORT_FILE_NAME: %(org-hugo-slug (org-capture-get :knowledge-base-section))_%(org-hugo-slug "${title}")
-#+ROAM_TAGS: %(org-hugo-slug (org-capture-get :knowledge-base-section)) 
+#+ROAM_TAGS: %(org-hugo-slug (org-capture-get :knowledge-base-section))
 #+ROAM_ALIAS:

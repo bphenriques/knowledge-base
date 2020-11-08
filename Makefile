@@ -3,9 +3,12 @@ EMACS_BUILD_SRC=$(shell pwd)/tools
 EMACS_BUILD_DIR=/tmp/knowledge-base-home-build
 BASE_URL=https://bphenriques.github.io/knowledge-base
 
+all: clean build-content serve
+
 .PHONY: clean
 clean:
 	rm -rf content public
+	rm -rf static/ox-hugo
 
 .PHONY: serve
 serve:

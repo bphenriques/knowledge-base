@@ -3,7 +3,7 @@
 #+ROAM_TAGS: system-design
 #+ROAM_ALIAS:
 
-Subset of [[file:service_oriented_architecture.org][Service Oriented Architecture]] where each service is deployed separately:
+Subset of [[file:service_oriented_architecture_soa.org][Service Oriented Architecture (SOA)]] where each service is deployed separately:
 - Microservices can be physically separated and independently deployed.
 - Each have its own data store.
 - Independent and self governing.

@@ -1,6 +1,6 @@
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: system-design
-#+ROAM_ALIAS: CQRS
+#+ROAM_ALIAS:
 #+TITLE: Command Query Responsibility Segregation (CQRS)
 
 * Use Cases

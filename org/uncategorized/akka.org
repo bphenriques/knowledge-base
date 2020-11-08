@@ -5,7 +5,7 @@
 
 * Akka
 
-Toolkit and runtime for building highly concurrent, distributed and fault tolerant message-driven application in the JVM. It can be used to build [[file:../system-design/reactive_systems.org][Reactive Systems.]]
+Toolkit and runtime for building highly concurrent, distributed and fault tolerant message-driven application in the JVM. It can be used to build [[file:~/Documents/repos/knowledge-base/org/system-design/reactive_systems.org][Reactive Systems.]]
 
 Proposes unified programming model for:
 - Simpler concurrency: single threaded ilusion as each actor processes a messsage at a time).
@@ -35,10 +35,7 @@ Akka distributes actors across the cluster. And each actor maintains state for a
 
 [[file:_20201007_221440screenshot.png]]
 
-* Akka Distributed Data :ATTACH:
-:PROPERTIES:
-:ID:       e7db5a7a-5fc2-43d7-adca-0ad7aa3dcb75
-:END:
+* Akka Distributed Data
 
 Context: Shared State/Data problem
 
@@ -62,10 +59,7 @@ Best used for small data sets with infrequent updates that require high availabi
 
 Limitations CRDT: Do not work with every data type that require a merge function. Some data types are too complex to merge and require the use of /tombstone/:
 
-* Akka Address :ATTACH:
-:PROPERTIES:
-:ID:       b1cecd55-afad-40c2-a613-7ef86d00f655
-:END:
+* Akka Address
 
 [[file:_20201007_224144screenshot.png]]
 
@@ -125,10 +119,7 @@ This issue cannot be recovered by simply rebooting the affected node. In order t
 
 Step 2. is important otherwise it continues to operate unware that it has been removed from the cluster which can lead to multiple copies of the same shard.
 
-* Split Brain :ATTACH:
-:PROPERTIES:
-:ID:       bca2ddfb-c2b7-4090-93e0-f6642ccdb697
-:END:
+* Split Brain
 
 [[file:_20201008_232738screenshot.png]]
 
@@ -146,10 +137,7 @@ Each cluster can have a copy of the actor leading to a inconsistency and data co
 
 Set of customizable strategies for terminating members in order to avoid Split Brain scenarios. Terminating members allow orchestration platforms to take over and heal the problem.
 
-** Static Quorum :ATTACH:
-:PROPERTIES:
-:ID:       89abe15f-3741-4e3d-ad2a-fb43a90a996f
-:END:
+** Static Quorum
 
 [[file:_20201008_235124screenshot.png]]
 
@@ -159,10 +147,7 @@ Fixed sized quorom of node. All nodes will evaluate their situation and /Down/ u
 
 Similar to previous but dynamically tracks the size of the cluster.
 
-** Keep Oldest :ATTACH:
-:PROPERTIES:
-:ID:       527e04ad-ca16-4ccd-9af2-cd2be498d0d1
-:END:
+** Keep Oldest
 
 [[file:_20201008_235425screenshot.png]]
 
@@ -176,10 +161,7 @@ Similar to the other one but designate a specific node as /referee/ (based on it
 
 All nodes terminate themselves relying on good orchestration tools to reduce downtime - Me not like this one.
 
-** Lease Majority :ATTACH:
-:PROPERTIES:
-:ID:       3d14bc4a-d116-43aa-9e63-057947c8b597
-:END:
+** Lease Majority
 
 Reserved for Kubernetes deployments.
 
@@ -189,13 +171,9 @@ It uses a distributed /lock/ (lock) to make it's decision. Each partition will a
 
 There is a bit of nice hack (IMO but can't understand exactly how this is achieved) which is that the side that is theoretically smaller will delay the attempt to obtain the lock so that the majority wins.
 
-** Some Edge Cases :ATTACH:
-:PROPERTIES:
-:ID:       276475f5-6d13-4603-a6f2-60f9e00daa1e
-:END:
+** Some Edge Cases
 
 [[file:_20201009_000309screenshot.png]]
-
 
 - Indirect connected Edges (for some reason is connected to only one member).
 - Unstable nodes (keeps on disconnecting from some nodes).
@@ -212,11 +190,7 @@ Is down but not terminated.
 
 Distribute actors across a cluster.
 
-** Entities :ATTACH:
-:PROPERTIES:
-:ID:       221c9b10-cf9e-4fc8-a16d-1b53649a232a
-:END:
-
+** Entities
 
 [[file:_20201010_164050screenshot.png]]
 
@@ -236,10 +210,7 @@ val idExtractor: ExtractEntityId = {
 }
 #+END_SRC
 
-** Shard :ATTACH:
-:PROPERTIES:
-:ID:       ef307079-4de6-4452-9eb6-dad21d460e7b
-:END:
+** Shard
 
 [[file:_20201010_165840screenshot.png]]
 
@@ -254,10 +225,7 @@ Example of unbalanced ids:
 
 Usually the best is ~Math.abs(hashCode % number_shards)~.
 
-** Shard Region :ATTACH:
-:PROPERTIES:
-:ID:       343865ec-484a-419e-9dec-6817fcbdd6a5
-:END:
+** Shard Region
 
 [[file:_20201010_170205screenshot.png]]
 
@@ -269,10 +237,7 @@ Runs as a Akka Cluster Singleton. It is responsible to route the messages addres
 
 Backed by Akka Distributed Data or Akka Persistence.
 
-* Handling Messages Asyncronously :ATTACH:
-:PROPERTIES:
-:ID:       8ed48992-2f51-44fe-a39e-aac6d2d90d5e
-:END:
+* Handling Messages Asyncronously
 
 Blocking threads inside the actors creates contention therefore the handling of the messages must happen in a async fashion, including any DB writes and DB reads when starting the actor. For example, using interfaces such as ~Future[T]~. However this may lead to concurrency within the actor itself removing the ilusion of a single thread. This means that messages must be /stash/ until other operations complete.
 
@@ -374,10 +339,7 @@ By default it is /OneForOneStrategy/ with some directives that are too specific 
 
 Proper tuning leads to a self-healing system. Some exceptions are worth stopping the actor while others are worth recovering.
 
-** Full Lifecycle :ATTACH:
-:PROPERTIES:
-:ID:       b7b0935e-b412-4c9a-a2f5-2b03332cea88
-:END:
+** Full Lifecycle
 
 [[file:_20201012_203109screenshot.png]]
 
@@ -418,10 +380,7 @@ Streams of data are Messages that will be consumed by actors.
 
 Data flows through a chain of processing stages. Each stage has zero or more inputs/outputs depending on the type. By default these stages run *sync* inside a single actor but can also be configured to run asyncronously in separate actors.
 
-*** Linear Streams :ATTACH:
-:PROPERTIES:
-:ID:       1b4e9928-73cf-4e25-8ad9-d67c831a22c3
-:END:
+*** Linear Streams
 
 [[file:_20201013_222125screenshot.png]]
 
@@ -486,7 +445,7 @@ Each stage can be fine-tuned to choose a dispatchet, bufferSize, log levels and 
 
 Sometimes errors are recoverable which is a ~Throwable -> T~.
 
-**** Graphs :ATTACH:
+**** Graphs
 
 Introduces Junctions which take multiple inputs and multiple outputs. Basic ones are:
 - Fan in: N inputs + 1 output. E.g., Merge (random selects from the inputs), MergePreferred (give one input higher priority), ZipWith (arity N), Zip (arity 2), Concat.
@@ -494,7 +453,7 @@ Introduces Junctions which take multiple inputs and multiple outputs. Basic ones
 
 [[file:_20201014_220602screenshot.png]]
 
-**** Fusion :ATTACH:
+**** Fusion
 
 Until now all of this runs syncronously as Akka "fuses" all stages onto a single syncronous one.
 
@@ -513,10 +472,7 @@ It is not a magic bullet. Performance gain/loss depends on the use-case.
 Fusion optimization principles is: "insert an async boundary to bisect the stream into two subsections of roughly equal processing time.". In other words, check at the current pipeline where the stages can be split so that they can be performed in paralell and joined almost at the same time. This implies looking at Grafana, analyse each stage and compare with the stream graph we have.
 
 Lesson: Do not multitask on your computer while you are doing benchmarks :P This affected the exercises throughput by /a lot/.
-*** Graphs :ATTACH:
-:PROPERTIES:
-:ID:       eac6cced-263d-4255-b074-a75311139262
-:END:
+*** Graphs
 
 [[file:_20201013_222507screenshot.png]]
 
@@ -535,11 +491,7 @@ Source(1 to 10)                  // source
   .run                           // materialize the graph
 #+END_SRC
 
-** Backpressure :ATTACH:
-:PROPERTIES:
-:ID:       15a14326-71d7-4fbd-b3b5-0d93c153b266
-:END:
-
+** Backpressure
 
 [[file:_20201013_221335screenshot.png]]
 

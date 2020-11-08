@@ -8,10 +8,7 @@ Actor is the fundamental unit of computation embodying processing, storage, and 
 #+end_quote
 
 
-* Fundamentals :ATTACH:
-:PROPERTIES:
-:ID:       f2886d69-caa0-4908-b08c-76fe54c82ee2
-:END:
+* Fundamentals
 
 - All computation occurs inside of the actor.
 - Each actor has an address.

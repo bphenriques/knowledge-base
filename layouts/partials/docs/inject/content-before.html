@@ -1,0 +1,21 @@
+<!-- Obtain all backlinks. Looks for raw references -->
+{{ $re := $.File.BaseFileName }}
+{{ $backlinks := slice }}
+{{ range .Site.AllPages }}
+   {{ if and (findRE $re .RawContent) (not (eq $re .File.BaseFileName)) }}
+      {{ $backlinks = $backlinks | append . }}
+   {{ end }}
+{{ end }}
+
+<!-- Generate the HTML -->
+{{ if gt (len $backlinks) 0 }}
+  <div class="backlinks">
+     <h3>Referred in:</h3>
+     <ul>
+       {{ range $backlinks }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+       {{ end }}
+     </ul>
+  </div>
+{{ end }}
+

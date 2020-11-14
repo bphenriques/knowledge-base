@@ -1,11 +1,17 @@
 @import "theme-override.scss";
 
 .backlinks {
-    padding: 0.001em 1.5rem 0.001rem 1.5rem;
+    padding: 0.1rem 1rem 0.1rem 1rem;
+    margin-bottom: 1rem;
     border-radius: .5rem;
     background-color: var(--backlinks-background);
 
     ul li {
         font-size: 0.9em;
     }
+
+    // Line spacing
+    li:not(:last-child) {
+       margin-bottom: .5rem;
+    }  
 }

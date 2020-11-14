@@ -1,4 +1,4 @@
-;;; build.el --- Minimal emacs installation with ox-hugo and org-roam -*- lexical-binding: t -*-
+;;; build.el --- Minimal emacs installation to build the website -*- lexical-binding: t -*-
 ;; Authors: Bruno Henriques <4727729+bphenriques@users.noreply.github.com>
 
 ;;; Commentary:
@@ -49,47 +49,12 @@
 (use-package ox-hugo
   :straight (:type git :host github :repo "kaushalmodi/ox-hugo"))
 
-(use-package org-roam
-  :straight (:type git :host github :repo "org-roam/org-roam")
-  :config
-  (setq
-   org-roam-directory knowledge-base-org-files
-   org-roam-file-exclude-regexp "_index.org"
-   org-roam-tag-sources '(prop last-directory)))
-
-;;;
-;;; Export Helpers
-;;;
-
-(defun knowledge-base/org-roam--backlinks-list (file)
-  "Return the list of backlinks to the provided FILE."
-  (when (org-roam--org-roam-file-p file)
-    (mapcar #'car (org-roam-db-query [:select :distinct [from]
-                                      :from links
-                                      :where (= to $s1)
-                                      :and from :not :like $s2] file "%private%"))))
-
-(defun knowledge-base/org-export-preprocessor (_backend)
-  "Add a list of backlinks to the to the buffer-file."
-  (when-let ((links (knowledge-base/org-roam--backlinks-list (buffer-file-name))))
-    (insert "\n#+begin_backlinks\n")
-    (insert "Referred in:\n")
-    (dolist (link links)
-      (insert (format "- [[file:%s][%s]]\n"
-                      (file-relative-name link org-roam-directory)
-                      (org-roam--get-title-or-slug link))))
-    (insert "#+end_backlinks\n")))
-
-(add-hook 'org-export-before-processing-hook #'knowledge-base/org-export-preprocessor)
-
 ;;;
 ;;; Public functions
 ;;;
 
 (defun build/export-all ()
   "Export all org-files (including nested) under knowledge-base-org-files."
-  (message "Building org-roam db cache...")
-  (org-roam-db-build-cache)
 
   (dolist (org-file (directory-files-recursively knowledge-base-org-files "\.org$"))
     (with-current-buffer (find-file org-file)

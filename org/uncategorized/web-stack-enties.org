@@ -77,3 +77,7 @@ Source: https://boxofcables.dev/no-microsoft-is-not-rebasing-windows-to-linux/
 * How to teach yourself hard things
 
 Source: https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/
+
+* Choose Boring Technology
+
+Source: http://boringtechnology.club/

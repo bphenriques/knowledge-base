@@ -1,6 +1,0 @@
-#+TITLE: System Design Articles
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: system-design
-#+ROAM_ALIAS:
-
-- http://boringtechnology.club/

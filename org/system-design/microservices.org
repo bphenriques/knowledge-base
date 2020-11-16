@@ -7,7 +7,7 @@ Subset of [[file:service_oriented_architecture_soa.org][Service Oriented Archite
 - Microservices can be physically separated and independently deployed.
 - Each have its own data store.
 - Independent and self governing.
-- Communication is syncronous or asyncronous (e.g., through [[file:~/Documents/repos/knowledge-base/org/messaging-systems/overview.org][message brokers]]).
+- Communication is syncronous or asyncronous (e.g., through [[file:~/Documents/repos/knowledge-base/org/messaging-systems/messaging-systems-overview.org][messaging systems]]).
 - Loose coupling between components (more or less by experience but that is design flaw likely :thinking:).
 - Shorter development and release cycles.
 - Each scale independently (either through physical or virtual machines).

@@ -1,43 +1,29 @@
 #+TITLE: Akka Streams
 #+SETUPFILE: ./_index.org
-#+ROAM_TAGS: akka
+#+ROAM_TAGS: akka stream
 #+ROAM_ALIAS:
 
-* Akka Streams
+Actor Streams leverage the actor system to consume streams of data. In fact, each element of a stream is a Message within the Actor System
 
-Use cases: live-data, ETL systems, streaming.
+Here, data flows through a chain of processing stages:
+- ~Sources~: The "source" (e.g., CSV file).
+- ~Sinks~: The "destination" (e.g., a file).
+- ~Flows~: Transformations made to the data within the Stream (e.g., total number of lines).
+- ~Runnable Graphs~: A stream where all inputs and outputs are connected.
 
-- It is more efficient to consume asyncronously.
-- Avoid flooding a slow consumer (backpressure).
+All these stages are composable and, in order to start the flow they have to be materialized. As soon they are connected, each staga materializes a value. See available operators [[https://doc.akka.io/docs/akka/current/stream/operators/][here]].
 
-Initiative to provide a standard for async stream processing with non-blocking backpressure.
+Moreover, there are two types of Streams:
+- ~Linear Streams~: Linear flow.
+- ~Graphs~: Where there may be branches points in the Stream (aka ~Junctions~). Useful for more complex use-cases.
 
-Components of a Reactive Stream:
-- Publisher: Publishes data to stream
-- Subscriber: Consumes data from the stream.
-- Processor: Acts as both a publisher and a subscriber, obeying the contract for each.
-- Subscription: Connects a subscriber to a publisher to initiate a message flow.
+In any case, by default the stages in a ~Linear Stream~ run *syncronously* inside a single together ("Fused" together) but can also be configured to run ~asyncronously~ in separate actors.
 
-Streams of data are Messages that will be consumed by actors.
+Last but not he least: backpressure is managed by a pull/push mechanism. I.e.:
+1. Subscriber signals demand which is sent upstream via subscription.
+2. Publishers receives demand and pushes data (if available) downstream.
 
-** How
-
-Data flows through a chain of processing stages. Each stage has zero or more inputs/outputs depending on the type. By default these stages run *sync* inside a single actor but can also be configured to run asyncronously in separate actors.
-
-*** Linear Streams
-
-[[file:_20201013_222125screenshot.png]]
-
-- Sources: the source of the data in the stream. E.g., CSV.
-- Sinks: the "destination" for the data. E.g., CSV file.
-- Flows: Transformations. E.g., Concatenate columns.
-- Runnable Graph: A stream where all the inputs and outputs are connected.
-
-Each stage can be run sync or async. In most cases the order is preserved.
-
-Backpressure is propagated downstream stages to upstream.
-
-**** Source
+* Source
 
 Stage with single output: ~Source[+Out, +Mat]~:
 - ~Out~: The type of each element that is produced.
@@ -45,101 +31,196 @@ Stage with single output: ~Source[+Out, +Mat]~:
 
 Source only push data as long as there is demand. The source will have to deal with incoming data until demand resumes (how how largely demands on the use-case).
 
-E.g., ~empty~, ~single~, ~repeat~ (repeat), ~tick~ (schedule), from iterables, cycle (same as iterable but repeats), stateful source ~unfold(initial)(fn), from actors, from files, tcp connections (!= data sent through it), java streams.
+See available operators [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#source-operators][here]].
 
-**** Sink
+* Sink
 
 Stage with a single input: ~Sink[-In, +Mat]~:
 - In: The type of each element that is consumed.
 - Mat The type of each element that is produced. E.g., Future[Int].
 
-It creates backpressure by controlling /Demand/.
+It creates backpressure by controlling /Demand/. Note that if the stream is infinite, these sinks may never complete.
 
-E.g., ignore, foreach (pure side effects as it does not return values), head/last, headOption/lastOption, seq (materialized all elements), stateful sinks such as fold and reduce, actorRef (no backpressure mechanism), actorRefAck (provides backpressure), FileIO.toPath, StreamConverts.fromJavaStream.
+See available operators [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#sink-operators][here]].
 
-Note that if the stream is infinite, these sinks may never complete.
-
-**** Flows
+* Flows
 
 Single input and single output: ~Flow[-In, +Out, +Mat]~.
 
 Acts both as producer and consumer therefore it propagates demand to the producer as well propagating (and transforming) messages produced to downstream stages.
 
-E.g., map, mapAsync(Parallelism) that still guarantees order, mayAsyncUnordered, mapConcat (similar to flatMap but not the same), grouped, sliding, fold, scan (emits each new computed result), filter, collect, limit by time using takeWithin(Duration), dropWithin(Duration), groupedWithin(Number, Duration), zip, flatMapConcat (similar mapConcat but operates on Sources rather than iterables), flatMapMerge (similar to flatMapContact but the substreams are consumed consumed therefore order is not guaranteed), buffer(size, strategy) (smooth incosistencies in the flow rate), for slow consumers/producers we have expand (extrapolate for slow producers), batch (for slow consumer) and conflate (create summary of the elements when the producer is faster), log.
+The most notable operators (way too many):
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#simple-operators][Simple Operators]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#timer-driven-operators][Timer Driven]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#asynchronous-operators][Asyncronous]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#backpressure-aware-operators][Backpressure Aware]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#nesting-and-flattening-operators][Nesting and flatenning]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#time-aware-operators][Time Aware]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#fan-in-operators][Fan-in]]
+- [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#fan-out-operators][Fan-Out]]
 
-Some of these operations are directly accessible from ~Source~ and does not require additional typing.
+Note that some of these operations are directly accessible from ~Source~ and does not require additional typing.
 
-**** Runnable Graphs
+Additional notes:
+- ~Buffer~ smooths flow inconsistencies.
+- ~extrapolate~ to deal with slow producers.
+- ~batch~ to deal with slow consumers.
+- ~conflate~ which creates a summary of the elements when the producer is faster - What is the usefulness?
 
-Connects source, flows, sinks so that data can start flowing.
+* Runnable Graphs
 
-E.g.,:
-- to: materializes the value from left to right. - Returns Cancellable.
-- toMat: Transform/combine materialized values: ~source.viaMat(flow)(Keep.right).to(sink).run()~ - Returns NotUsed.
-- viaMat: Similar but operates on a flow as opposed to sink - Returns Future[Done].
+Connects source, flows and sinks so that data can start flowing.
 
-**** Fault Tolerancy.
+This is done using ~via~ followed ~to~ and finally ~run~ on a ~Source~ as follows:
+
+#+begin_src scala
+import $ivy.`com.typesafe.akka::akka-actor:2.6.3`
+import $ivy.`com.typesafe.akka::akka-stream:2.6.3`
+
+import akka.actor.ActorSystem
+import akka.stream.scaladsl.{Flow, Sink, Source}
+
+implicit val system = ActorSystem("QuickStart")
+Source(1 to 10)
+   .via(Flow[Int].map(_ * 2))
+   .to(Sink.foreach(println))
+   .run
+#+end_src
+
+Notes:
+- ~via~: connects ~Flow~ to a ~Source~ returning a new ~Source~. Also allows composing two ~Flows~.
+- ~to~: connects a ~Sink~ to a ~Source~ returning a ~RunnableGraph~. Also connects to a ~Flow~ to build new ~Sink~. In essence, it materializes the value from the stage is called on.
+- The ~run~ is a terminal operator. There are others.
+
+While the flow is *running*, values are materialized. These values are then acessed using ~to~, ~source.toMat(Sink)(Transform/CombineFunction)~, ~~source.viaMat(flow)(Transform/CombineFunction)~.
+
+Finally, there are some shortcuts:
+- ~Source.runWith(Sink)~.
+- ~Source.runForeach(Function)~.
+- ~Source.runFold(0)(_ + _)~.
+- ~Source.runReduce(_ + _).~
+
+* Fault Tolerancy - TODO: Review Examples
 
 Default strategy is to stop processing the stream and can be overriden within the ~ActorMaterializer~ by passing a decider that given an exception it either decides:
-- Stop: terminate with an error.
-- Resume: Drop the failing element.
-- Restart: The element is dropped and the stream continues after restarting the stage. Any state acumulated by that stage will be cleared.
+- /Stop/: terminate with an error.
+- /Resume/: Drop the failing element.
+- /Restart/: The element is dropped and the stream continues after restarting the stage. Any state acumulated by that stage will be cleared.
 
-Each stage can be fine-tuned to choose a dispatchet, bufferSize, log levels and supervision.
+Via attributes, each stage can be fine-tuned:
+- ~Dispatcher~
+- ~Buffer Sizes~
+- ~Log Level~
+- ~Supervision~
 
-Sometimes errors are recoverable which is a ~Throwable -> T~.
+With a Supervision Strategy:
+#+begin_src scala
+import $ivy.`com.typesafe.akka::akka-actor:2.6.3`
+import $ivy.`com.typesafe.akka::akka-stream:2.6.3`
 
-**** Graphs
+import akka.NotUsed
+import akka.actor.ActorSystem
+import akka.stream.{ActorAttributes, Supervision}
+import akka.stream.scaladsl.{Flow, Sink, Source}
+import java.lang.ArithmeticException
 
-Introduces Junctions which take multiple inputs and multiple outputs. Basic ones are:
-- Fan in: N inputs + 1 output. E.g., Merge (random selects from the inputs), MergePreferred (give one input higher priority), ZipWith (arity N), Zip (arity 2), Concat.
-- Fan out: 1 input + N outputs. E.g., Broadcast,  Balance (to just one of the outputs), UnzipWithin to for example split a tuple to send to the outputs, UnZip splits a tuple[A, B] onto 2 streams A and B.
+val decider: Supervision.Decider = {
+  case _: ArithmeticException => Supervision.Resume
+  case _ => Supervision.Stop
+}
+
+val possibleDivisionByZero =
+  Flow[Int].map(i => 100 / i)
+    .withAttributes(
+      ActorAttributes.supervisionStrategy(decider)
+    )
+
+implicit val system = ActorSystem("QuickStart")
+Source(-1 to 1)
+   .via(possibleDivisionByZero)
+   .runWith(Sink.foreach(println))
+#+end_src
+
+However some errors are recoverable, in this case we provide a ~PartialFunction[Throwable, T]~. It will terminate the stream graciously passing the resulting value as the final value.
+
+#+begin_src scala
+import $ivy.`com.typesafe.akka::akka-actor:2.6.3`
+import $ivy.`com.typesafe.akka::akka-stream:2.6.3`
+
+import akka.NotUsed
+import akka.actor.ActorSystem
+import akka.stream.{ActorAttributes, Supervision}
+import akka.stream.scaladsl.{Flow, Sink, Source}
+import java.lang.ArithmeticException
+
+val possibleDivisionByZero =
+  Flow[Int].map(i => 100/i)
+    .withAttributes(
+      ActorAttributes.supervisionStrategy(decider)
+    )
+    .recover {
+      case _: ArithmeticException => 0
+    }
+
+implicit val system = ActorSystem("QuickStart")
+Source(-1 to 1)
+   .via(possibleDivisionByZero)
+   .runWith(Sink.foreach(println))
+#+end_src
+
+* Graphs
+
+Introduces ~Junctions~ which take multiple inputs and multiple outputs. Basic ones are:
+- ~Fan-in~: N inputs + 1 output. See [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#fan-in-operator][operators]].
+- ~Fan-out~: 1 input + N outputs. See [[https://doc.akka.io/docs/akka/current/stream/operators/index.html#fan-out-operators][operators]].
+
+For example, using ~Fan-in~ we can randombly select one of the inputs, give preference or merely zip them. Then, using ~Fan-out~, we can broadcast the values or unzip to create two individual streams.
 
 [[file:_20201014_220602screenshot.png]]
 
-**** Fusion
+We can use ~GraphDSL~ to easily connect them visually ([[https://doc.akka.io/docs/akka/current/stream/stream-graphs.html][documentation]]). E.g.:
+#+begin_src scala
+import $ivy.`com.typesafe.akka::akka-actor:2.6.3`
+import $ivy.`com.typesafe.akka::akka-stream:2.6.3`
 
-Until now all of this runs syncronously as Akka "fuses" all stages onto a single syncronous one.
+import akka.NotUsed
+import akka.actor.ActorSystem
+import akka.stream.{ActorAttributes, ClosedShape, Supervision}
+import akka.stream.scaladsl.{Broadcast, Flow, Merge, RunnableGraph, Sink, Source, GraphDSL}
 
+implicit val system = ActorSystem("QuickStart")
+RunnableGraph.fromGraph(GraphDSL.create() { implicit builder: GraphDSL.Builder[NotUsed] =>
+  import GraphDSL.Implicits._
+  val in = Source(1 to 10)
+  val out = Sink.foreach(println)
+
+  val bcast = builder.add(Broadcast[Int](2))
+  val merge = builder.add(Merge[Int](2))
+
+  val f1, f2, f3, f4 = Flow[Int].map(_ + 10)
+
+  in ~> f1 ~> bcast ~> f2 ~> merge ~> f3 ~> out
+  bcast ~> f4 ~> merge
+  ClosedShape                 // Indicates no open inputs or outputs, this means that the graph is runnable. The opposite means that it is a partial graph.
+}).run()
+#+end_src
+
+It is also possible to build partial graphs, or ~Shapes~. There are already some built-in:
+- Linear Shapes (~<Source|Flow|Sink>Shape~)
+- Junction Shapes with the same input/output types (~UniformFan<In|Out>Shape~).
+- Junction Shapes with different inputs/outputs types (~Fan<In|Out>Shape<arity>~).
+
+Simpler graphs can be done using, for example, the simpler ~Sink.combine~ API.
+
+* Fusion
+
+By default, Akka "fuses" all stages onto a single syncronous one to run on a single actor (auto-fusing can be disabled) but this limits the benefits we are looking for.
 
 [[file:_20201014_224503screenshot.png]]
 
-When fused on, buffers are not present in each stage. When turned-off each stage has a dedicated buffer once we start processing stages asyncronously.
+In order to add a asyncronous boundary, we just need to add ~async~ which disables fusing for that stage, which means that we are adding an additional overhead (Actors, mailboxes and buffers). Its benefits largely depends on the use-case. A good principle is
+#+begin_quote
+Insert an async boundary to bisect the stream into two subsections of roughly equal processing time.
+#+end_quote
 
-We can disable fusing for everything however we can be more selective: ~Source(1 to 10).async.runForEach(println)~. This creates overhead of:
-- Actors.
-- Mailboxes.
-- Buffers.
-
-It is not a magic bullet. Performance gain/loss depends on the use-case.
-
-Fusion optimization principles is: "insert an async boundary to bisect the stream into two subsections of roughly equal processing time.". In other words, check at the current pipeline where the stages can be split so that they can be performed in paralell and joined almost at the same time. This implies looking at Grafana, analyse each stage and compare with the stream graph we have.
-
-Lesson: Do not multitask on your computer while you are doing benchmarks :P This affected the exercises throughput by /a lot/.
-*** Graphs
-
-[[file:_20201013_222507screenshot.png]]
-
-Linear streams are most of the times sufficient. However, there are some cases where there are multiple inputs and outputs. Leading to additional components:
-- Junctions: Branch points in the stream (e.g., fan-in, fan-out).
-
-All the introduced components are immutable and can be reused in different scenarios as they solely contain instructions to do /something/ with the data.
-
-*** Example
-
-Simple stream:
-#+BEGIN_SRC scala
-Source(1 to 10)                  // source
-  .via(Flow[Int].map(_ * 2))     // stage
-  .to(Sink.foreach(println))     // sink
-  .run                           // materialize the graph
-#+END_SRC
-
-** Backpressure
-
-[[file:_20201013_221335screenshot.png]]
-
-
-- pull/push mechanism.
-
-  Subscribers signal demand that is sent upstream via subscription. Publishers then push data (if available), this way publisher does not send more information than that it was demanded.
+In other words, check at the current pipeline where the stages can be split so that they can be performed in paralell and joined almost at the same time. This implies looking at Telemetry and verify which stages can be processed in paralell given the graph we have.

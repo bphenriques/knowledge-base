@@ -1,0 +1,145 @@
+#+TITLE: Akka Streams
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: akka
+#+ROAM_ALIAS:
+
+* Akka Streams
+
+Use cases: live-data, ETL systems, streaming.
+
+- It is more efficient to consume asyncronously.
+- Avoid flooding a slow consumer (backpressure).
+
+Initiative to provide a standard for async stream processing with non-blocking backpressure.
+
+Components of a Reactive Stream:
+- Publisher: Publishes data to stream
+- Subscriber: Consumes data from the stream.
+- Processor: Acts as both a publisher and a subscriber, obeying the contract for each.
+- Subscription: Connects a subscriber to a publisher to initiate a message flow.
+
+Streams of data are Messages that will be consumed by actors.
+
+** How
+
+Data flows through a chain of processing stages. Each stage has zero or more inputs/outputs depending on the type. By default these stages run *sync* inside a single actor but can also be configured to run asyncronously in separate actors.
+
+*** Linear Streams
+
+[[file:_20201013_222125screenshot.png]]
+
+- Sources: the source of the data in the stream. E.g., CSV.
+- Sinks: the "destination" for the data. E.g., CSV file.
+- Flows: Transformations. E.g., Concatenate columns.
+- Runnable Graph: A stream where all the inputs and outputs are connected.
+
+Each stage can be run sync or async. In most cases the order is preserved.
+
+Backpressure is propagated downstream stages to upstream.
+
+**** Source
+
+Stage with single output: ~Source[+Out, +Mat]~:
+- ~Out~: The type of each element that is produced.
+- ~Mat~: Type of the materialized value. Usually ~NotUsed~.
+
+Source only push data as long as there is demand. The source will have to deal with incoming data until demand resumes (how how largely demands on the use-case).
+
+E.g., ~empty~, ~single~, ~repeat~ (repeat), ~tick~ (schedule), from iterables, cycle (same as iterable but repeats), stateful source ~unfold(initial)(fn), from actors, from files, tcp connections (!= data sent through it), java streams.
+
+**** Sink
+
+Stage with a single input: ~Sink[-In, +Mat]~:
+- In: The type of each element that is consumed.
+- Mat The type of each element that is produced. E.g., Future[Int].
+
+It creates backpressure by controlling /Demand/.
+
+E.g., ignore, foreach (pure side effects as it does not return values), head/last, headOption/lastOption, seq (materialized all elements), stateful sinks such as fold and reduce, actorRef (no backpressure mechanism), actorRefAck (provides backpressure), FileIO.toPath, StreamConverts.fromJavaStream.
+
+Note that if the stream is infinite, these sinks may never complete.
+
+**** Flows
+
+Single input and single output: ~Flow[-In, +Out, +Mat]~.
+
+Acts both as producer and consumer therefore it propagates demand to the producer as well propagating (and transforming) messages produced to downstream stages.
+
+E.g., map, mapAsync(Parallelism) that still guarantees order, mayAsyncUnordered, mapConcat (similar to flatMap but not the same), grouped, sliding, fold, scan (emits each new computed result), filter, collect, limit by time using takeWithin(Duration), dropWithin(Duration), groupedWithin(Number, Duration), zip, flatMapConcat (similar mapConcat but operates on Sources rather than iterables), flatMapMerge (similar to flatMapContact but the substreams are consumed consumed therefore order is not guaranteed), buffer(size, strategy) (smooth incosistencies in the flow rate), for slow consumers/producers we have expand (extrapolate for slow producers), batch (for slow consumer) and conflate (create summary of the elements when the producer is faster), log.
+
+Some of these operations are directly accessible from ~Source~ and does not require additional typing.
+
+**** Runnable Graphs
+
+Connects source, flows, sinks so that data can start flowing.
+
+E.g.,:
+- to: materializes the value from left to right. - Returns Cancellable.
+- toMat: Transform/combine materialized values: ~source.viaMat(flow)(Keep.right).to(sink).run()~ - Returns NotUsed.
+- viaMat: Similar but operates on a flow as opposed to sink - Returns Future[Done].
+
+**** Fault Tolerancy.
+
+Default strategy is to stop processing the stream and can be overriden within the ~ActorMaterializer~ by passing a decider that given an exception it either decides:
+- Stop: terminate with an error.
+- Resume: Drop the failing element.
+- Restart: The element is dropped and the stream continues after restarting the stage. Any state acumulated by that stage will be cleared.
+
+Each stage can be fine-tuned to choose a dispatchet, bufferSize, log levels and supervision.
+
+Sometimes errors are recoverable which is a ~Throwable -> T~.
+
+**** Graphs
+
+Introduces Junctions which take multiple inputs and multiple outputs. Basic ones are:
+- Fan in: N inputs + 1 output. E.g., Merge (random selects from the inputs), MergePreferred (give one input higher priority), ZipWith (arity N), Zip (arity 2), Concat.
+- Fan out: 1 input + N outputs. E.g., Broadcast,  Balance (to just one of the outputs), UnzipWithin to for example split a tuple to send to the outputs, UnZip splits a tuple[A, B] onto 2 streams A and B.
+
+[[file:_20201014_220602screenshot.png]]
+
+**** Fusion
+
+Until now all of this runs syncronously as Akka "fuses" all stages onto a single syncronous one.
+
+
+[[file:_20201014_224503screenshot.png]]
+
+When fused on, buffers are not present in each stage. When turned-off each stage has a dedicated buffer once we start processing stages asyncronously.
+
+We can disable fusing for everything however we can be more selective: ~Source(1 to 10).async.runForEach(println)~. This creates overhead of:
+- Actors.
+- Mailboxes.
+- Buffers.
+
+It is not a magic bullet. Performance gain/loss depends on the use-case.
+
+Fusion optimization principles is: "insert an async boundary to bisect the stream into two subsections of roughly equal processing time.". In other words, check at the current pipeline where the stages can be split so that they can be performed in paralell and joined almost at the same time. This implies looking at Grafana, analyse each stage and compare with the stream graph we have.
+
+Lesson: Do not multitask on your computer while you are doing benchmarks :P This affected the exercises throughput by /a lot/.
+*** Graphs
+
+[[file:_20201013_222507screenshot.png]]
+
+Linear streams are most of the times sufficient. However, there are some cases where there are multiple inputs and outputs. Leading to additional components:
+- Junctions: Branch points in the stream (e.g., fan-in, fan-out).
+
+All the introduced components are immutable and can be reused in different scenarios as they solely contain instructions to do /something/ with the data.
+
+*** Example
+
+Simple stream:
+#+BEGIN_SRC scala
+Source(1 to 10)                  // source
+  .via(Flow[Int].map(_ * 2))     // stage
+  .to(Sink.foreach(println))     // sink
+  .run                           // materialize the graph
+#+END_SRC
+
+** Backpressure
+
+[[file:_20201013_221335screenshot.png]]
+
+
+- pull/push mechanism.
+
+  Subscribers signal demand that is sent upstream via subscription. Publishers then push data (if available), this way publisher does not send more information than that it was demanded.

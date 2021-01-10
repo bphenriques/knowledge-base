@@ -1,0 +1,10 @@
+#+HUGO_BASE_DIR: ../..
+#+HUGO_SECTION: akka
+#+HUGO_WEIGHT: 1
+
+* Akka
+:PROPERTIES:
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
+:EXPORT_FILE_NAME: _index
+:END:
+

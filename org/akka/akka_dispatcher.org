@@ -1,0 +1,14 @@
+#+TITLE: Akka Dispatcher
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: akka dispatcher
+#+ROAM_ALIAS:
+
+The engine of Akka as it decides when a actor should process messsages and when it must yield the thread for others. It means that dispatchers are in control of the thread time and of the threads themselves.
+
+- ~Dispatcher~ (default): Event-driven dispatcher, sharing threads from thread pool.
+- ~PinnedDispatcher~: Dedicated thread per actor.
+- ~CallingThreadDispatcher~: Just for testing.
+
+The best tips are:
+- Adjust ~throughput~ to deliver more messages to the actors before yielding.
+- Adjust dispatcher settings according to the use-case.

@@ -220,7 +220,8 @@ By default, Akka "fuses" all stages onto a single syncronous one to run on a sin
 
 In order to add a asyncronous boundary, we just need to add ~async~ which disables fusing for that stage, which means that we are adding an additional overhead (Actors, mailboxes and buffers). Its benefits largely depends on the use-case. A good principle is
 #+begin_quote
-Insert an async boundary to bisect the stream into two subsections of roughly equal processing time.
+1. Insert an async boundary to bisect the stream into two subsections of roughly equal processing time.
+2. We insert an async boundary to bisect the stream into two subsections of roughly equal processing time.
 #+end_quote
 
 In other words, check at the current pipeline where the stages can be split so that they can be performed in paralell and joined almost at the same time. This implies looking at Telemetry and verify which stages can be processed in paralell given the graph we have.

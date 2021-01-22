@@ -5,8 +5,24 @@
 
 - Reproducible
 - Each reproduction (a build) produces a generation
+- Nixpkgs, nix, nix-darwin, home-manager, so many stuff! How can I use a single tool regardless of the environment?
 
-Links:
+* Home-Manager
+
+Only to manager $HOME, some packages and dotfiles. Nothing OS related. Which is a bummer because I wanted to install fonts.
+
+- https://www.mathiaspolligkeit.de/dev/exploring-nix-on-macos/
+
+
+* Nix Darwin
+
+The one to use in MacOS
+
+- https://dev.to/louy2/use-nix-on-macos-as-a-homebrew-user-22d
+- https://hardselius.github.io/2020/nix-please/
+
+* Links:
+- https://www.mathiaspolligkeit.de/dev/exploring-nix-on-macos/
 - https://wiki.nikitavoloboev.xyz/package-managers/nix
 - https://nixcloud.io/tour/?id=1
 - https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html

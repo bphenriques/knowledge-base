@@ -3,31 +3,27 @@
 #+ROAM_ALIAS:
 #+TITLE: Command Query Responsibility Segregation (CQRS)
 
-* Use Cases
-
+Command Query Responsibility Segregation (CQRS) is a architectural pattern that aims to split applications between two models: ~Command Model~ (writes) and ~Query Model~ (reads). Some use cases:
 - Auditing (e.g., banking, accounting)
 - High Scalability
 - High Resiliency
 
-Some Aggregate Roots are a better fit for write models but do not fit other read models. Requirements for both models are different.
+This separation allows both concerns to evolve separately depending on the requirements. For example, some Aggregate Roots are a better fit for write models but do not fit other read models.
 
-* What
-
-Command Query Responsibility Segregation (CQRS) aims to separate read models from write models. This is specially problematic when using [[file:../uncategorized/event_sourcing.org][Event Sourcing]]. Note that [[file:../uncategorized/event_sourcing.org][Event Sourcing]] is not a requirement for CQRS but are often combined.
+This pattern is often combined with [[file:event_sourcing_es_es.org][Event Sourcing (ES)]].
 
 Eventually consistent by design which always present but now is explicit about it.
 
 * How:
 
+Application is split between two models:
+- *Command Model*: Handles requests to change the state of the application and decide its side-effects, e.g., events or new commands.
+- *Query Model* (or View Model or Projection): Focus on data and not on behavior and are modelled to satisfy a very specific need, therefore it is usual having multiple of them.
+
 #+BEGIN_SRC
 API -Queries-> Read Model <- Data Store
 API -Commands-> Write Model -> Data Store
 #+END_SRC
-
-Notes:
-- There can be multiple read models to satisfy different use-cases.
-
-Each model is optimized for their purpose.
 
 Separate process consumes the written events and persists on a denormalized event store, which is called /Projection/ used by the read model like so:
 
@@ -38,17 +34,15 @@ API -Commands-> Write Model -> Data Store
 Data Store -Events-> Denormalized Data Store (with Projections)
 #+END_SRC
 
-Denormalization makes queries fast as there is no need for complex joins or queries.
+The Data Store is usually denormalized to make sure that queries are faster.
 
 * Summary
 
-- Flexible model
 - Write model are optimized for writes
 - Read models are optimized for reads
 - Read and write models are decoupled which implies that they may use different data stores.
 - New /Projections/ are easy in CQRD/ES.
 - New projections are retroactive because we have the fully history.
-
 
 * Models as Microservices
 
@@ -77,7 +71,7 @@ Pure reads are never consistent as they are often working with stale data. These
 
 ** Write Model
 
-Due to the higher consistency, availability is lower
+Due to the higher consistency, availability is lower.
 
 ** Read Model
 
@@ -95,6 +89,6 @@ Eventual consistency in CQRS can be isolated to where it is necessary.
 - More databases to maintain
 - More classes/objects to maintain
 - Support older versions can be challenging
-- Additinoal storage
+- Additinonal storage
 - Data duplication may result in desyncs that often solved by rebuilding project - Question: *when* ? Do we have monitoring over this? Can this be automatic? How often does this occur?
 - UI must be designed to be eventually consistent (which was always there in the past, it is now explicit)

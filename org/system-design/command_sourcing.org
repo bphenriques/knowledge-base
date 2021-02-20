@@ -5,7 +5,7 @@
 
 * Command Sourcing
 
-Similar to [[file:event_sourcing.org][Event Sourcing]] but persists commands as opposed to events so:
+Similar to [[file:event_sourcing_es_es.org][Event Sourcing (ES)]] but persists commands as opposed to events so:
 1. Issue command
 2. Persist command
 3. Run asyncronous the command

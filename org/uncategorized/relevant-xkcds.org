@@ -1,5 +1,0 @@
-#+TITLE: Relevant xkcds
-#+SETUPFILE: ./_index.org
-
-* On Standards
-https://xkcd.com/927/

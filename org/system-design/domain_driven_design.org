@@ -3,48 +3,34 @@
 #+ROAM_TAGS: system-design lightbend
 #+ROAM_ALIAS:
 
-* Goal
+Approach on Software Development focused on the design of a shared Model understood by domain experts and by who implements it. Being a model, it means that it can be implemented in different ways, from diagrams to software.
 
-Evolving Shared Model understood by domain experts and by who implements it. Being a model, it means that it can be implemented in different ways, from diagrams to software. Regardless of how it is implemented, it must reflect the model.
+* Concepts
 
-Useful for modelling use-cases before attempting to implement it whether in Software or mere Diagrams.
+- *Context*: The setting a word appers determines its meaning.
+- *Domain*: Sphere of knowledge, influence or activity (aka /area/).
+- *Model*: System of abstractions that describes a part of the domain.
+- *Ubiquitous Language*: Common language between domain experts and developers.
+- *Aggregate*: Entity or group of entities bounded a root entity (Aggregate Root) that are always consistent (within a ACID transaction). Serves as a building block to implement ~Command~ within [[file:command_query_responsibility_segregation.org][CQRS]].
 
-* Ubiquitous Languague
+* Strategies
 
-Common language that enables communication between the domain experts and the developers. Terminology in there comes from the domain experts. Software terms should be avoided and any addition must go through domain experts as they may have already a word for that.
-
-
-* Subject-Verb-Object notation
-
-Allows having a consistent way to phrase activies our events in the domain.
-
-Example: Host checks current reservation.
-- *Subject*: Host
-- *Verb*: Checks
-- *Object*: Reservation
-
-Note that "current" can be seen as a modifier.
-
-Sometimes there may be multiple objects. E.g., "Bartender collects Payment for a Drink Order":
-- Both are objects
-- "Payment" is a direct object.
-- "Drink Order" is a indirect object.
-
-Regardless, diferentiation is not that relevant.
+On complex domains, it is hard to have a single unified model, therefore the model is usually split into multiple ones. Follows some strategies used to maintain integrity.
 
 * Bounded Context
 
-Ubiquitous Language and model for a sub-domain. The means that a concept might change from one bounded context to another.
+Concepts may change from one context to another. It is important to be explicit about it:
+1. Explicitely define the context where the model applies.
+2. Explicitely set the boundaries, e.g., team organization, code-bases, database schemas.
+3. Keep the model strictly consistent within these bounds.
 
-Each one has unique domain concepts and not all contexts are compatible with others.
+Maintain these boundaries strong allows smoother workflows.
 
-Typically [[file:microservices.org][Microservices]] are build around these contexts. Best way to determine is to:
+Typically [[file:microservices.org][Microservices]] are build around these contexts. Follows some tips to define them:
 - Define use-cases.
 - Look how different groups of people interact with a given entity.
 - Look for variations of the ubiquitous language as they may suggest a new context.
 - Look for variations where informations starts to become or relevant or irrelevant.
-
-Strongly separated bounded contexts result in smoother workflows.
 
 * Anti-Corruption Layer
 

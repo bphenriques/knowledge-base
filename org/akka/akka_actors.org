@@ -1,16 +1,7 @@
-#+TITLE: Akka
+#+TITLE: Akka Actors
 #+SETUPFILE: ./_index.org
-#+ROAM_TAGS: uncategorized
+#+ROAM_TAGS: akka
 #+ROAM_ALIAS:
-
-* Akka
-
-Toolkit and runtime for building highly concurrent, distributed and fault tolerant message-driven application in the JVM. It can be used to build [[file:~/Documents/repos/knowledge-base/org/system-design/reactive_systems.org][Reactive Systems.]]
-
-Proposes unified programming model for:
-- Simpler concurrency: single threaded ilusion as each actor processes a messsage at a time (no need to locks or syncronization strategues).
-- Simpler distribution: is distributed by default (see more on [[file:../akka/akka_cluster.org][Akka Cluster]]).
-- Simpler fault tolerancy: Decouples communication from failure handling.
 
 * Handling Messages Asyncronously
 
@@ -21,10 +12,6 @@ In essence the actor has 3 states:
 - Running - Regular behavior.
 - Waiting.
 
-[[file:_20201011_002542screenshot.png]]
-
-
-[[file:_20201011_002523screenshot.png]]
 Question: If DB fails, then it is recommended to throw the exception leading to a restart of the Actor that in turn will re-read the state from the DB. So:
 - It is explained that the stash is not lost, how?
 - What happens if there is a persistent issue in the DB? Will there be a loop?
@@ -91,14 +78,3 @@ Use tell when:
 - We do not care about the response.
 
 Neverthless, when using the ask operator, always ue pipeTo within the actor system to avoid breaking the single thread illusion.
-
-* Concurrency and paralelism :ATTACH:
-:PROPERTIES:
-:ID:       9352259e-1a22-40a4-b623-aac72163e993
-:END:
-
-Paralelism: Run multiple actors as an actor processes at most one message at a time.
-
-
-[[attachment:_20210105_215405screenshot.png]]
-

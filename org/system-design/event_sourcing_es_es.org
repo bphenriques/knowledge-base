@@ -1,0 +1,36 @@
+#+TITLE: Event Sourcing (ES)
+#+SETUPFILE: ./_index.org
+#+ROAM_TAGS: system-design
+#+ROAM_ALIAS:
+
+Representing the application's state through the history of events that have happened in the past. Use cases:
+- *Audit Logs*: Build tailored reports from the event stream.
+- *Analytics*: Extract behavior from the event stream.
+- *Temporal Reports*: Build the timeline that led to a certain state.
+
+This is the opposite of regular applications where the final state is stored. In Event Sourced applications, the final state is called ~Materialized State~. Whenever we need to obtain the current state we replay the logs until we reach the current state *without replaying the side-effects*. It is possible to keep both representation but that is complex and may become out-of-sync. Moreover, append-only operations are more efficient in databases.
+
+#+begin_src
+Event1 -> Event2 -> Event3 ----> Materialized State
+#+end_src
+
+As events become the source of truth, it is of utmost importance that they are immutables.
+
+* Optimization through snapshots
+
+What happens if the list of events is too large?
+*Solution*: Ocasionally persist a snapshot and we replay the events from that point on (issue: We may receive an event out-of-order, invalidating the snapshot).
+
+* Versioning
+
+Issue when we have to change the event's schema. This leads to ~ModelV1~, ~ModelV2~, etc. This requires _supporting_ all versions. And requires flexibile formats: JSON, ProtoBuf or AkkA Event Adapters in the lightbend ecosystem that is between the system and the DB translating the ~V1~, ~V2~, ~VN~ to the corresponding and unique Domain entity.
+
+* Problems
+
+When we need to perform queries that involve several aggregate roots. Because entities need to be rebuilt from events everytime they are visited.
+
+#+begin_quote
+The model used to persist are not compatible with the model required during queries.
+#+end_quote
+
+See [[file:../system-design/command_query_responsibility_segregation.org][Command Query Responsibility Segregation]].

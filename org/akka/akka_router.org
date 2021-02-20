@@ -27,22 +27,12 @@ How the routees are managed. In this case, the message delivery is optimized:
 - Messages are not enqueued into the router's mailbox but are delivered directly to the routees.
 - but delive
 
-* ~Pool Router~ :ATTACH:
-:PROPERTIES:
-:ID:       3c45de95-81de-4f15-9292-3081f79bc389
-:END:
+* ~Pool Router~
 
 Creates and supervises a number of routees according to a configuration. E.g., create 5 routees. It can be configured to dynamically adjust the number of routees.
 
-[[attachment:_20210105_221731screenshot.png]]
 
-* ~Group Router~ :ATTACH:
-:PROPERTIES:
-:ID:       7a24ac11-77fa-402e-bd59-34d5d78f5606
-:END:
-
-
-[[attachment:_20210105_221755screenshot.png]]
+* ~Group Router~
 
 Router is configured to route to existing actors (routees). Each actor is supervised by the parents and not by the router as opposed to previous type. In this case we need to especify the routees and will find all that match.
 

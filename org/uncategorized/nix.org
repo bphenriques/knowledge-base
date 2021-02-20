@@ -3,29 +3,12 @@
 #+ROAM_ALIAS:
 #+TITLE: Nix
 
-- Reproducible
-- Each reproduction (a build) produces a generation
-- Nixpkgs, nix, nix-darwin, home-manager, so many stuff! How can I use a single tool regardless of the environment?
+[[https://nixos.org/][Nix]] is a declarative language aiming produce reproducible systems. In can be used to produce ~dotfiles~.
 
-* Home-Manager
+Follows three tools:
+- [[https://github.com/nix-community/home-manager][Home Manager]]: Manages user's home. It can't be used to install fonts for example.
+- [[https://github.com/LnL7/nix-darwin/][Nix Darwin]]: Manages macOS systems.
 
-Only to manager $HOME, some packages and dotfiles. Nothing OS related. Which is a bummer because I wanted to install fonts.
+The goal is to compose these tools to produce a reproducible /generation/ of one's environment. To aid this, [[https://nixos.wiki/wiki/Flakes][Nix Flakes]] introduces another layer on top that aims to pin the versions the dependencies through a ~flake.lock~ file.
 
-- https://www.mathiaspolligkeit.de/dev/exploring-nix-on-macos/
-
-
-* Nix Darwin
-
-The one to use in MacOS
-
-- https://dev.to/louy2/use-nix-on-macos-as-a-homebrew-user-22d
-- https://hardselius.github.io/2020/nix-please/
-
-* Links:
-- https://www.mathiaspolligkeit.de/dev/exploring-nix-on-macos/
-- https://wiki.nikitavoloboev.xyz/package-managers/nix
-- https://nixcloud.io/tour/?id=1
-- https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
-- https://engineering.shopify.com/blogs/engineering/what-is-nix
-- https://www.nmattia.com/posts/2018-03-21-nix-reproducible-setup-linux-macos.html
-- https://shopify.engineering/what-is-nix
+My [[https://github.com/bphenriques/dotfiles][dotfiles]] leverage Nix.

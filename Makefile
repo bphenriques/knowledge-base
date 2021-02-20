@@ -28,3 +28,6 @@ build-site:
 .PHONY: build
 build: build-content build-site
 
+update-sub-modules:
+	 git submodule update --init --recursive
+	 git submodule foreach git pull origin master 

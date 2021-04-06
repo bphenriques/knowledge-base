@@ -38,16 +38,18 @@ For numbers which are multiples of both 3 and 5, print "FizzBuzz" instead of the
 #+end_quote
 
 #+BEGIN_SRC scala
-def flexibleFizBuzz(callback: String => Unit) {
- (1 to 100).foreach { i =>
-   if (i % 3 == 0 && i % 5 == 0) callback("FizzBuzz")
-   else if (i % 3 == 0) callback("Fizz")
-   else if (i % 5 == 0) callback("Buzz")
-   else callback(i.toString)
- }
-}
+def fizzbuzz(n: Int): String =
+    if (n % 3 == 0 && n % 5 == 0) "FizzBuzz"
+    else if (n % 3 == 0) "Fizz"
+    else if (n % 5 == 0) "Buzz"
+    else n.toString()
 
-flexibleFizBuzz(s => println(s))
+@main
+def main() {
+    (1 to 100)
+        .map(fizzbuzz)
+        .foreach(println)
+}
 #+END_SRC
 
 ** 3.64

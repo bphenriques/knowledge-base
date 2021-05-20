@@ -31,7 +31,6 @@ How the routees are managed. In this case, the message delivery is optimized:
 
 Creates and supervises a number of routees according to a configuration. E.g., create 5 routees. It can be configured to dynamically adjust the number of routees.
 
-
 * ~Group Router~
 
 Router is configured to route to existing actors (routees). Each actor is supervised by the parents and not by the router as opposed to previous type. In this case we need to especify the routees and will find all that match.

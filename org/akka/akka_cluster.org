@@ -23,7 +23,6 @@ Many applications leverage the database for strong-consistency. However it may b
 
 In order to solve this, Akka Cluster Sharding allows distributing Actors across the cluster responsible for managing the state of a especific database entitiy (given a hashing function). With the aid of a single-thread illusion, we can cache the entities in-memory without the risk of desyncronizing with the database, leading to strong consistency. This is great as most applications are read-heavy as opposed to write-heavy.
 
-[[file:_20201007_221440screenshot.png]]
 
 * Akka Distributed Data
 
@@ -35,7 +34,6 @@ For this end we use a especific data-structure called Conflict Free Replicated D
 
 For more, please check [[https://doc.akka.io/docs/akka/current/typed/distributed-data.html][here]].
 
-[[file:_20201007_222154screenshot.png]]
 
 ** Conflict Free Replicated Data Types (CRDTs)
 
@@ -62,7 +60,6 @@ The lack of Akka Distributed Data may lead to frequent network requests to fetch
 
 * Akka Address
 
-[[file:_20201007_224144screenshot.png]]
 
 May be local or remote in the form:
 ~akka://<ActorSystem>@<HostName>:<Post>/<ActorPath>~
@@ -122,7 +119,6 @@ Step 2. is important otherwise it continues to operate unware that it has been r
 
 * Split Brain
 
-[[file:_20201008_232738screenshot.png]]
 
 Occurs when single cluster splits into two or more distinctive clusters. It normally does not occur unless poor management (not stopping processes that are /Down/) or configuration (there are strategies to solve this automatically). Can be caused by improper /Downing/ a member leading to the node creating another cluster as the process was not terminated.
 
@@ -140,7 +136,6 @@ Set of customizable strategies for terminating members in order to avoid Split B
 
 ** Static Quorum
 
-[[file:_20201008_235124screenshot.png]]
 
 Fixed sized quorom of node. All nodes will evaluate their situation and /Down/ unreachable. If quorum is set then a smaller cluster will prevail, otherwise the nodes will shutdown themselves. The quorum value must at least ~n/2 + 1~.
 
@@ -150,7 +145,6 @@ Similar to previous but dynamically tracks the size of the cluster.
 
 ** Keep Oldest
 
-[[file:_20201008_235425screenshot.png]]
 
 Monitors the oldest node in the cluster. Members that are not communicating with that node will be marked as down and the nodes will terminate themselves. If the oldest node has crashed so will the cluster  but is configurable in a way, that in that case only the oldest will be /Downed/.
 
@@ -166,7 +160,6 @@ All nodes terminate themselves relying on good orchestration tools to reduce dow
 
 Reserved for Kubernetes deployments.
 
-[[file:_20201008_235848screenshot.png]]
 
 It uses a distributed /lock/ (lock) to make it's decision. Each partition will attempt to obtain it the loser terminates and the winnner remains.
 
@@ -174,7 +167,6 @@ There is a bit of nice hack (IMO but can't understand exactly how this is achiev
 
 ** Some Edge Cases
 
-[[file:_20201009_000309screenshot.png]]
 
 - Indirect connected Edges (for some reason is connected to only one member).
 - Unstable nodes (keeps on disconnecting from some nodes).

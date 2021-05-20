@@ -2,6 +2,7 @@
 #+SETUPFILE: ./_index.org
 #+ROAM_TAGS: akka
 #+ROAM_ALIAS:
+#+FILE_TAGS: akka
 
 * Handling Messages Asyncronously
 

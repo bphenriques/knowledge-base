@@ -1,0 +1,9 @@
+<aside class="tag-list">
+  {{ if ne (len $.Site.Taxonomies.tags) 0 }}
+  <li>
+      {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
+      <ul><a href="{{ "/tags/" | relURL }}{{ $name | urlize }}">{{ $name }}</a></ul>
+      {{ end }}
+  </li>
+  {{ end }}
+</aside>

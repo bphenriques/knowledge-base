@@ -1,15 +1,9 @@
-theme = "book"
+theme = "knowledge-base"
 title = "Bruno Henriques"
 canonifyURLs = "true"
 
 [markup.goldmark.renderer]
   unsafe = true
 
-[params]
-  BookTheme = 'dark'
-  BookRepo = "https://github.com/bphenriques/knowledge-base"
-
-  BookSection = '*'
-
-  # Custom as the exported files have `.md` extension and not the original `.org` extension.
-  OrgBookEditPath = 'edit/master/org'
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

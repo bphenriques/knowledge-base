@@ -1,0 +1,6 @@
+{{ define "main" }}
+  <h2>Recently Updated Notes:</h2>
+  {{ range .Pages.ByPublishDate.Reverse }}
+  {{ partial "list-item" . }}
+  {{ end }}
+{{ end }}

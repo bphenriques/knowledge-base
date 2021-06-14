@@ -1,4 +1,4 @@
-theme = "knowledge-base"
+theme = "tagged-notes"
 title = "Bruno Henriques"
 canonifyURLs = "true"
 
@@ -6,4 +6,7 @@ canonifyURLs = "true"
   unsafe = true
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML"]
+
+[params]
+  BookTheme = 'dark'

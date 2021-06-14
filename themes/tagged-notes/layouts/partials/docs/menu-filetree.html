@@ -1,0 +1,7 @@
+<ul>
+    {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
+    <li><a href="{{ "/tags/" | relURL }}{{ $name | urlize }}">#{{ $name }}</a></li>
+    {{ end }}
+</ul>
+
+<!-- Idea - first display categories and then display tags -->

@@ -1,0 +1,17 @@
+<article class="book-post">
+  <a class="list-item" href="{{ .RelPermalink }}">
+    <h3 class="list-item-title">{{ .Title }}</h3>
+    <div class="list-item-metadata">
+      <div class="list-item-tags">
+        {{ range $name, $_ := $.Site.Taxonomies.tags }}
+        <div>#{{ $name }}</div>
+        {{ end }}
+      </div>
+      <span class="list-item-updated-at">
+        {{ with .Date }}
+          <h3>{{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h5>
+        {{ end }}
+      </span>
+    </div>
+  </a>
+</article>

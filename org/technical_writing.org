@@ -1,0 +1,6 @@
+#+TITLE: Technical Writing
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: learning
+#+ROAM_ALIAS:
+
+https://developers.google.com/tech-writing/overview

@@ -1,9 +1,0 @@
-#+HUGO_BASE_DIR: ../..
-#+HUGO_SECTION: uncategorized
-#+HUGO_WEIGHT: 100
-
-* Uncategorized
-:PROPERTIES:
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true
-:EXPORT_FILE_NAME: _index.md
-:END:

@@ -1,0 +1,33 @@
+#+TITLE: Monolith
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: system-design
+#+ROAM_ALIAS:
+
+* Charateristics
+
+- Deployed as a single unit.
+- No Clear Isolation.
+- Complex Depedencies which in turn makes it hard to understand and modify.
+- Big Bang Style Releases
+- Long Cycle Times
+- Careful releases
+- Scalation is done with multiple copies and uses the database as consistency between them.
+
+* Advantages:
+- Easy Cross Module Refactor
+- Easier to maitain consistency
+- Single Deploy Process
+- Single thing to monitor
+- Simple Scalability Model
+
+* Disavantages:
+- Limited by the maximum size of a single phyisical machine.
+- Only scales as the database allows.
+- Components are scaled as a group.
+- Deep coupling.
+- Long Dev Cycle.
+- Lack of reliaability given that one failure may impact the whole monolith.
+
+* Tearing it up
+
+Introduce domain boundaries within the application itself (e.g., libraries). This falls within [[file:service_oriented_architecture_soa.org][Service Oriented Architecture (SOA)]].

@@ -1,0 +1,83 @@
+#+TITLE: Stack Web Notes
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: uncategorized
+
+* How To Drive Change as a Software Engineer
+
+Source: https://www.lihaoyi.com/post/HowToDriveChangeasaSoftwareEngineer.html
+
+* The Dark Side of Events - YouTube
+
+Source: https://www.youtube.com/watch?v=URYPpY3SgS8&feature=youtu.be&t=1884
+
+* Ask HN: How to Take Good Notes? | Hacker News
+
+Source: https://news.ycombinator.com/item?id=22473209
+
+* Unlearning toxic behaviors in a code review culture | by Sandya Sankarram | Medium
+
+Source: https://medium.com/@sandya.sankarram/unlearning-toxic-behaviors-in-a-code-review-culture-b7c295452a3c
+
+* Org Mode - Organize Your Life In Plain Text!
+
+Source: http://doc.norang.ca/org-mode.html#GettingOrgModeWithGit
+
+* 🧠 Own Your Second Brain: Set Up org-roam on Your Own Machine
+
+Source: https://www.ianjones.us/own-your-second-brain
+
+* Nicolas Mattia – Nix: A Reproducible Setup for Linux and macOS
+
+Source: https://www.nmattia.com/posts/2018-03-21-nix-reproducible-setup-linux-macos.html
+
+* Writing a book: is it worth it? | Hacker News
+
+Source: https://news.ycombinator.com/item?id=24628549
+
+* Presets | Starship
+
+Source: https://starship.rs/presets/#nerd-font-symbols
+
+* Miniflux Hosting
+
+Source: https://miniflux.app/hosting.html
+
+* RemoteRetro.org | Free. World-class. Agile retrospectives.
+
+Source: [[https://remoteretro.org/retros/]]
+
+* Write code that is easy to delete, not easy to... — programming is terrible
+
+Source: https://programmingisterrible.com/post/139222674273/how-to-write-disposable-code-in-large-systems
+
+* The Product-Minded Software Engineer - The Pragmatic Engineer
+
+Source: https://blog.pragmaticengineer.com/the-product-minded-engineer/
+
+* SSH Agent Explained
+
+Source: https://smallstep.com/blog/ssh-agent-explained/
+
+* Remembering what you Read: Zettelkasten vs P.A.R.A.
+
+Source: https://www.zainrizvi.io/blog/remembering-what-you-read-zettelkasten-vs-para/
+
+* degoogle | A huge list of alternatives to Google products. Privacy tips, tricks, and links.
+
+Source: https://degoogle.jmoore.dev/#useful-links-tools-and-advice
+
+* LPT_LISA - lisa19_maheshwari.pdf
+
+Source: https://www.usenix.org/sites/default/files/conference/protected-files/lisa19_maheshwari.pdf
+
+* No, Microsoft is not rebasing Windows to Linux
+
+Source: https://boxofcables.dev/no-microsoft-is-not-rebasing-windows-to-linux/
+
+* How to teach yourself hard things
+
+Source: https://jvns.ca/blog/2018/09/01/learning-skills-you-can-practice/
+
+* Choose Boring Technology
+
+Source: http://boringtechnology.club/

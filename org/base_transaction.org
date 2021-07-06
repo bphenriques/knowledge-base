@@ -1,0 +1,11 @@
+#+TITLE: BASE Transaction
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: system-design
+#+ROAM_ALIAS:
+
+Sometimes ACID transactions are not possible in some cases, e.g., microservices. As alternative, we use BASE transactions:
+- Basically Available
+- Soft State
+- Eventual Consistency
+
+The difference from ACID transactions it that they cannot be rolledback easily. To rollback, a compensating action is needed to revert to the original state. [[file:saga.org][Saga]] manages these kind of transactions and are often used to manage different aggregate roots (see [[file:domain_driven_design.org][Domain Driven Design]]).

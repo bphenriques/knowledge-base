@@ -1,0 +1,9 @@
+#+TITLE: GPG
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: uncategorized
+#+ROAM_ALIAS:
+
+Automatically export public key to a server:
+#+begin_src
+$ gpg --keyserver pgp.mit.edu --send-keys <KEY>
+#+end_src

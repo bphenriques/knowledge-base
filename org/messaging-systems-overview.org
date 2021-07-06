@@ -1,0 +1,19 @@
+#+TITLE: Messaging Systems Comparison
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: messaging
+
+* Kafka
+
+Event Streaming, persistent.
+
+* RabbitMQ
+
+Low latency.
+
+* Pulsar
+
+Made by Apache
+
+* TODO
+
+- Read this comparison: https://www.confluent.io/kafka-vs-pulsar/#:~:text=In%20reality%2C%20Kafka%2C%20RabbitMQ%2C,Pulsar%20sits%20somewhere%20in%20between.

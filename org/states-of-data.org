@@ -1,0 +1,10 @@
+#+TITLE: States of Data
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: data
+
+States of data:
+- *At Rest*: Data that is not consumed at the time is injested. It is stored and then consumed later in a batch process.
+- *In Transit*: Data that is travelling between point A and point B.
+- *In Use*: Data that is opened for treatment
+
+Encountered several concerns regarding how such data must be handled. Follows a link to be reviewed later:[[https://www.sealpath.com/protecting-the-three-states-of-data/][ three-states-of-data]]

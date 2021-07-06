@@ -1,0 +1,8 @@
+#+TITLE: Curriculum
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: work
+#+ROAM_ALIAS:
+
+Some reference pages:
+- https://www.myperfectresume.com/cv/examples/computer-software/engineer
+- https://business.linkedin.com/talent-solutions/blog/linkedin-best-practices/2016/7-linkedin-profile-summaries-that-we-love-and-how-to-boost-your-own

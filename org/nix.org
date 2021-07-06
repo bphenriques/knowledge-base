@@ -1,0 +1,14 @@
+#+HUGO_TAGS: uncategorized
+#+HUGO_SECTION: notes
+#+ROAM_ALIAS:
+#+TITLE: Nix
+
+[[https://nixos.org/][Nix]] is a declarative language aiming produce reproducible systems. In can be used to produce ~dotfiles~.
+
+Follows three tools:
+- [[https://github.com/nix-community/home-manager][Home Manager]]: Manages user's home. It can't be used to install fonts for example.
+- [[https://github.com/LnL7/nix-darwin/][Nix Darwin]]: Manages macOS systems.
+
+The goal is to compose these tools to produce a reproducible /generation/ of one's environment. To aid this, [[https://nixos.wiki/wiki/Flakes][Nix Flakes]] introduces another layer on top that aims to pin the versions the dependencies through a ~flake.lock~ file.
+
+My [[https://github.com/bphenriques/dotfiles][dotfiles]] leverage Nix.

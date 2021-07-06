@@ -1,0 +1,10 @@
+#+TITLE: Gunther's Universal Scalability Law
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: concurrency
+#+ROAM_ALIAS:
+
+Increasing concurrency can cause negative resutrns due to contention and coherency delay.
+
+Picks from [[file:./amdah_s_law.org][Amdah's Law]]. In addition to contention, it accounts for coeherency delay.
+
+As the system scales up, the cost to coordinate between nodes exceeds any benefits.

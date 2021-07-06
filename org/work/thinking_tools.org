@@ -1,7 +1,0 @@
-#+TITLE: Thinking Tools
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: work
-#+ROAM_ALIAS:
-
-Follows some interesting resources:
-- https://untools.co/

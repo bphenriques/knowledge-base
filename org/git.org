@@ -1,0 +1,10 @@
+#+TITLE: Git
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: snippets
+#+ROAM_ALIAS:
+
+* Get Previous Tag
+
+#+begin_src
+$ git for-each-ref --sort=creatordate --format '%(refname)' refs/tags | sed 's#^refs/tags/##' | tail -n 2 | head -n 1
+#+end_src

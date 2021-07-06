@@ -1,6 +1,14 @@
 {{ define "main" }}
-  <h2>Recently Updated Notes:</h2>
-  {{ range .Pages.ByPublishDate.Reverse }}
+  {{ $recentBlogPosts := where .Site.RegularPages.ByPublishDate.Reverse "Section" "blog" }}
+  {{ if (gt ($recentBlogPosts | len) 0) }}
+    <h2 class="frontpage-list-title">Recent Blog Posts</h2>
+    {{ range $recentBlogPosts }}
+      {{ partial "list-item" . }}
+    {{ end }}
+  {{ end }}
+  
+  <h2 class="frontpage-list-title">Recent Notes</h2>
+  {{ range first 5 (where .Site.RegularPages.ByPublishDate.Reverse "Section" "notes") }}
   {{ partial "list-item" . }}
   {{ end }}
 {{ end }}

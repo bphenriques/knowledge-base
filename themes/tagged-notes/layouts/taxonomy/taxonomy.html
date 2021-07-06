@@ -1,9 +1,7 @@
 {{ define "main" }}
-  {{ range sort .Paginator.Pages }}
+  {{ range .Pages }}
   {{ partial "list-item" . }}
   {{ end }}
-
-  {{ template "_internal/pagination.html" . }}
 {{ end }}
 
 {{ define "toc" }}

@@ -9,8 +9,8 @@
   const indexConfig = Object.assign({{ $searchConfig }}, {
     doc: {
       id: 'id',
-      field: ['title', 'content'],
-      store: ['title', 'href', 'section']
+      field: ['title', 'content', 'tags'],
+      store: ['title', 'href', 'section', 'tags']
     }
   });
 
@@ -82,7 +82,7 @@
 
       a.href = page.href;
       a.textContent = page.title;
-      small.textContent = page.section;
+      small.textContent = page.tags.map(function(tag) { return "#" + tag; }).join(' ');
 
       results.appendChild(li);
     });

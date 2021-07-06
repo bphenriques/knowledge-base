@@ -10,3 +10,4 @@ canonifyURLs = "true"
 
 [params]
   BookTheme = 'dark'
+  HomePage = 'https://bphenriques.github.io'

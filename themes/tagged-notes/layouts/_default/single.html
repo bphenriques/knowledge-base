@@ -1,8 +1,6 @@
 {{ define "main" }}
 <article class="markdown">
-  <h1>
-    <a href="{{ .RelPermalink }}">{{ partial "docs/title.html" . }}</a>
-  </h1>
+  <h1>{{ partial "docs/title.html" . }}</h1>
 
   {{ partial "backlinks" . }}
   {{ with .Date }}

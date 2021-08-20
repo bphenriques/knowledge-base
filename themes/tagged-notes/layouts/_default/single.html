@@ -1,15 +1,15 @@
 {{ define "main" }}
 <article class="markdown">
   <h1>
-    <a href="{{ .RelPermalink }}">{{ partial "docs/title.html" . }}</a>
+    <a href="{{ .RelPermalink }}">{{ partial "util/title.html" . }}</a>
   </h1>
 
   {{ partial "backlinks" . }}
   {{ with .Date }}
-    <h5 class="post-date">Created {{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h5>
+    <h5 class="post-date">Created {{ partial "util/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h5>
   {{ end }}
   {{ if ne .Lastmod .Date }}
-    <h5 class="post-date">Updated {{ partial "docs/date" (dict "Lastmod" . "Format" $.Site.Params.BookDateFormat) }}</h5>
+    <h5 class="post-date">Updated {{ partial "util/date" (dict "Lastmod" . "Format" $.Site.Params.BookDateFormat) }}</h5>
   {{ end }}
   {{- .Content -}}
 </article>

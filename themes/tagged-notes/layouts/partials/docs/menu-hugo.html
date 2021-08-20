@@ -13,7 +13,7 @@
     <a href="{{ .URL }}" {{ if not .Page }}target="_blank" rel="noopener"{{ end }}>
       {{- .Pre -}}
       {{ with .Page }}
-        {{ partial "docs/title" .Page }}
+        {{ partial "util/title" .Page }}
       {{ else }}
         {{ .Name }}
       {{ end }}

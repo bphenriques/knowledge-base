@@ -11,7 +11,7 @@
       </div>
       {{ with .Date }}
         <span class="list-item-updated-at">
-          <h3>{{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h3>
+          <h3>{{ partial "util/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h3>
         </span>
       {{ end }}
     </div>

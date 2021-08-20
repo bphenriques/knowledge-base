@@ -16,8 +16,8 @@
 {{ if gt $index 0}},{{end}} {
     "id": {{ $index }},
     "href": "{{ $page.RelPermalink }}",
-    "title": {{ (partial "docs/title" $page) | jsonify }},
-    "section": {{ (partial "docs/title" $page.Parent) | jsonify }},
+    "title": {{ (partial "util/title" $page) | jsonify }},
+    "section": {{ (partial "util/title" $page.Parent) | jsonify }},
     "tags": {{ $tags | jsonify }},
     "content": {{ $page.Plain | jsonify }}
 }

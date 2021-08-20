@@ -278,6 +278,7 @@ ul.pagination {
   display: inline-block;
   vertical-align: baseline;
   white-space: nowrap;
+  line-height: 1; // Fixes off-center caused by global line-height
   background-color: #999999;
   border-radius: 5px;
   color: #222222 !important; //TODO: Hack

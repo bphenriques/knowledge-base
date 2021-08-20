@@ -7,10 +7,6 @@
 <h4 class="menu-tags-title"><b>Tags</b></h4>
 <ul>
     {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
-    <li>
-        <a class="menu-tag-item" href="{{ "/tags/" | relURL }}{{ $name | urlize }}">
-        #{{ $name }}
-        </a>
-    </li>
+      <li>{{ partial "docs/tag-circle-badge.html" $name }}</li>
     {{ end }}
 </ul>

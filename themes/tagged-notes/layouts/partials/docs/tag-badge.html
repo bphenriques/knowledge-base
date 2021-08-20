@@ -1,0 +1,3 @@
+<!-- Generate a Tag Badge -->
+{{ $tag_color := partial "util/color-code.html" . }}
+<div class="list-item-tag" style="background-color: {{ $tag_color }}">{{ . | humanize }}</div>

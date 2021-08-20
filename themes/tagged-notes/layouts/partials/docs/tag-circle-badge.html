@@ -1,0 +1,7 @@
+<!-- Generate a Tag Badge -->
+{{ $tag_color := partial "util/color-code.html" . }}
+
+<a class="menu-tag-item" href="{{ "/tags/" | relURL }}{{ . | urlize }}">
+  <div class="tag-dot" style="background-color: {{ $tag_color }}"></div>
+  {{ . | humanize }}
+</a>

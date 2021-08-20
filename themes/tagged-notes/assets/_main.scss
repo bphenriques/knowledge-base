@@ -113,6 +113,29 @@ ul.pagination {
     @include fixed;
   }
 
+  .menu-tags-title {
+    margin-bottom: 0.25rem;
+  }
+
+  .menu-tag-item {
+    padding: 0.5rem 0rem;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+
+    .tag-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 0.5em;
+    }
+  }
+  .menu-tag-item:hover {
+    opacity: 0.5;
+  }
+
   a,
   label {
     color: inherit;
@@ -139,22 +162,6 @@ ul.pagination {
   input.toggle:checked + label::after {
     content: "▾";
   }
-}
-
-.menu-tag-item:hover {
-  opacity: 0.5;
-}
-
-.menu-tags-title {
-  margin-bottom: 0.25rem;
-}
-.menu-tag-item {
-  padding: 0.5rem 0rem;
-  display: flex;
-  -moz-box-align: center;
-  align-items: center;
-  font-weight: 400;
-  font-size: 14px;
 }
 
 .book-section-flat {
@@ -213,14 +220,9 @@ ul.pagination {
   padding: 0.75rem 0.5rem;
   border-radius: 0.3rem;
   transition: all 150ms ease-in-out 0s;
+  justify-content: space-between;
   overflow: hidden;
   display: block; // only do this if the width is low
-
-  .list-item-preamble {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
   .list-item-title {
     font-size: 1rem;
@@ -230,77 +232,66 @@ ul.pagination {
     margin-bottom: 0.3rem;
   }
 
-  .list-item-updated-at {
-    box-sizing: border-box;
-    font-size: 0.7rem;
-    color: var(--theme-ui-colors-text,hsl(210,17%,85%));
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    h3 {
-      margin-top: 0;
-    }
-  }
-
-  .list-item-tags {
+  .list-item-metadata {
     box-sizing: border-box;
     margin: 0;
-    margin-top: 0.5rem;
-    min-width: 0;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-flex-shrink: 0;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
 
-    .list-item-tag {
-      box-sizing: border-box;
-      margin: 0px 0.25rem 0px 0px;
-      min-width: 0px;
-      display: inline-block;
-      vertical-align: baseline;
-      white-space: nowrap;
-      background-color: #999999;
-      border-radius: 5px;
-      color: #222222;
-      text-decoration: none;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
-      font-weight: 400;
-      font-size: 0.7rem;
-    }
+    .list-item-tags {
+        box-sizing: border-box;
+        margin: 0;
+        min-width: 0;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+      }
+
+      .list-item-updated-at {
+          box-sizing: border-box;
+          margin: 0 0 0 0.5rem;
+          font-size: 0.7rem;
+          color: var(--theme-ui-colors-text,hsl(210,17%,85%));
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          h3 {
+            margin-top: 0;
+          }
+        }
   }
+}
+
+.list-item-tag {
+  box-sizing: border-box;
+  margin: 0px 0.25rem 0px 0px;
+  min-width: 0px;
+  display: inline-block;
+  vertical-align: baseline;
+  white-space: nowrap;
+  background-color: #999999;
+  border-radius: 5px;
+  color: #222222 !important; //TODO: Hack
+  text-decoration: none;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-weight: 400;
+  font-size: 0.7rem;
 }
 
 .toc-tags {
   margin-bottom: 1.25rem;
-  .toc-tag {
-    box-sizing: border-box;
-    margin: 0px 0.25rem 0px 0px;
-    min-width: 0px;
-    display: inline-block;
-    vertical-align: baseline;
-    white-space: nowrap;
-    background-color: #999999;
-    border-radius: 5px;
-    color: #222222;
-    text-decoration: none;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    font-weight: 400;
-    font-size: 0.7rem;
-  }
 }
 
 .toc-title {
@@ -485,5 +476,9 @@ ul.pagination {
   .book-menu .book-menu-content,
   .book-toc .book-toc-content {
     padding: $padding-16 * 2 $padding-16;
+  }
+
+  .list-item {
+    display: flex;
   }
 }

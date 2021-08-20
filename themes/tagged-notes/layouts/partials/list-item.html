@@ -1,16 +1,18 @@
 <article class="book-post">
   <a class="list-item" href="{{ .RelPermalink }}">
     <h3 class="list-item-title">{{ .Title }}</h3>
-    {{ with .Date }}  
-    <span class="list-item-updated-at">
-      <h3>{{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h5>
-    </span>
-    {{ end }}
-    <div class="list-item-tags">
-      {{ range $taxonomy, $_ := .Site.Taxonomies }}
-        {{ range $n, $term := $.GetTerms $taxonomy }}
-          <div class="list-item-tag">#{{ $term.Title }}</div>
-        {{- end }}
+    <div class="list-item-metadata">
+      <div class="list-item-tags">
+        {{ range $taxonomy, $_ := .Site.Taxonomies }}
+          {{ range $n, $term := $.GetTerms $taxonomy }}
+            {{ partial "docs/tag-badge.html" $term.Title }}
+          {{- end }}
+        {{ end }}
+      </div>
+      {{ with .Date }}
+        <span class="list-item-updated-at">
+          <h3>{{ partial "docs/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h3>
+        </span>
       {{ end }}
     </div>
   </a>

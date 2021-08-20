@@ -1,0 +1,64 @@
+<!--
+  Generates the color code for a given text.
+
+  Not the most elegant way but gets the job done without using JS and leveraging the static site generator while
+  producing consistent results.
+-->
+{{ $colors := slice }}
+{{ $colors := $colors | append
+    "#fc9867"
+    "#ffd866"
+    "#a9dc76"
+    "#78dce8"
+    "#ab9df2"
+    "#999988"
+    "#999988"
+    "#FFEBEE"
+    "#FFCDD2"
+    "#FF8A80"
+    "#E1BEE7"
+    "#D1C4E9"
+    "#C5CAE9"
+    "#BBDEFB"
+    "#90CAF9"
+    "#E3F2FD"
+    "#B3E5FC"
+    "#E1F5FE"
+    "#40C4FF"
+    "#B2EBF2"
+    "#80CBC4"
+    "#B2DFDB"
+    "#E0F2F1"
+    "#00BFA5"
+    "#C8E6C9"
+    "#A5D6A7"
+    "#B9F6CA"
+    "#DCEDC8"
+    "#C5E1A5"
+    "#F1F8E9"
+    "#F0F4C3"
+    "#FFF9C4"
+    "#FFF59D"
+    "#FFECB3"
+    "#FFE082"
+    "#FFE57F"
+    "#FFE0B2"
+    "#FFCC80"
+    "#FFB74D"
+    "#FFD180"
+    "#FFD180"
+    "#FFD180"
+    "#FF9E80"
+    "#D7CCC8"
+    "#BCAAA4"
+    "#F5F5F5"
+    "#F5F5F5"
+    "#E0E0E0"
+    "#CFD8DC"
+}}
+
+<!-- MD5 -> Replace letters for "0" -> Pick first 8 numbers -> Remove leading zeros -->
+{{ $tagIntHashRepresentation := (int ((substr (replaceRE "[a-zA-Z]" "0" (md5 .)) 0 7) | strings.TrimLeft "0")) }}
+{{ $color := (index $colors (mod $tagIntHashRepresentation (len $colors))) }}
+
+{{ return $color }}

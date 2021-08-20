@@ -89,6 +89,8 @@ ul.pagination {
 }
 
 .book-brand {
+  font-family: sans-serif;
+  font-weight: bold;
   margin-top: 0;
 
   img {
@@ -467,6 +469,22 @@ ul.pagination {
       transform: translateX(-$menu-width);
     }
   }
+}
+
+.backlinks {
+    padding: 0.1rem 1rem 0.1rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    background-color: var(--backlinks-background);
+
+    ul li {
+        font-size: 0.9em;
+    }
+
+    // Line spacing
+    li:not(:last-child) {
+       margin-bottom: .5rem;
+    }
 }
 
 // Extra space for big screens

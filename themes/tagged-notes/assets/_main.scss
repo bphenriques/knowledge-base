@@ -164,6 +164,20 @@ ul.pagination {
   }
 }
 
+.book-section-flat {
+  margin: $padding-16 * 2 0;
+
+  > a,
+  > span,
+  > label {
+    font-weight: bolder;
+  }
+
+  > ul {
+    padding-inline-start: 0;
+  }
+}
+
 .book-page {
   min-width: $body-min-width;
   flex-grow: 1;

@@ -1,0 +1,9 @@
+{{ define "main" }}
+  {{ range .Pages }}
+  {{ partial "list-item" . }}
+  {{ end }}
+{{ end }}
+
+{{ define "toc" }}
+  {{ partial "docs/taxonomy" . }}
+{{ end }}

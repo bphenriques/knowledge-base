@@ -27,7 +27,7 @@
       <label for="menu-control" class="hidden book-menu-overlay"></label>
     </div>
 
-    {{ if (and .File (default true (default .Site.Params.BookToC .Params.BookToC))) }}
+    {{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
     <aside class="book-toc">
       <div class="book-toc-content">
         {{ template "toc" . }} <!-- Table of Contents -->

@@ -10,7 +10,7 @@
 <!-- Generate the HTML -->
 {{ if gt (len $backlinks) 0 }}
   <div class="backlinks">
-     <h3>Referred in:</h3>
+     <h3>Mentioned in:</h3>
      <ul>
        {{ range $backlinks }}
           <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>

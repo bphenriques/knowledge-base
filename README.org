@@ -39,6 +39,7 @@ Feel free to send feedback! I look forward to include your insights on my notes 
 There are several personal Wikis made by other people that inspired me to make one for me. Follows some notable examples:
 - [[https://github.com/jethrokuan/braindump]]
 - [[https://wiki.nikitavoloboev.xyz]]
+- https://github.com/maggiedelano/digital-garden/
 - https://beepb00p.xyz/exobrain/
 - http://okmij.org/ftp/
 - https://notes.andymatuschak.org/About_these_notes

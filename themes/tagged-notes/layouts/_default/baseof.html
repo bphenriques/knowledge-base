@@ -56,14 +56,6 @@
   {{ partial "docs/footer" . }}
 {{ end }}
 
-{{ define "comments" }}
-  {{ if and .Content (default true (default .Site.Params.BookComments .Params.BookComments)) }}
-  <div class="book-comments">
-    {{- partial "docs/comments" . -}}
-  </div>
-  {{ end }}
-{{ end }}
-
 {{ define "main" }}
   <article class="markdown">
     {{- .Content -}}

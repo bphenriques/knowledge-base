@@ -1,20 +1,16 @@
-[[https://img.shields.io/badge/hugo-0.74.3-blue.svg]]
+[[https://img.shields.io/badge/hugo-0.85.0-blue.svg]]
 [[https://github.com/bphenriques/knowledge-base/workflows/Build%20&%20Deploy/badge.svg?event=push]]
 [[https://img.shields.io/badge/License-MIT-blue.svg]]
 
-* Knowledge Base
+* Digital Garden
 
-Source code of my personal wiki available at [[https://bphenriques.github.io/knowledge-base][bphenriques.github.io/knowledge-base]] using [[https://orgmode.org/][org-mode]], [[https://github.com/org-roam/org-roam][org-roam]] and [[https://ox-hugo.scripter.co/][ox-hugo.]]
+My digital garden is available at [[https://bphenriques.github.io/knowledge-base][bphenriques.github.io/knowledge-base]].
 
 * How it works
 
-The content is written in the ~org-mode~ format in the ~org/docs~ directory where each ~*.org~ file within represents an entry.
+The content is written using ~org-mode~ in the ~org~ directory where each ~*.org~ file is a new note.
 
-Then, the elisp files under ~tools~ will transform the ~*.org~ to ~*.md~ counterpart using ox-hugo, which in will be feeded to ~gohugo~ to generate the final version of the website. Builds happen on the ~gh-pages~ branch (using [[https://git-scm.com/docs/git-worktree][git-worktree]] and [[https://git-scm.com/docs/git-checkout/#Documentation/git-checkout.txt---orphanltnewbranchgt][orphan branches]]).
-
-** Org Roam Capture
-
-In order to automate this process, I use ~org-roam-capture~ templates to create new entries and sections if they are not present already. Feel free to contact me for the dotfiles while they are not available.
+Then, using [[https://ox-hugo.scripter.co/][ox-hugo]], each ~*.org~ file is converted to ~*.md~ which will feed ~gohugo~ to generate my digital garden.
 
 * Run locally
 
@@ -45,3 +41,10 @@ There are several personal Wikis made by other people that inspired me to make o
 - https://notes.andymatuschak.org/About_these_notes
 - http://okmij.org/ftp/
 - https://notes.aravindballa.com/
+
+* Theme
+
+I am no frontend engineer therefore it was challenging building this theme.
+
+This theme was heavily based on [[https://github.com/alex-shpak/hugo-book][Hugo Book Theme]] with a twist of [[https://github.com/mrmartineau/gatsby-theme-code-notes][Gatsby Theme Code Nodes]] and [[https://www.maggiedelano.com/garden/][Maggie Delano's digital garden]].
+

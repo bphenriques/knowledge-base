@@ -1,13 +1,8 @@
 {{ define "main" }}
 <article class="markdown">
-
-  <div id="graph-wrapper"></div>
-
   <h1>
     <a href="{{ .RelPermalink }}">{{ partial "util/title.html" . }}</a>
   </h1>
-
-  {{ partial "backlinks" . }}
   {{ with .Date }}
     <h5 class="post-date">Created {{ partial "util/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h5>
   {{ end }}

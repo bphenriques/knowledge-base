@@ -8,14 +8,16 @@
 {{ end }}
 
 <!-- Generate the HTML -->
-{{ if gt (len $backlinks) 0 }}
-  <div class="backlinks">
-     <h3>Mentioned in:</h3>
-     <ul>
-       {{ range $backlinks }}
-          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-       {{ end }}
-     </ul>
-  </div>
-{{ end }}
+{{- if gt (len $backlinks) 0 -}}
+<p class="toc-title">Mentioned In</p>
+<div class="backlinks">
+    {{- range $backlinks -}}
+    <div class="backlink-item">
+        <a class="backlink-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <br>
+        <span class="backlink-preview">{{ .Summary | truncate 90 }}</span>
+    </div>
+   {{- end -}}
+</div>
+{{- end -}}
 

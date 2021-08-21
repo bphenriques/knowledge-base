@@ -11,9 +11,7 @@
 
   const TICKS = 100;
   const MAX_LABEL_LENGTH = 50;
-
   const ZOOM_RANGE = [0.2, 3]
-
   const GRAPH_DATA_URL = '{{ $graphData.RelPermalink }}';
 
   const input = document.querySelector('#book-search-input');
@@ -46,17 +44,18 @@
     // Set SVG shape
     const svg = d3.select("svg");
     const graphSVGGroup = svg.append("g");
-    let linkSVGGroup = graphSVGGroup.append("g").attr("class", "links").selectAll(".links");
-    let nodeSVGGroup = graphSVGGroup.append("g").attr("class", "nodes").selectAll(".nodes");
-    let labelsSVGGroup = graphSVGGroup.append("g").attr("class", "labels").selectAll(".labels");
+    const linkSVGGroup = graphSVGGroup.append("g").attr("class", "links").selectAll(".links");
+    const nodeSVGGroup = graphSVGGroup.append("g").attr("class", "nodes").selectAll(".nodes");
+    const labelsSVGGroup = graphSVGGroup.append("g").attr("class", "labels").selectAll(".labels");
 
-    let width = Number(svg.attr("width"))
-    let height = Number(svg.attr("width"))
+    const width = Number(svg.attr("width"))
+    const height = Number(svg.attr("width"))
     const simulation = d3
       .forceSimulation(nodesData)
       .force("charge", d3.forceManyBody().strength(-2000).distanceMax(450))
-      .force("link", d3.forceLink(linksData).id((d) => d.id).distance(30).strength(1))
-      .force("center", d3.forceCenter(width / 2, height / 2));
+      .force("link", d3.forceLink(linksData).id((link) => link.id).distance(50))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("collision", d3.forceCollide().radius(80));
 
     const zoomHandler = d3
       .zoom()
@@ -68,12 +67,13 @@
     resetZoom(zoomHandler, svg)
   }
 
+  //TODO: Zoom to current node
   function resetZoom(zoomHandler, svg) {
     let width = Number(svg.attr("width"));
     let height = Number(svg.attr("height"));
     svg.call(
       zoomHandler.transform,
-      d3.zoomIdentity.translate(width / 2, height / 2).scale(0.2)
+      d3.zoomIdentity.translate(width / 2, height / 2).scale(0.6)
     );
   }
 
@@ -88,10 +88,9 @@
         .append("circle")
         .attr("r", (d) => isCurrentPath(d.path) ? RADIUS * CURRENT_NODE_RADIUS_PROPORTION : RADIUS)
         .attr("active", (d) => isCurrentPath(d.path) ? true : null)
-        .on("click", onClick)
         .merge(nodeSVGGroup);
 
-      let newLinks = linkSVGGroup.data(linksData, (d) => `${d.source.id}-${d.target.id}`)
+      let newLinks = linkSVGGroup.data(linksData, (link) => `${link.source.id}-${link.target.id}`)
         .enter()
         .append("line")
         .merge(linkSVGGroup);
@@ -101,8 +100,17 @@
         .append("text")
         .text((d) => shorten(d.label.replace(/_*/g, ""), MAX_LABEL_LENGTH))
         .attr("active", (d) => isCurrentPath(d.path) ? true : null)
-        .on("click", onClick)
         .merge(labelsSVGGroup);
+
+      // Add handler after setting the new content
+      newNodes
+        .on("click", onClick)
+        .on("mouseover", function(event, node) { onMouseOver(node, linksData, newNodes, newLinks, newLabels) })
+        .on("mouseout", function(event) { onMouseOut(newNodes, newLinks, newLabels) })
+      newLabels
+        .on("click", onClick)
+        .on("mouseover", function(event, node) { onMouseOver(node, linksData, newNodes, newLinks, newLabels) })
+        .on("mouseout", function(event) { onMouseOut(newNodes, newLinks, newLabels) })
 
       d3.range(TICKS).forEach(simulation.tick);
 
@@ -131,6 +139,40 @@
 
   function isCurrentPath(notePath) {
     return window.location.pathname.includes(notePath)
+  }
+
+  function onMouseOver(node, linksData, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) {
+    const adjacentNodes = new Set();
+    linksData
+      .filter((link) => link.target.id == node.id || link.source.id == node.id)
+      .forEach((link) => {
+        adjacentNodes.add(link.target.id);
+        adjacentNodes.add(link.source.id);
+      });
+
+    const setLabelNodeFocus = (linkData) => {
+      if (linkData.id !== node.id && !adjacentNodes.has(linkData.id)) {
+        return "unfocus";
+      } else {
+        return ""
+      }
+    }
+
+    nodeSVGGroup.attr("class", setLabelNodeFocus);
+    labelsSVGGroup.attr("class", setLabelNodeFocus);
+    linkSVGGroup.attr("class", (linkData) => {
+      if (linkData.source.id != node.id && linkData.target.id != node.id) {
+        return "unfocus"
+      } else {
+        return ""
+      }
+    });
+  }
+
+  function onMouseOut(nodeSVGGroup, linkSVGGroup, labelsSVGGroup) {
+    nodeSVGGroup.attr("class", "");
+    linkSVGGroup.attr("class", "");
+    labelsSVGGroup.attr("class", "");
   }
 
   function shorten(str, maxLen, separator = ' ') {

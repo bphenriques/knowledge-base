@@ -2,18 +2,26 @@
   background: inherit; // blend with background
   height: auto;
 
+  .nodes, .links, .labels {
+     .unfocus {
+        opacity: 0.2;
+     }
+  }
+
   .links line {
+    transition: all 0.15s ease-out;
     stroke: #ccc;
     stroke-width: 1;
-    opacity: 0.5;
   }
 
   .nodes circle {
+    transition: all 0.15s ease-out;
     cursor: pointer;
     fill: #FAFAFA;
   }
 
   .labels text {
+    transition: all 0.15s ease-out;
     cursor: pointer;
     text-anchor: middle;
     alignment-baseline: central;

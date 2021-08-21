@@ -1,0 +1,32 @@
+#graph-wrapper {
+  background: inherit; // blend with background
+  border-radius: 4px;
+  height: auto;
+
+  .links line {
+    stroke: #ccc;
+    opacity: 0.5;
+  }
+
+  .nodes circle {
+    cursor: pointer;
+    fill: blue;
+    transition: all 0.15s ease-out;
+  }
+
+  .labels text {
+    cursor: pointer;
+    //fill: #333;
+    fill: white;
+    //text-shadow: -1px -1px 0 #fafafabb, 1px -1px 0 #fafafabb, -1px 1px 0 #fafafabb, 1px 1px 0 #fafafabb;
+  }
+
+  .nodes [active], .labels [active] {
+    cursor: pointer;
+    fill: white;
+  }
+
+  .nodes circle[active] {
+    r: 8;
+  }
+}

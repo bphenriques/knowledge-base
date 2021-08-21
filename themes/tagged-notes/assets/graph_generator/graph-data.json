@@ -1,4 +1,4 @@
-{{- $pages := .Site.Pages -}}
+{{- $pages := .Site.RegularPages -}}
 {{- $nodes := slice -}}
 {{- $edges := slice -}}
 {{- range $current := $pages -}}

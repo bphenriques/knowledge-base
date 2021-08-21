@@ -7,24 +7,18 @@
   const TICKS = 100;
   const FONT_BASELINE = 15;
   const MAX_LABEL_LENGTH = 50;
+  const INITIAL_ZOOM_LEVEL = 1;
 
-  const graphDataURL = '{{ $graphData.RelPermalink }}';
+  const GRAPH_DATA_URL = '{{ $graphData.RelPermalink }}';
 
-  // TODO: Replace with a different hook
-  const graphWrapper = document.getElementById('graph-wrapper')
   const input = document.querySelector('#book-search-input');
-  const element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-
-  if (!input) {
-    return
-  }
+  const graphWrapper = document.getElementById('graph-wrapper')
 
   input.addEventListener('focus', init);
   function init() {
     input.removeEventListener('focus', init); // init once
-    alert("init!")
 
-    fetch(graphDataURL)
+    fetch(GRAPH_DATA_URL)
       .then(pages => pages.json())
       .then(graphData => {
         let nodesData = graphData.nodes;
@@ -35,112 +29,70 @@
   }
 
   function initGraph(nodesData, linksData) {
-    const element = document.createElementNS(
+    const graphSVG = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg"
     );
-    const graphWrapper = document.getElementById('graph-wrapper')
 
-    element.setAttribute("width", graphWrapper.getBoundingClientRect().width);
-    graphWrapper.setAttribute("height", window.innerHeight * 0.8);
-    element.setAttribute("height", window.innerHeight * 0.8);
+    onWindowResize(graphSVG)// First sizing
+    graphWrapper.appendChild(graphSVG);
+    window.onresize = function() { onWindowResize(graphSVG) };
 
-    graphWrapper.appendChild(element);
-
-    const reportWindowSize = () => {
-      element.setAttribute("width", graphWrapper.getBoundingClientRect().width);
-      graphWrapper.setAttribute("height", window.innerHeight * 0.8);
-      element.setAttribute("height", window.innerHeight * 0.8);
-    };
-
-    window.onresize = reportWindowSize;
-
+    // Set SVG shape
     const svg = d3.select("svg");
-    const width = Number(svg.attr("width"));
-    const height = Number(svg.attr("height"));
-    let zoomLevel = 1;
+    const graphSVGGroup = svg.append("g");
+    let linkSVGGroup = graphSVGGroup.append("g").attr("class", "links").selectAll(".links");
+    let nodeSVGGroup = graphSVGGroup.append("g").attr("class", "nodes").selectAll(".nodes");
+    let labelsSVGGroup = graphSVGGroup.append("g").attr("class", "labels").selectAll(".labels");
 
     const simulation = d3
       .forceSimulation(nodesData)
-      .force("charge", d3
-        .forceManyBody()
-        .strength(-4000)
-      )
-      .force(
-        "link",
-        d3
-          .forceLink(linksData)
-          .id((d) => d.id)
-          .distance(150)
-      )
-      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("charge", d3.forceManyBody().strength(-4000))
+      .force("link", d3.forceLink(linksData).id((d) => d.id).distance(150))
+      .force("center", d3.forceCenter(Number(svg.attr("width")) / 2, Number(svg.attr("height")) / 2))
       .stop();
 
-    const g = svg.append("g");
-    let link = g.append("g").attr("class", "links").selectAll(".link");
-    let node = g.append("g").attr("class", "nodes").selectAll(".node");
-    let text = g.append("g").attr("class", "text").selectAll(".text");
+    const zoomHandler = d3
+      .zoom()
+      .scaleExtent([0.2, 3])
+      .on("zoom", function() { onZoom(graphSVGGroup, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) });
+    zoomHandler(svg);
 
-    const zoomActions = () => {
-      const scale = d3.event.transform;
-      zoomLevel = scale.k;
-      g.attr("transform", scale);
+    restart(nodesData, linksData, simulation, nodeSVGGroup, linkSVGGroup, labelsSVGGroup);
+  }
 
-      const zoomOrKeep = (value) => (scale.k >= 1 ? value / scale.k : value);
+  function restart(nodesData, linksData, simulation, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) {
+      let zoomLevel = INITIAL_ZOOM_LEVEL;
 
-      const font = Math.max(Math.round(zoomOrKeep(FONT_SIZE)), 1);
+      // Remove old information
+      nodeSVGGroup.exit().remove();
+      linkSVGGroup.exit().remove();
+      labelsSVGGroup.exit().remove();
 
-      text.attr("font-size", `${font}px`);
-      text.attr("y", (d) => d.y - zoomOrKeep(FONT_BASELINE));
-      link.attr("stroke-width", zoomOrKeep(STROKE));
-      node.attr("r", zoomOrKeep(RADIUS));
-    };
-
-    const ticked = () => {
-      node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-      text
-        .attr("x", (d) => d.x)
-        .attr("y", (d) => d.y - FONT_BASELINE / zoomLevel);
-      link
-        .attr("x1", (d) => d.source.x)
-        .attr("y1", (d) => d.source.y)
-        .attr("x2", (d) => d.target.x)
-        .attr("y2", (d) => d.target.y);
-    };
-
-    const restart = () => {
-      node = node.data(nodesData, (d) => d.id);
-      node.exit().remove();
-      node = node
+      let newNodes = nodeSVGGroup.data(nodesData, (d) => d.id)
         .enter()
         .append("circle")
         .attr("r", RADIUS)
-        // .attr("fill", (d) => getNodeColor(d))
+        .attr("active", (d) => isCurrentPath(d.path) ? true : null)
         .on("click", onClick)
-        .merge(node);
+        .merge(nodeSVGGroup);
 
-      link = link.data(linksData, (d) => `${d.source.id}-${d.target.id}`);
-      link.exit().remove();
-      link = link
+      let newLinks = linkSVGGroup.data(linksData, (d) => `${d.source.id}-${d.target.id}`)
         .enter()
         .append("line")
         .attr("stroke-width", STROKE)
-        .merge(link);
+        .merge(linkSVGGroup);
 
-      node.attr("active", (d) => isCurrentPath(d.path) ? true : null);
-      text.attr("active", (d) => isCurrentPath(d.path) ? true : null);
-
-      text = text.data(nodesData, (d) => d.label);
-      text.exit().remove();
-      text = text
+      let newLabels = labelsSVGGroup.data(nodesData, (d) => d.label)
         .enter()
         .append("text")
         .text((d) => shorten(d.label.replace(/_*/g, ""), MAX_LABEL_LENGTH))
         .attr("font-size", `${FONT_SIZE}px`)
         .attr("text-anchor", "middle")
         .attr("alignment-baseline", "central")
+        .attr("active", (d) => isCurrentPath(d.path) ? true : null)
         .on("click", onClick)
-        .merge(text);
+        .merge(labelsSVGGroup);
 
       simulation.nodes(nodesData);
       simulation.force("link").links(linksData);
@@ -151,22 +103,36 @@
         simulation.tick();
       }
 
-      ticked();
-    };
-
-    const zoomHandler = d3
-      .zoom()
-      .scaleExtent([0.2, 3])
-      //.translateExtent([[0,0], [width, height]])
-      //.extent([[0, 0], [width, height]])
-      .on("zoom", zoomActions);
-
-    zoomHandler(svg);
-    restart();
+      // Update coordinates for each element after running the simulation
+      newNodes.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+      newLabels.attr("x", (d) => d.x).attr("y", (d) => d.y - FONT_BASELINE / zoomLevel);
+      newLinks.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
+          .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
   }
 
-  function onClick(d) {
-    window.location = d.path
+  function onWindowResize(graphSVG) {
+    graphSVG.setAttribute("width", graphWrapper.getBoundingClientRect().width);
+    graphSVG.setAttribute("height", window.innerHeight * 0.8);
+    graphWrapper.setAttribute("height", window.innerHeight * 0.8);
+  }
+
+  function onZoom(graphSVGGroup, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) {
+    const scale = d3.event.transform;
+    graphSVGGroup.attr("transform", scale);
+
+    let zoomLevel = scale.k;
+    const zoomOrKeep = (value) => (zoomLevel >= 1 ? value / zoomLevel : value);
+
+    const font = Math.max(Math.round(zoomOrKeep(FONT_SIZE)), 1);
+    nodeSVGGroup.attr("r", zoomOrKeep(RADIUS));
+    linkSVGGroup.attr("stroke-width", zoomOrKeep(STROKE));
+    labelsSVGGroup
+        .attr("font-size", `${font}px`)
+        .attr("y", (d) => d.y - zoomOrKeep(FONT_BASELINE));
+  }
+
+  function onClick(node) {
+    window.location = node.path // Go to node's location
   }
 
   function isCurrentPath(notePath) {
@@ -177,5 +143,4 @@
     if (str.length <= maxLen) return str;
     return str.substr(0, str.lastIndexOf(separator, maxLen)) + '...';
   }
-
 })();

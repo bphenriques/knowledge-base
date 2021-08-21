@@ -3,12 +3,6 @@
   <h1>
     <a href="{{ .RelPermalink }}">{{ partial "util/title.html" . }}</a>
   </h1>
-  {{ with .Date }}
-    <h5 class="post-date">Created {{ partial "util/date" (dict "Date" . "Format" $.Site.Params.BookDateFormat) }}</h5>
-  {{ end }}
-  {{ if ne .Lastmod .Date }}
-    <h5 class="post-date">Updated {{ partial "util/date" (dict "Lastmod" . "Format" $.Site.Params.BookDateFormat) }}</h5>
-  {{ end }}
   {{- .Content -}}
 </article>
 {{ end }}

@@ -1,4 +1,17 @@
-{{ $script := resources.Get "clipboard.js" | resources.Minify }}
-{{ with $script.Content }}
-  <script>{{ . | safeJS }}</script>
+{{ if .File }}
+  {{ if .Date }}
+    <div class="flex align-center">
+        <img src="{{ "svg/calendar.svg" | relURL }}" class="book-icon" alt="Calendar" />
+        <span>{{ partial "util/date" (dict "Date" .Date "Format" $.Site.Params.BookDateFormat) }}
+        {{ if .Lastmod -}}
+            (Last updated on {{ partial "util/date" (dict "Date" .Lastmod "Format" $.Site.Params.BookDateFormat) }})
+        {{- end -}}
+        </span>
+    </div>
+  {{ end }}
+
+  {{ $script := resources.Get "clipboard.js" | resources.Minify }}
+  {{ with $script.Content }}
+    <script>{{ . | safeJS }}</script>
+  {{ end }}
 {{ end }}

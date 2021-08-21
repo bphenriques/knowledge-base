@@ -255,10 +255,10 @@ ul.pagination {
         flex-shrink: 0;
       }
 
-      .list-item-updated-at {
+      .list-item-created-at {
           box-sizing: border-box;
           margin: 0 0 0 0.5rem;
-          font-size: 0.7rem;
+          font-size: 0.8rem;
           color: var(--theme-ui-colors-text,hsl(210,17%,85%));
           white-space: nowrap;
           overflow: hidden;

@@ -1,13 +1,18 @@
 {{ $graphData := resources.Get "graph_generator/graph-data.json" | resources.ExecuteAsTemplate "graph-data.json" . | resources.Minify | resources.Fingerprint }}
 
+/**
+  Initializes a edge connected graph given the set of nodes and edges provided in graphData.
+
+  Uses D3 v7.0.1.
+*/
 (function () {
   const RADIUS = 4;
-  const STROKE = 1;
-  const FONT_SIZE = 15;
+  const CURRENT_NODE_RADIUS_PROPORTION = 2;
+
   const TICKS = 100;
-  const FONT_BASELINE = 15;
   const MAX_LABEL_LENGTH = 50;
-  const INITIAL_ZOOM_LEVEL = 1;
+
+  const ZOOM_RANGE = [0.2, 3]
 
   const GRAPH_DATA_URL = '{{ $graphData.RelPermalink }}';
 
@@ -45,25 +50,34 @@
     let nodeSVGGroup = graphSVGGroup.append("g").attr("class", "nodes").selectAll(".nodes");
     let labelsSVGGroup = graphSVGGroup.append("g").attr("class", "labels").selectAll(".labels");
 
+    let width = Number(svg.attr("width"))
+    let height = Number(svg.attr("width"))
     const simulation = d3
       .forceSimulation(nodesData)
-      .force("charge", d3.forceManyBody().strength(-4000))
-      .force("link", d3.forceLink(linksData).id((d) => d.id).distance(150))
-      .force("center", d3.forceCenter(Number(svg.attr("width")) / 2, Number(svg.attr("height")) / 2))
-      .stop();
+      .force("charge", d3.forceManyBody().strength(-2000).distanceMax(450))
+      .force("link", d3.forceLink(linksData).id((d) => d.id).distance(30).strength(1))
+      .force("center", d3.forceCenter(width / 2, height / 2));
 
     const zoomHandler = d3
       .zoom()
-      .scaleExtent([0.2, 3])
-      .on("zoom", function() { onZoom(graphSVGGroup, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) });
-    zoomHandler(svg);
+      .scaleExtent(ZOOM_RANGE)
+      .on("zoom", function(event) { onZoom(event.transform, graphSVGGroup) });
+    svg.call(zoomHandler);
 
     restart(nodesData, linksData, simulation, nodeSVGGroup, linkSVGGroup, labelsSVGGroup);
+    resetZoom(zoomHandler, svg)
+  }
+
+  function resetZoom(zoomHandler, svg) {
+    let width = Number(svg.attr("width"));
+    let height = Number(svg.attr("height"));
+    svg.call(
+      zoomHandler.transform,
+      d3.zoomIdentity.translate(width / 2, height / 2).scale(0.2)
+    );
   }
 
   function restart(nodesData, linksData, simulation, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) {
-      let zoomLevel = INITIAL_ZOOM_LEVEL;
-
       // Remove old information
       nodeSVGGroup.exit().remove();
       linkSVGGroup.exit().remove();
@@ -72,7 +86,7 @@
       let newNodes = nodeSVGGroup.data(nodesData, (d) => d.id)
         .enter()
         .append("circle")
-        .attr("r", RADIUS)
+        .attr("r", (d) => isCurrentPath(d.path) ? RADIUS * CURRENT_NODE_RADIUS_PROPORTION : RADIUS)
         .attr("active", (d) => isCurrentPath(d.path) ? true : null)
         .on("click", onClick)
         .merge(nodeSVGGroup);
@@ -80,32 +94,23 @@
       let newLinks = linkSVGGroup.data(linksData, (d) => `${d.source.id}-${d.target.id}`)
         .enter()
         .append("line")
-        .attr("stroke-width", STROKE)
         .merge(linkSVGGroup);
 
       let newLabels = labelsSVGGroup.data(nodesData, (d) => d.label)
         .enter()
         .append("text")
         .text((d) => shorten(d.label.replace(/_*/g, ""), MAX_LABEL_LENGTH))
-        .attr("font-size", `${FONT_SIZE}px`)
-        .attr("text-anchor", "middle")
-        .attr("alignment-baseline", "central")
         .attr("active", (d) => isCurrentPath(d.path) ? true : null)
         .on("click", onClick)
         .merge(labelsSVGGroup);
 
-      simulation.nodes(nodesData);
-      simulation.force("link").links(linksData);
-      simulation.alpha(1).restart();
-      simulation.stop();
-
-      for (let i = 0; i < TICKS; i++) {
-        simulation.tick();
-      }
+      d3.range(TICKS).forEach(simulation.tick);
 
       // Update coordinates for each element after running the simulation
       newNodes.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-      newLabels.attr("x", (d) => d.x).attr("y", (d) => d.y - FONT_BASELINE / zoomLevel);
+      newLabels
+        .attr("x", (d) => d.x)
+        .attr("y", (d) => d.y - (isCurrentPath(d.path) ? RADIUS * CURRENT_NODE_RADIUS_PROPORTION : RADIUS) - 10);
       newLinks.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
           .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
   }
@@ -116,22 +121,11 @@
     graphWrapper.setAttribute("height", window.innerHeight * 0.8);
   }
 
-  function onZoom(graphSVGGroup, nodeSVGGroup, linkSVGGroup, labelsSVGGroup) {
-    const scale = d3.event.transform;
+  function onZoom(scale, graphSVGGroup) {
     graphSVGGroup.attr("transform", scale);
-
-    let zoomLevel = scale.k;
-    const zoomOrKeep = (value) => (zoomLevel >= 1 ? value / zoomLevel : value);
-
-    const font = Math.max(Math.round(zoomOrKeep(FONT_SIZE)), 1);
-    nodeSVGGroup.attr("r", zoomOrKeep(RADIUS));
-    linkSVGGroup.attr("stroke-width", zoomOrKeep(STROKE));
-    labelsSVGGroup
-        .attr("font-size", `${font}px`)
-        .attr("y", (d) => d.y - zoomOrKeep(FONT_BASELINE));
   }
 
-  function onClick(node) {
+  function onClick(p, node) {
     window.location = node.path // Go to node's location
   }
 

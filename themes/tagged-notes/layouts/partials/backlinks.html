@@ -1,4 +1,4 @@
-<!-- Obtain all backlinks. Looks for raw references -->
+<!-- Obtain all backlinks. Looks within the page's raw content -->
 {{ $re := $.File.BaseFileName }}
 {{ $backlinks := slice }}
 {{ range .Site.AllPages }}

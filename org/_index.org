@@ -1,0 +1,8 @@
+#+TITLE: Index
+#+HUGO_SECTION:
+#+HUGO_TAGS:
+#+hugo_custom_front_matter: :BookToC false
+
+Welcome to my digital garden where I let my thoughts and ideas grow.
+
+It is an extension of my thinking process, therefore, some of these notes may be raw or incomplete as I explore them. Let me know if you encounter a mistake or just want to say hi!

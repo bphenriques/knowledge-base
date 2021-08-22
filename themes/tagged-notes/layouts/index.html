@@ -1,0 +1,12 @@
+{{- define "main" -}}
+
+<article class="markdown">
+    <h2 class="frontpage-list-title">{{ .Site.Params.IntroTitle }}</h2>
+    {{ partial "docs/graph" . }}
+
+    {{- .Content -}}
+</article>
+
+
+
+{{- end -}}

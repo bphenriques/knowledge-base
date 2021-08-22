@@ -6,7 +6,7 @@
     <p><a class="menu-shortcut-link" href="{{ "/blog" | relURL }}">Blog Posts</a></p>-->
     {{ end }}
     {{ if (gt (where .Site.RegularPages "Section" "notes" | len) 0) }}
-    <p><a class="menu-shortcut-link" href="{{ "/notes" | relURL }}">All Notes</a></p>
+    <p><a class="menu-shortcut-link" href="{{ "/notes" | relURL }}">Recent Notes</a></p>
     {{ end }}
     <h4 class="menu-tags-title"><b>Tags</b></h4>
     <ul>

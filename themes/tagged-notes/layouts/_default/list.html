@@ -1,14 +1,33 @@
+
 {{ define "main" }}
-  {{ $recentBlogPosts := where .Site.RegularPages.ByPublishDate.Reverse "Section" "blog" }}
-  {{ if (gt ($recentBlogPosts | len) 0) }}
-    <h2 class="frontpage-list-title">Recent Blog Posts</h2>
-    {{ range $recentBlogPosts }}
-      {{ partial "list-item" . }}
-    {{ end }}
+<!-- FIXME: Search is always showing the same tags -->
+<h2 class="frontpage-list-title">Hi! 🌱</h2>
+<p>Welcome to my digital garden where I let my thoughts and ideas grow.</p>
+
+<h2 class="frontpage-list-title">Digital Gardens</h2>
+<p></p>
+{{ partial "docs/graph" . }}
+
+<h2 class="frontpage-list-title">Digital Gardens</h2>
+
+<p>It is an extension of my thinking process, therefore, some of these notes may be raw or incomplete as I explore them. Let me know if you encounter a mistake or just want to say hi!</p>
+
+{{ $recentBlogPosts := where .Site.RegularPages.ByPublishDate.Reverse "Section" "blog" }}
+{{ if (gt ($recentBlogPosts | len) 0) }}
+  <h2 class="frontpage-list-title">Recent Blog Posts</h2>
+  {{ range $recentBlogPosts }}
+    {{ partial "list-item" . }}
   {{ end }}
+{{ end }}
   
-  <h2 class="frontpage-list-title">Recent Notes</h2>
-  {{ range first 5 (where .Site.RegularPages.ByPublishDate.Reverse "Section" "notes") }}
+<h2 class="frontpage-list-title">Recent Notes</h2>
+{{ range first 5 (where .Site.RegularPages.ByPublishDate.Reverse "Section" "notes") }}
   {{ partial "list-item" . }}
-  {{ end }}
+{{ end }}
+
+
+<!-- Add contact info This Wiki is open-source and available at bphenriques/knowledge-base.-->
+<!-- Add some starting point where one can start a digital garden -->
+<!-- These notes are always evolving. If these interest you, please get in touch. You can learn more about me on my website. -->
+
 {{ end }}

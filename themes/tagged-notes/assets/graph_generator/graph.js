@@ -7,7 +7,7 @@
   Uses D3 v7.0.1.
 */
 (function () {
-  const RADIUS = 4;
+  const RADIUS = 15;
   const CURRENT_NODE_RADIUS_PROPORTION = 2;
 
   const TICKS = 100;
@@ -15,13 +15,10 @@
   const ZOOM_RANGE = [0.2, 3]
   const GRAPH_DATA_URL = '{{ $graphData.RelPermalink }}';
 
-  const input = document.querySelector('#book-search-input');
   const graphWrapper = document.getElementById('graph-wrapper')
 
-  input.addEventListener('focus', init);
+  init();
   function init() {
-    input.removeEventListener('focus', init); // init once
-
     fetch(GRAPH_DATA_URL)
       .then(pages => pages.json())
       .then(graphData => {
@@ -37,20 +34,19 @@
       "http://www.w3.org/2000/svg",
       "svg"
     );
-
-    onWindowResize(graphSVG)// First sizing
     graphWrapper.appendChild(graphSVG);
-    window.onresize = function() { onWindowResize(graphSVG) };
 
     // Set SVG shape
+    const width = graphWrapper.clientWidth;
+    const height = graphWrapper.clientHeight;
     const svg = d3.select("svg");
-    const graphSVGGroup = svg.append("g");
+    const graphSVGGroup = svg.append("g")
+       .attr("preserveAspectRatio", "xMinYMin meet")
+       .attr("viewBox", `0 0 ${width} ${height}`);
     const linkSVGGroup = graphSVGGroup.append("g").attr("class", "links").selectAll(".links");
     const nodeSVGGroup = graphSVGGroup.append("g").attr("class", "nodes").selectAll(".nodes");
     const labelsSVGGroup = graphSVGGroup.append("g").attr("class", "labels").selectAll(".labels");
 
-    const width = Number(svg.attr("width"))
-    const height = Number(svg.attr("width"))
     const simulation = d3
       .forceSimulation(nodesData)
       .force("charge", d3.forceManyBody().strength(-2000).distanceMax(450))
@@ -122,12 +118,6 @@
         .attr("y", (d) => d.y - (isCurrentPath(d.path) ? RADIUS * CURRENT_NODE_RADIUS_PROPORTION : RADIUS) - 10);
       newLinks.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
           .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
-  }
-
-  function onWindowResize(graphSVG) {
-    graphSVG.setAttribute("width", graphWrapper.getBoundingClientRect().width);
-    graphSVG.setAttribute("height", window.innerHeight * 0.8);
-    graphWrapper.setAttribute("height", window.innerHeight * 0.8);
   }
 
   function onZoom(scale, graphSVGGroup) {

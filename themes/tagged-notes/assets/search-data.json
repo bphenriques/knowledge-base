@@ -1,25 +1,16 @@
 [
-{{- $pages := where .Site.Pages "Kind" "in" (slice "page" "section") -}}
+{{- $pages := where .Site.RegularPages "Kind" "in" (slice "page" "section") -}}
 {{- $pages = where $pages "Params.booksearchexclude" "!=" true -}}
 {{- $pages = where $pages "Content" "not in" (slice nil "") -}}
-
-{{ $tags := slice }}
-{{ range $taxonomy, $_ := .Site.Taxonomies }}
-{{ with $terms := $.GetTerms $taxonomy }}
-  {{ range $n, $term := $terms }}
-  {{ $tags = $tags | append $term.Title }}
-  {{ end }}
-{{ end }}
-{{ end }}
 
 {{ range $index, $page := $pages }}
 {{ if gt $index 0}},{{end}} {
     "id": {{ $index }},
     "href": "{{ $page.RelPermalink }}",
-    "title": {{ (partial "util/title" $page) | jsonify }},
-    "section": {{ (partial "util/title" $page.Parent) | jsonify }},
-    "tags": {{ $tags | jsonify }},
+    "title": {{ (partial "util/title" .) | jsonify }},
+    "section": {{ (partial "util/title" .Parent) | jsonify }},
+    "tags": {{ $page.Params.tags | jsonify }},
     "content": {{ $page.Plain | jsonify }}
-}
+  }
 {{- end -}}
 ]

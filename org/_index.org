@@ -5,7 +5,7 @@
 
 * Hi! 🌱
 
-Welcome to my [[file:digital_garden.org][digital garden]]. A frictionless writing space where I collect, arrange, and connect my thoughts as I explore
+Welcome to my [[file:digital_garden.org][digital garden]]! A frictionless writing space where I collect, arrange, and connect my thoughts as I explore
 new or existing topics.
 
 Learning can be hard. Having incremental notes and linking them is a great way to turn insights into knowledge, and with
@@ -25,4 +25,4 @@ You can explore all the notes in this digital garden using the following graph:
 
 It is an extension of my thinking process, therefore, some of these notes may be raw or incomplete as I explore them. Let me know if you find mistakes or just want to say hi!
 
-This wiki is open-source and available at bphenriques/knowledge-base.
+This wiki is open-source and available on [[https://github.com/bphenriques/knowledge-base][Github]].

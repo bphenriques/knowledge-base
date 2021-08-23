@@ -8,7 +8,6 @@
     "id": {{ $index }},
     "href": "{{ $page.RelPermalink }}",
     "title": {{ (partial "util/title" .) | jsonify }},
-    "section": {{ (partial "util/title" .Parent) | jsonify }},
     "tags": {{ $page.Params.tags | jsonify }},
     "content": {{ $page.Plain | jsonify }}
   }

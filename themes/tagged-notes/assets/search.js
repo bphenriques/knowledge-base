@@ -1,18 +1,7 @@
-'use strict';
-
-{{ $searchDataFile := printf "%s.search-data.json" .Language.Lang }}
-{{ $searchData := resources.Get "search-data.json" | resources.ExecuteAsTemplate $searchDataFile . | resources.Minify | resources.Fingerprint }}
-{{ $searchConfig := "{ cache: true }" }}
+{{ $searchData := resources.Get "search-data.json" | resources.ExecuteAsTemplate "search-data.json" . | resources.Minify | resources.Fingerprint }}
 
 (function () {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
-  const indexConfig = Object.assign({{ $searchConfig }}, {
-    doc: {
-      id: 'id',
-      field: ['title', 'content', 'tags'],
-      store: ['title', 'href', 'section', 'tags']
-    }
-  });
 
   const input = document.querySelector('#book-search-input');
   const results = document.querySelector('#book-search-results');
@@ -59,8 +48,17 @@
     fetch(searchDataURL)
       .then(pages => pages.json())
       .then(pages => {
-        window.bookSearchIndex = FlexSearch.create('balance', indexConfig);
-        window.bookSearchIndex.add(pages);
+        window.bookSearchIndex = new FlexSearch.Document({
+            tokenize: "forward",
+            document: {
+                id: "id",
+                store: ["title", "href", "tags"],
+                index: ["title", "tags", "content"]
+            }
+        });
+
+        // TOOD: This won't likely scale. Not a problem _for now_.
+        pages.forEach(page => { window.bookSearchIndex.add(page); });
       })
       .then(() => input.required = false)
       .then(search);
@@ -75,8 +73,17 @@
       return;
     }
 
-    const searchHits = window.bookSearchIndex.search(input.value, 10);
-    searchHits.forEach(function (page) {
+    // TODO explore asyncSearch (triggers flicker as of now).
+    let searchHitIndices = window.bookSearchIndex.search(input.value, { limit: 10, enrich: true });
+    const mapResults = new Map();
+    // Would love to have a flatMap
+    searchHitIndices.forEach((searchResultIndex) => {
+      searchResultIndex.result.forEach(pageHit => {
+        mapResults.set(pageHit.id, pageHit.doc);
+      });
+     });
+
+    mapResults.forEach((page) => {
       const li = element('<li><a href></a><small></small></li>');
       const a = li.querySelector('a'), small = li.querySelector('small');
 

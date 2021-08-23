@@ -17,7 +17,10 @@
 
   const graphWrapper = document.getElementById('graph-wrapper')
 
-  init();
+  if (graphWrapper) {
+    init();
+  }
+
   function init() {
     fetch(GRAPH_DATA_URL)
       .then(pages => pages.json())

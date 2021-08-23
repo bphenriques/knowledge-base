@@ -8,7 +8,7 @@
     {{ if (gt (where .Site.RegularPages "Section" "notes" | len) 0) }}
     <p><a class="menu-shortcut-link" href="{{ "/notes" | relURL }}">Recent Notes</a></p>
     {{ end }}
-    <h4 class="menu-tags-title"><b>Tags</b></h4>
+    <p class="menu-tags-title"><b>Tags</b></p>
     <ul>
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
         <li>{{ partial "docs/tag-circle-badge.html" $name }}</li>

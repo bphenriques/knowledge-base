@@ -3,6 +3,6 @@
     {{- with .Site.Params.BookLogo -}}
     <img src="{{ . | relURL }}" alt="Logo" />
     {{- end -}}
-    <span>{{ .Site.Title }}</span>
+    <span>{{ default .Site.Title .Site.Params.BrandTitle }}</span>
   </a>
 </h2>

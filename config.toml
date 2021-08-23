@@ -1,5 +1,5 @@
 theme = "tagged-notes"
-title = "Bruno Henriques"
+title = "Bruno Henriques's Digital Garden 🌱"
 canonifyURLs = "true"
 
 [markup.goldmark.renderer]
@@ -9,6 +9,6 @@ canonifyURLs = "true"
   home = ["HTML"]
 
 [params]
-  IntroTitle = 'Digital Garden 🌱'
+  BrandTitle = 'Bruno Henriques'
   BookTheme = 'dark'
   HomePage = 'https://bphenriques.github.io'

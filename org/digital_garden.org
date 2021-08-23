@@ -1,0 +1,26 @@
+#+TITLE: Digital Garden
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: note zettelkasten
+#+ROAM_ALIAS:
+
+Digital gardening is a different take to blogging as it shifts the focus of publishing content to a public to the writing.
+
+Like gardening, digital gardens start with raw notes and, as we tend to it, connections will start to emerge. But it is
+personal and informal. There is no pressure on having complete thoughts. You can always circle back to the notes you made
+in the past and refine them.
+
+// TODO: Note on how entropy grows and correlate with gardening. See https://joelhooks.com/digital-garden
+
+* Visualizing Digital Gardens
+
+Visualizing your notes and how they connect with one another is a great way to have a bird-eyes view on how you perceive
+a topic and it can even help you maturing what you know about it. For example, this This digital garden can be visualized
+and explored through the following graph:
+
+#+begin_export html
+{{< graph >}}
+#+end_export
+
+* History
+
+See Maggie Appleton's excellent [[https://maggieappleton.com/garden-history][article]].

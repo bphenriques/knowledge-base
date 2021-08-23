@@ -70,7 +70,12 @@
   }
 
   img {
+    width: 85%;
     max-width: 100%;
+    display:block;
+    float:none;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   code {

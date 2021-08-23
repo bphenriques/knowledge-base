@@ -1,8 +1,28 @@
-#+TITLE: Index
+#+TITLE: Home
 #+HUGO_SECTION:
 #+HUGO_TAGS:
 #+hugo_custom_front_matter: :BookToC false
 
-Welcome to my digital garden where I let my thoughts and ideas grow.
+* Hi! 🌱
 
-It is an extension of my thinking process, therefore, some of these notes may be raw or incomplete as I explore them. Let me know if you encounter a mistake or just want to say hi!
+Welcome to my [[file:digital_garden.org][digital garden]]. A frictionless writing space where I collect, arrange, and connect my thoughts as I explore
+new or existing topics.
+
+Learning can be hard. Having incremental notes and linking them is a great way to turn insights into knowledge, and with
+experience, make good use of it!
+
+[[file:from-data-to-knowledge.png]]
+
+* Navigation
+
+You can explore all the notes in this digital garden using the following graph:
+
+#+begin_export html
+{{< graph >}}
+#+end_export
+
+* Contributing
+
+It is an extension of my thinking process, therefore, some of these notes may be raw or incomplete as I explore them. Let me know if you find mistakes or just want to say hi!
+
+This wiki is open-source and available at bphenriques/knowledge-base.

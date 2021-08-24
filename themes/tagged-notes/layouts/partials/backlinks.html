@@ -11,15 +11,9 @@
 {{- if gt (len $backlinks) 0 -}}
 <p class="toc-title">Mentioned In</p>
 <div class="backlinks">
-    {{- range $backlinks -}}
-    <a href="{{ .RelPermalink }}">
-        <div class="backlink-item">
-            <span class="backlink-title">{{ .Title }}</span>
-            <br>
-            <span class="backlink-preview">{{ .Summary | truncate 90 }}</span>
-        </div>
-    </a>
-   {{- end -}}
+{{- range $backlinks -}}
+  {{ partial "component/preview" . }}
+{{- end -}}
 </div>
 {{- end -}}
 

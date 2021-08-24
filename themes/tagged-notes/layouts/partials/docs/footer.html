@@ -10,7 +10,7 @@
     </div>
   {{ end }}
 
-  {{ $script := resources.Get "clipboard.js" | resources.Minify }}
+  {{ $script := resources.Get "js/clipboard.js" | resources.Minify }}
   {{ with $script.Content }}
     <script>{{ . | safeJS }}</script>
   {{ end }}

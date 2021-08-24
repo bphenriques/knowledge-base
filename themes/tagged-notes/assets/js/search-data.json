@@ -9,7 +9,8 @@
     "href": "{{ $page.RelPermalink }}",
     "title": {{ (partial "util/title" .) | jsonify }},
     "tags": {{ $page.Params.tags | jsonify }},
-    "content": {{ $page.Plain | jsonify }}
+    "content": {{ $page.Plain | jsonify }},
+    "preview": {{ $page.Summary | truncate 90 | jsonify }}
   }
 {{- end -}}
 ]

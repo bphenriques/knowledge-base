@@ -10,7 +10,10 @@
 
 @import "markdown";
 @import "shortcodes";
-@import "graph_generator/graph";
+
+// components
+@import "components/graph";
+@import "components/item-preview";
 
 // Custom defined styles
 @import "custom";

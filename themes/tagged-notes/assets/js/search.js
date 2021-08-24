@@ -1,4 +1,4 @@
-{{ $searchData := resources.Get "search-data.json" | resources.ExecuteAsTemplate "search-data.json" . | resources.Minify | resources.Fingerprint }}
+{{ $searchData := resources.Get "js/search-data.json" | resources.ExecuteAsTemplate "js/search-data.json" . | resources.Minify | resources.Fingerprint }}
 
 (function () {
   const searchDataURL = '{{ $searchData.RelPermalink }}';
@@ -52,7 +52,7 @@
             tokenize: "forward",
             document: {
                 id: "id",
-                store: ["title", "href", "tags"],
+                store: ["title", "href", "tags", "preview"],
                 index: ["title", "tags", "content"]
             }
         });
@@ -84,15 +84,33 @@
      });
 
     mapResults.forEach((page) => {
-      const li = element('<li><a href></a><small></small></li>');
-      const a = li.querySelector('a'), small = li.querySelector('small');
-
-      a.href = page.href;
-      a.textContent = page.title;
-      small.textContent = page.tags.map(function(tag) { return "#" + tag; }).join(' ');
-
-      results.appendChild(li);
+      results.appendChild(buildPreview(page));
     });
+  }
+
+  // Has to be consistent with partials/component/preview.html
+  function buildPreview(page) {
+    const li = element('<li></li>')
+    const a = element('<a></a>')
+    const div = element('<div></div>')
+    const title = element('<span></span>')
+    const content = element('<span></span>')
+
+    a.href = page.href;
+    title.textContent = page.title;
+    content.textContent = page.preview;
+
+    div.classList.add('item-preview');
+    title.classList.add('item-preview-title');
+    content.classList.add('item-preview-content');
+
+    div.appendChild(title);
+    div.appendChild(element('<br>'));
+    div.appendChild(content);
+    a.appendChild(div);
+    li.appendChild(a);
+
+    return li;
   }
 
   /**

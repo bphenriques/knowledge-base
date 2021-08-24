@@ -1,4 +1,4 @@
-{{ $graphData := resources.Get "graph_generator/graph-data.json" | resources.ExecuteAsTemplate "graph-data.json" . | resources.Minify | resources.Fingerprint }}
+{{ $graphData := resources.Get "js/graph-data.json" | resources.ExecuteAsTemplate "js/graph-data.json" . | resources.Minify | resources.Fingerprint }}
 
 /**
   Initializes a edge connected graph given the set of nodes and edges provided in graphData.

@@ -46,10 +46,6 @@ img {
   margin: 0.75rem 0;
 }
 
-.book-search ul li {
-  margin: 0.75rem 0;
-}
-
 aside nav ul {
   padding: 0;
   margin: 0;
@@ -457,23 +453,13 @@ ul.pagination {
 
 .backlinks {
     margin-bottom: 1rem;
-
-    .backlink-item {
-        border-radius: .5rem;
-        background-color: var(--backlinks-background);
-        padding: 0.5rem;
-        margin-bottom: 0.25rem;
-
-        .backlink-title {
-            font-weight: 600;
-        }
-
-        .backlink-preview {
-            font-size: $font-size-12;
-            color: var(--body-font-color);
-        }
-    }
 }
+
+
+.book-search ul li {
+  margin: 0.5rem 0;
+}
+
 
 // Extra space for big screens
 @media screen and (min-width: $container-max-width) {

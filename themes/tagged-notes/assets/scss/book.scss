@@ -8,12 +8,11 @@
 @import "fonts";
 @import "print";
 
-@import "markdown";
-@import "shortcodes";
-
 // components
 @import "components/graph";
 @import "components/item-preview";
+@import "components/markdown";
+@import "components/shortcodes";
 
 // Custom defined styles
 @import "custom";

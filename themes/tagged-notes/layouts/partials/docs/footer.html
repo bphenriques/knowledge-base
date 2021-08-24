@@ -2,9 +2,9 @@
   {{ if .Date }}
     <div class="flex align-center">
         <img src="{{ "svg/calendar.svg" | relURL }}" class="book-icon" alt="Calendar" />
-        <span>{{ partial "util/date" (dict "Date" .Date "Format" $.Site.Params.BookDateFormat) }}
+        <span>{{ partial "util/date" (dict "Date" .Date "Format" $.Site.Params.DateFormat) }}
         {{ if .Lastmod -}}
-            (Last updated on {{ partial "util/date" (dict "Date" .Lastmod "Format" $.Site.Params.BookDateFormat) }})
+            (Last updated on {{ partial "util/date" (dict "Date" .Lastmod "Format" $.Site.Params.DateFormat) }})
         {{- end -}}
         </span>
     </div>

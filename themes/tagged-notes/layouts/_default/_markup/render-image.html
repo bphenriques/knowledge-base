@@ -1,4 +1,4 @@
-{{- if .Page.Site.Params.BookPortableLinks -}}
+{{- if .Page.Site.Params.PortableLinks -}}
   {{- template "portable-image" . -}}
 {{- else -}}
   <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }}/>

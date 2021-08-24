@@ -15,7 +15,7 @@
 {{- $styles := resources.Get "scss/book.scss" | resources.ExecuteAsTemplate "scss/book.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" {{ template "integrity" $styles }}>
 
-{{- if default true .Site.Params.BookSearch -}}
+{{- if default true .Site.Params.Search -}}
   {{- $searchJS := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ "js/vendor/flexsearch.bundle.js" | relURL }}"></script>
   <script defer src="{{ $searchJS.RelPermalink }}" {{ template "integrity" $searchJS }}></script>
@@ -27,7 +27,7 @@
   <script defer src="{{ $graphJS.RelPermalink }}" {{ template "integrity" $graphJS }}></script>
 {{ end -}}
 
-{{- if .Site.Params.BookServiceWorker -}}
+{{- if .Site.Params.ServiceWorker -}}
   {{- $swJS := resources.Get "js/sw-register.js" | resources.ExecuteAsTemplate "js/sw.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ $swJS.RelPermalink }}" {{ template "integrity" $swJS }}></script>
 {{ end -}}

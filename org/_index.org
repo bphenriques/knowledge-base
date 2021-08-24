@@ -1,7 +1,7 @@
 #+TITLE: Home
 #+HUGO_SECTION:
 #+HUGO_TAGS:
-#+hugo_custom_front_matter: :BookToC false
+#+hugo_custom_front_matter: :ToC false
 
 * Hi! 🌱
 

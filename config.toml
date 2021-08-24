@@ -10,5 +10,5 @@ canonifyURLs = "true"
 
 [params]
   BrandTitle = 'Bruno Henriques'
-  BookTheme = 'dark'
+  Theme = 'dark'
   HomePage = 'https://bphenriques.github.io'

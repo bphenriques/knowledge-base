@@ -1,6 +1,6 @@
 const cacheName = self.location.pathname
 const pages = [
-{{ if eq .Site.Params.BookServiceWorker "precache" }}
+{{ if eq .Site.Params.ServiceWorker "precache" }}
   {{ range .Site.AllPages -}}
   "{{ .RelPermalink }}",
   {{ end -}}

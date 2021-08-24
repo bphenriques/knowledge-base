@@ -1,6 +1,6 @@
 <!--
   Returns formatted date.
-  Usage: partial "docs/date" (dict "Date" .Date "Format" .Site.Params.BookDateFormat)
+  Usage: partial "docs/date" (dict "Date" .Date "Format" .Site.Params.DateFormat)
 -->
 {{- $format := default "Jan 2, 2006" .Format -}}
 {{- return (.Date.Format $format) -}}

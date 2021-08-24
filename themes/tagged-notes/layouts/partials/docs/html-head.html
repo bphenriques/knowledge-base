@@ -11,23 +11,18 @@
 <link rel="manifest" href="{{ $manifest.RelPermalink }}">
 <link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/x-icon">
 
-{{- range .Translations }}
-  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ partial "util/title" . }}">
-{{- end -}}
-
 <!-- Theme stylesheet, you can customize scss by creating `assets/custom.scss` in your website -->
 {{- $styles := resources.Get "book.scss" | resources.ExecuteAsTemplate "book.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" {{ template "integrity" $styles }}>
 
 {{- if default true .Site.Params.BookSearch -}}
-  {{- $searchJSFile := printf "%s.search.js" .Language.Lang }}
-  {{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint }}
+  {{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate "search.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ "flexsearch.bundle.js" | relURL }}"></script>
   <script defer src="{{ $searchJS.RelPermalink }}" {{ template "integrity" $searchJS }}></script>
 {{ end -}}
 
 {{- if default true .Site.Params.NodeGraph -}}
-  {{- $graphJS := resources.Get "graph_generator/graph.js" | resources.ExecuteAsTemplate "graph.js" . }}
+  {{- $graphJS := resources.Get "graph_generator/graph.js" | resources.ExecuteAsTemplate "graph.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ "d3.min.js" | relURL }}"></script>
   <script defer src="{{ $graphJS.RelPermalink }}" {{ template "integrity" $graphJS }}></script>
 {{ end -}}

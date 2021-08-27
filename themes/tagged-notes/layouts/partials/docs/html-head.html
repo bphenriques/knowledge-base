@@ -27,11 +27,6 @@
   <script defer src="{{ $graphJS.RelPermalink }}" {{ template "integrity" $graphJS }}></script>
 {{ end -}}
 
-{{- if .Site.Params.ServiceWorker -}}
-  {{- $swJS := resources.Get "js/sw-register.js" | resources.ExecuteAsTemplate "js/sw.js" . | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $swJS.RelPermalink }}" {{ template "integrity" $swJS }}></script>
-{{ end -}}
-
 {{- template "_internal/google_analytics_async.html" . -}}
 
 <!-- RSS -->

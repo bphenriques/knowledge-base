@@ -1,8 +1,0 @@
-<h2 class="brand">
-  <a class="flex align-center" href="{{ cond (not .Site.Home.File) .Sites.First.Home.RelPermalink .Site.Home.RelPermalink }}">
-    {{- with .Site.Params.Logo -}}
-    <img src="{{ . | relURL }}" alt="Logo" />
-    {{- end -}}
-    <span>{{ default .Site.Title .Site.Params.BrandTitle }}</span>
-  </a>
-</h2>

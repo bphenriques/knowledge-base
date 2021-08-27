@@ -1,21 +1,36 @@
 (function () {
-  function select(element) {
-    const selection = window.getSelection();
+    document
+      .querySelectorAll(".highlight")
+      .forEach((highlightDiv) => createCopyButton(highlightDiv));
 
-    const range = document.createRange();
-    range.selectNodeContents(element);
+    function createCopyButton(highlightDiv) {
+      const button = document.createElement("button");
+      button.className = "copy-code-button";
+      button.type = "button";
+      button.innerText = "Copy";
+      button.addEventListener("click", () =>
+        copyCodeToClipboard(button, highlightDiv)
+      );
+      highlightDiv.insertBefore(button, highlightDiv.firstChild);
+    }
 
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
+    async function copyCodeToClipboard(button, highlightDiv) {
+      const codeToCopy = highlightDiv.querySelector("pre").innerText;
+      button.blur();
 
-  document.querySelectorAll("pre code").forEach(code => {
-    code.addEventListener("click", function (event) {
-      select(code.parentElement);
-
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(code.parentElement.textContent);
+      try {
+        result = await navigator.permissions.query({ name: "clipboard-write" });
+        if (result.state == "granted" || result.state == "prompt") {
+          await navigator.clipboard.writeText(codeToCopy);
+          button.innerText = "Copied!";
+        } else {
+          button.innerText = "Permission denied!";
+          copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+        }
+      } catch (_) {
+          button.innerText = "Error!";
+      } finally {
+        setTimeout(() => { button.innerText = "Copy"; }, 2000);
       }
-    });
-  });
+    }
 })();

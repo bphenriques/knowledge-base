@@ -1,0 +1,30 @@
+.copy-code-button {
+    color: #272822;
+    background-color: var(--body-font-color);
+    border-color: #272822;
+    border: 2px solid;
+    border-radius: 3px 3px 0px 0px;
+
+    /* right-align */
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+
+    margin-bottom: -2px;
+    padding: 3px 8px;
+    font-size: 0.8em;
+}
+
+.copy-code-button:hover {
+    cursor: pointer;
+}
+
+.copy-code-button:active {
+    color: #272822;
+    background-color: var(--body-font-color);
+}
+
+.highlight pre {
+    /* Avoid pushing up the copy buttons. */
+    margin: 0;
+}

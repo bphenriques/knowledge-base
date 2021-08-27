@@ -21,6 +21,11 @@
   <script defer src="{{ $searchJS.RelPermalink }}" {{ template "integrity" $searchJS }}></script>
 {{ end -}}
 
+{{ if (findRE "<pre" .Content 1) }}
+{{- $clipboardJS := resources.Get "js/clipboard.js" | resources.ExecuteAsTemplate "js/clipboard.js" . | resources.Minify | resources.Fingerprint }}
+<script defer src="{{ $clipboardJS.RelPermalink }}" {{ template "integrity" $clipboardJS }}></script>
+{{ end -}}
+
 {{- if in .RawContent "{{< graph >}}" -}}
   {{- $graphJS := resources.Get "js/graph.js" | resources.ExecuteAsTemplate "js/graph.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ "js/vendor/d3.min.js" | relURL }}"></script>

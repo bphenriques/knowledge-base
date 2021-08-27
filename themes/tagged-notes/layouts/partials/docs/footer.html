@@ -9,9 +9,4 @@
         </span>
     </div>
   {{ end }}
-
-  {{ $script := resources.Get "js/clipboard.js" | resources.Minify }}
-  {{ with $script.Content }}
-    <script>{{ . | safeJS }}</script>
-  {{ end }}
 {{ end }}

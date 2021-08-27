@@ -16,6 +16,7 @@ self.addEventListener("install", function (event) {
 });
 
 self.addEventListener("fetch", (event) => {
+  console.log("hello world");
   const request = event.request;
   if (request.method !== "GET") {
     return;

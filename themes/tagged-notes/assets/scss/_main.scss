@@ -126,51 +126,15 @@ ul.pagination {
         height: 10px;
         border-radius: 50%;
         margin-right: 0.5em;
+        flex: none;
     }
   }
-  .menu-tag-item:hover {
+  a:hover {
     opacity: 0.5;
   }
 
-  a,
-  label {
+  a, label {
     color: inherit;
-    cursor: pointer;
-    word-wrap: break-word;
-  }
-
-  a.active {
-    color: var(--color-link);
-  }
-
-  input.toggle + label + ul {
-    display: none;
-  }
-
-  input.toggle:checked + label + ul {
-    display: block;
-  }
-
-  input.toggle + label::after {
-    content: "▸";
-  }
-
-  input.toggle:checked + label::after {
-    content: "▾";
-  }
-}
-
-.book-section-flat {
-  margin: $padding-16 * 2 0;
-
-  > a,
-  > span,
-  > label {
-    font-weight: bolder;
-  }
-
-  > ul {
-    padding-inline-start: 0;
   }
 }
 

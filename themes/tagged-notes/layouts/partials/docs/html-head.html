@@ -21,7 +21,7 @@
   <script defer src="{{ $searchJS.RelPermalink }}" {{ template "integrity" $searchJS }}></script>
 {{ end -}}
 
-{{- if default true .Site.Params.NodeGraph -}}
+{{- if in .RawContent "{{< graph >}}" -}}
   {{- $graphJS := resources.Get "js/graph.js" | resources.ExecuteAsTemplate "js/graph.js" . | resources.Minify | resources.Fingerprint }}
   <script defer src="{{ "js/vendor/d3.min.js" | relURL }}"></script>
   <script defer src="{{ $graphJS.RelPermalink }}" {{ template "integrity" $graphJS }}></script>

@@ -9,8 +9,8 @@
 
 <!-- Generate the HTML -->
 {{- if gt (len $backlinks) 0 -}}
-<p class="toc-title">Mentioned In</p>
 <div class="backlinks">
+<p class="toc-title">Mentioned In</p>
 {{- range $backlinks -}}
   {{ partial "component/preview" . }}
 {{- end -}}

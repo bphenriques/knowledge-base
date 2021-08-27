@@ -1,6 +1,6 @@
 #+TITLE: GPG
 #+HUGO_SECTION: notes
-#+HUGO_TAGS: uncategorized
+#+HUGO_TAGS: security signing
 #+ROAM_ALIAS:
 
 Automatically export public key to a server:

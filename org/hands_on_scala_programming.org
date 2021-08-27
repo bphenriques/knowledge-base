@@ -9,7 +9,7 @@ As an experiment, I coding directly in the org-mode file using Babel to execute 
 
 * TODO Some introduction
 - [ ] Point to dotfiles
-- [ ] Point to the Babel package
+- [ ] Point to the Babel package
 
 * Notes
 

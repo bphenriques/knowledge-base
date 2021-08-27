@@ -1,6 +1,6 @@
 #+TITLE: Sharding or Partitioning
 #+HUGO_SECTION: notes
-#+HUGO_TAGS: databases
+#+HUGO_TAGS: databases system-design
 #+ROAM_ALIAS:
 
 Technique used by some data stores to reduce contention without sacrificing consistency.

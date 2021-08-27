@@ -3,7 +3,7 @@
 #+HUGO_TAGS: data
 
 States of data:
-- *At Rest*: Data that is not consumed at the time is injested. It is stored and then consumed later in a batch process.
+- *At Rest*: Data that is not consumed at the time is ingested. It is stored and then consumed later in a batch process.
 - *In Transit*: Data that is travelling between point A and point B.
 - *In Use*: Data that is opened for treatment
 

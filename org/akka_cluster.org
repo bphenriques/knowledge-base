@@ -19,7 +19,7 @@ Scalling vertically has limits. Introducing Akka Cluster Aware Routers, that all
 
 *Scenario*: Database becomes the bottleneck.
 
-Many applications leverage the database for strong-consistency. However it may become the source of contention (see [[file:../concurrency/amdah_s_law.org][Amdah's Law]]) as the load increases. We may migrate to a cache service (e.g., Memcached or Redis) but it will eventually become the bottleneck.
+Many applications leverage the database for strong-consistency. However it may become the source of contention (see [[file:amdah_s_law.org][Amdah's Law]]) as the load increases. We may migrate to a cache service (e.g., Memcached or Redis) but it will eventually become the bottleneck.
 
 In order to solve this, Akka Cluster Sharding allows distributing Actors across the cluster responsible for managing the state of a especific database entitiy (given a hashing function). With the aid of a single-thread illusion, we can cache the entities in-memory without the risk of desyncronizing with the database, leading to strong consistency. This is great as most applications are read-heavy as opposed to write-heavy.
 

@@ -4,7 +4,7 @@
 #+ROAM_ALIAS:
 #+HUGO_DRAFT: true
 
-* Asserting asyncronous task
+* Asserting asynchronous task
 
 Sometimes ~CountdownLatch~ is not possible, leading to ~Thread.sleep(...)~ that is not ideal as it blocks the system longer than required.
 As an alternative, follows a snippet that implements a pooling mechanism. Ideally, opt for CountdownLatch.

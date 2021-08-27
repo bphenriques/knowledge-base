@@ -3,12 +3,14 @@
 #+HUGO_TAGS: akka
 #+ROAM_ALIAS:
 
+How to test actors in Akka.
+
 * Test Actor Ref
 
-Syncronous and ideal for white-box testing as we can change the internal state.
+Synchronous and ideal for white-box testing as we can change the internal state.
 
 * Test Probes
 
-Black-box testing and then verify if expecific messages were sent (and other assertions).
+Black-box testing and then verify if specific messages were sent (and other assertions).
 
 (black box is always better :) )

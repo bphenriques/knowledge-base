@@ -5,9 +5,7 @@
 
 * Intro
 
-Context: Paralellize work by creating additional actors in order to solve bottlenecks.
-
-Router routes messages to destination actors called routees that can process messages in paralell to improve throughput. The way routing is done may be configured to fit the use-case.
+In Akka, Router routes messages to destination [[file:akka_actors.org][Akka Actors]] called routees that can process messages in parallel to improve throughput. The way routing is done may be configured to fit the use-case.
 
 * Routing Strategies
 
@@ -16,7 +14,7 @@ Determines how router routes to its routees.
 - ~RandomRoutingLogic~: Pure random and fast. May be unbalanced.
 - ~RoundRobinRoutingLogic~: Take turns. Is more fair and distributed. But depending on the messages, some actors may have more work than others.
 - ~SmallestMailboxRoutingLogic~: Tracks the size of the mailbox.
-- ~ConsistentHashingRoutingLogic~: Messages go to a especific routee.
+- ~ConsistentHashingRoutingLogic~: Messages go to a specific routee.
 - ~BroadcastRoutingLogic~: Sends to all routees.
 - ~ScatterGatherFirstCompletedRoutingLogic~: Similar to broadcast but looks for the first response. This optimizes speed as the picks the first one.
 - ~TailChoppingRoutingLogic~: Similar to previous but delays a bit before sending to the next routee.

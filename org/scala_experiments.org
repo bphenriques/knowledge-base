@@ -1,7 +1,9 @@
 #+TITLE: Scala Experiments
 #+HUGO_SECTION: notes
-#+HUGO_TAGS: snippets
+#+HUGO_TAGS: scala data-structures
 #+ROAM_ALIAS:
+
+* Implementing ~Tree~
 
 #+begin_src scala :eval never-export
 sealed class Tree[T] {

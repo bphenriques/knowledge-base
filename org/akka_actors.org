@@ -77,3 +77,7 @@ Use tell when:
 - We do not care about the response.
 
 Neverthless, when using the ask operator, always ue pipeTo within the actor system to avoid breaking the single thread illusion.
+
+* Testing
+
+See [[file:akka_testing.org][Akka Testing]].

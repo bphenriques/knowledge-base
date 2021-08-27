@@ -3,6 +3,8 @@
 #+HUGO_TAGS: jvm json
 #+ROAM_ALIAS:
 
+Jackson is a library to serialize and deserialize JSON in the JVM world.
+
 * Sane Settings
 
 After working a while with this I want to register these sane defaults:

@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" dir="{{ .Site.Language.LanguageDirection | default "ltr" }}">
 <head>
-  {{ partial "docs/html-head" . }}
+  {{ partial "html-head" . }}
 </head>
 <body dir="{{ .Site.Language.LanguageDirection | default "ltr" }}">
   <input type="checkbox" class="hidden toggle" id="menu-control" />
   <input type="checkbox" class="hidden toggle" id="toc-control" />
   <main class="container flex">
-    <aside class="book-menu">
-      <div class="book-menu-content">
-        {{ template "menu" . }} <!-- Left menu Content -->
+    <aside class="menu">
+      <div class="menu-content">
+        {{ partial "menu" . }} <!-- Left menu Content -->
       </div>
     </aside>
 
-    <div class="book-page">
-      <header class="book-header">
+    <div class="page">
+      <header class="page-header">
         {{ template "header" . }} <!-- Mobile layout header -->
       </header>
 
       {{ template "main" . }} <!-- Page Content -->
 
-      <footer class="book-footer">
+      <footer class="page-footer">
         {{ template "footer" . }} <!-- Footer under page content -->
       </footer>
 
-      <label for="menu-control" class="hidden book-menu-overlay"></label>
+      <label for="menu-control" class="hidden menu-overlay"></label>
     </div>
 
     {{ if (and .File (default true (default .Site.Params.ToC .Params.ToC))) }}
-    <aside class="book-toc">
-      <div class="book-toc-content">
+    <aside class="toc">
+      <div class="toc-content">
         {{ template "toc" . }} <!-- Table of Contents -->
       </div>
     </aside>
@@ -38,12 +38,8 @@
 </body>
 </html>
 
-{{ define "menu" }}
-  {{ partial "docs/menu" . }}
-{{ end }}
-
 {{ define "header" }}
-  {{ partial "docs/header" . }}
+  {{ partial "header" . }}
 
   {{ if default true (default .Site.Params.ToC .Params.ToC) }}
   <aside class="hidden clearfix">
@@ -53,7 +49,7 @@
 {{ end }}
 
 {{ define "footer" }}
-  {{ partial "docs/footer" . }}
+  {{ partial "footer" . }}
 {{ end }}
 
 {{ define "main" }}
@@ -63,5 +59,5 @@
 {{ end }}
 
 {{ define "toc" }}
-  {{ partial "docs/toc" . }}
+  {{ partial "toc" . }}
 {{ end }}

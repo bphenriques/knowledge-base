@@ -3,13 +3,13 @@
   {{ range $taxonomy, $_ := .Site.Taxonomies }}
     {{ with $terms := $.GetTerms $taxonomy }}
       {{ range $n, $term := $terms }}
-        {{ partial "docs/tag-badge.html" $term.Title }}
+        {{ partial "component/tag-badge" $term.Title }}
       {{- end }}
     {{ end }}
   {{ end }}
 </div>
 
-{{ partial "backlinks" . }}
+{{ partial "component/backlinks" . }}
 
 <p class="toc-title">Table Of Contents</p>
 {{ .TableOfContents }}

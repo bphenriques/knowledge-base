@@ -1,0 +1,12 @@
+{{ if .File }}
+  {{ if .Date }}
+    <div class="flex align-center">
+        <img src="{{ "svg/calendar.svg" | relURL }}" class="icon" alt="Calendar" />
+        <span>{{ partial "util/date" (dict "Date" .Date "Format" $.Site.Params.DateFormat) }}
+        {{ if .Lastmod -}}
+            (Last updated on {{ partial "util/date" (dict "Date" .Lastmod "Format" $.Site.Params.DateFormat) }})
+        {{- end -}}
+        </span>
+    </div>
+  {{ end }}
+{{ end }}

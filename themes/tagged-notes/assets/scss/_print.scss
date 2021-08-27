@@ -1,13 +1,13 @@
 @media print {
-  .book-menu,
-  .book-footer,
+  .menu,
+  .page-footer,
   .backlinks,
-  .book-toc {
+  .toc {
     display: none;
   }
 
-  .book-header,
-  .book-header aside {
+  .page-header,
+  .page-header aside {
     display: block;
   }
 

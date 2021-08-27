@@ -1,11 +1,11 @@
-<article class="book-post">
+<article>
   <a class="list-item" href="{{ .RelPermalink }}">
     <h3 class="list-item-title">{{ .Title }}</h3>
     <div class="list-item-metadata">
       <div class="list-item-tags">
         {{ range $taxonomy, $_ := .Site.Taxonomies }}
           {{ range $n, $term := $.GetTerms $taxonomy }}
-            {{ partial "docs/tag-badge.html" $term.Title }}
+            {{ partial "component/tag-badge" $term.Title }}
           {{- end }}
         {{ end }}
       </div>

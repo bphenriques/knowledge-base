@@ -1,6 +1,6 @@
 <nav>
-    {{ partial "docs/brand" . }}
-    {{ partial "docs/search" . }}
+    {{ partial "component/brand" . }}
+    {{ partial "component/search" . }}
 
     {{ if (gt (where .Site.RegularPages "Section" "blog" | len) 0) }}
     <p><a class="menu-shortcut-link" href="{{ "/blog" | relURL }}">Blog Posts</a></p>-->
@@ -11,7 +11,7 @@
     <p class="menu-tags-title"><b>Tags</b></p>
     <ul>
         {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
-        <li>{{ partial "docs/tag-circle-badge.html" $name }}</li>
+        <li>{{ partial "component/tag-badge-dot" $name }}</li>
         {{ end }}
     </ul>
 </nav>

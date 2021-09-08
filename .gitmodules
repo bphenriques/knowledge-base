@@ -1,0 +1,3 @@
+[submodule "themes/tagged-digital-garden"]
+	path = themes/tagged-digital-garden
+	url = git@github.com:bphenriques/tagged-digital-garden-hugo-theme.git

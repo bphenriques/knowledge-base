@@ -1,19 +1,29 @@
-#+HUGO_BASE_DIR: ..
-#+HUGO_SECTION: .
-#+HUGO_WEIGHT: 100
-#+TITLE: Introduction
+#+TITLE: Home
+#+HUGO_SECTION:
+#+HUGO_TAGS:
+#+hugo_custom_front_matter: :ContentMenu false
 
-Hi! 👋 Welcome to my Wiki!
+* Hi! 🌱
 
-* About this Wiki
+Welcome to my [[file:digital_garden.org][digital garden]]! A frictionless writing space where I collect, arrange, and connect my thoughts as I explore
+new or existing topics.
 
-Here you will find some notes I keep as a reference and some bits of knowledge I find interesting to share! It complements my thinking process, therefore, some of these notes may be raw or incomplete as I work on them.	
+Learning can be hard. Having incremental notes and linking them is a great way to turn insights into knowledge, and with
+experience, make good use of it!
 
-* Contributing	
+#+ATTR_HTML: :alt Connecting insights dots leads to building knowledge
+[[file:from-data-to-knowledge.png]]
 
-Let me know if you find a mistake or if you have suggestions! This Wiki is open-source and available at [[https://github.com/bphenriques/knowledge-base][bphenriques/knowledge-base]].	
+* Navigation
 
-* Contact Information	
+You can explore all the notes in this digital garden using the following graph:
 
-You can find my contacts on my homepage [[https://bphenriques.github.io][bphenriques.github.io]].
+#+begin_export html
+{{< graph >}}
+#+end_export
 
+* Contributing
+
+It is an extension of my thinking process, therefore, some of these notes may be raw or incomplete as I explore them. Let me know if you find mistakes or just want to say hi!
+
+This wiki is open-source and available on [[https://github.com/bphenriques/knowledge-base][Github]].

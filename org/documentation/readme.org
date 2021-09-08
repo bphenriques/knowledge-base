@@ -1,9 +1,0 @@
-#+TITLE: Readme
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: docs
-
-* Several examples
-
-- https://github.com/matiassingers/awesome-readme
-
-Like minimalistic versions as they require less maintenance (hmmm :thinking-face:)

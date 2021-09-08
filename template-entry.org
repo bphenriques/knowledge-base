@@ -1,4 +1,3 @@
 #+TITLE: ${title}
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: %(org-hugo-slug (org-capture-get :knowledge-base-section))
+#+HUGO_TAGS: 
 #+ROAM_ALIAS:

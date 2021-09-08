@@ -1,6 +1,0 @@
-#+TITLE: Technical Writing
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: learning
-#+ROAM_ALIAS:
-
-https://developers.google.com/tech-writing/overview

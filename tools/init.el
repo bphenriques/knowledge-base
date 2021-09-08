@@ -2,7 +2,7 @@
 ;; Authors: Bruno Henriques <4727729+bphenriques@users.noreply.github.com>
 
 ;;; Commentary:
-;;; - Requires KNOWLEDGE_BASE_ORG_SOURCE environment variable
+;;; - Requires KNOWLEDGE_BASE_DIR environment variable
 ;;
 ;; Notes:
 ;; * This is not a package.
@@ -15,8 +15,8 @@
  make-backup-files nil                                        ;; Disable "<file>~" backups.
 )
 
-(defconst knowledge-base-org-files
-  (let* ((env-key "KNOWLEDGE_BASE_ORG_SRC")
+(defconst knowledge-base-dir
+  (let* ((env-key "KNOWLEDGE_BASE_DIR")
          (env-value (getenv env-key)))
     (if (and env-value (file-directory-p env-value))
         env-value
@@ -49,19 +49,21 @@
 (use-package ox-hugo
   :straight (:type git :host github :repo "kaushalmodi/ox-hugo"))
 
+(setf org-hugo-base-dir knowledge-base-dir)
+
 ;;;
 ;;; Public functions
 ;;;
 
 (defun build/export-all ()
   "Export all org-files (including nested) under knowledge-base-org-files."
-
-  (dolist (org-file (directory-files-recursively knowledge-base-org-files "\.org$"))
-    (with-current-buffer (find-file org-file)
-      (message (format "[build] Exporting %s" org-file))
-      (org-hugo-export-wim-to-md :all-subtrees nil nil nil)))
-
-  (message "Done!"))
+  (let ((search-path (concat (file-name-as-directory knowledge-base-dir) "org/")))
+    (message (format "[build] Looking for files at %s" search-path))
+    (dolist (org-file (directory-files-recursively search-path "\.org$"))
+      (with-current-buffer (find-file org-file)
+			   (message (format "[build] Exporting %s" org-file))
+			   (org-hugo-export-wim-to-md :all-subtrees nil nil nil)))
+    (message "Done!")))
 
 (provide 'build/export-all)
 

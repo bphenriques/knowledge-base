@@ -1,0 +1,83 @@
+#+TITLE: Akka Actors
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: akka
+
+* Handling Messages Asyncronously
+
+Blocking threads inside the actors creates contention therefore the handling of the messages must happen in a async fashion, including any DB writes and DB reads when starting the actor. For example, using interfaces such as ~Future[T]~. However this may lead to concurrency within the actor itself removing the ilusion of a single thread. This means that messages must be /stash/ until other operations complete.
+
+In essence the actor has 3 states:
+- Loading - Load the state from the DB.
+- Running - Regular behavior.
+- Waiting.
+
+Question: If DB fails, then it is recommended to throw the exception leading to a restart of the Actor that in turn will re-read the state from the DB. So:
+- It is explained that the stash is not lost, how?
+- What happens if there is a persistent issue in the DB? Will there be a loop?
+
+* Akka Actor Lifecycle
+
+Can be stopped by himself or by others.
+
+Lifecycle (without faults):
+#+BEGIN_SRC
+hook:preStart() -> started -[stop]-> stopped -> hook:postStop() -> terminated
+#+END_SRC
+
+The actor is created assyncronously and available right away through the ~ActorRef~.
+
+Stopping an actor will:
+- Finishes the processing the current message.
+- Suspends message processing.
+- *Stop its children* - See [[file:actor-model.org][Actor Model]].
+- Waits for their termination confirmations and then stops himself.
+
+How to stop: ~PoisonPill~ (~context.stop(self())~) and ~actorRef ! Kill~ messages (throw ~ActorKilledException~). They are *not* appropriate to perform a cleanup before shutting down as the Actor does not "see" those messages (it is handled internally). It is best to use a dedicated message such as ~StopMeGraciouslyMessage~.
+
+** Monitor
+
+/Dead Watch/ allows monitoring another actor's termination (regular ~Terminated~ message in the ~receive~ block).
+
+* Failure Handling
+
+Akka deals with failures at the level of the individual actor (bulkheading has it only affects that actor).
+
+Does not throw the message back to the sender (b/c the sender does not know how to handle it). Instead the error is sent to a responsibile entity (e.g., "Manager") that determines the required steps to recover.
+
+When an actor fails, Akka provides two configurable strategies:
+- /OneForOneStrategy/: Only the faulty child is affected.
+- /AllForOneStrategy/: All children are affected by one faulty child.
+
+Both are configured with a ~type Decider = PartialFunction[Throwable, Directive]~. If not defined a directive, then the parent is consired faulty. Where ~Directive~:
+- Resume: Resume message processing. Use if the state remains valid.
+- Restart: Start a new actor in its place and resume, however all childs are stopped (by default unless ~preRestart~ hook is changed). It supports max number of retries and within a time limit.
+- Stop.
+- Escalate: Delegate the decision to the supervisor's parent.
+
+By default it is /OneForOneStrategy/ with some directives that are too specific to group here and we can check the documentation. In short, by default, the actor will be restarted. In any case, message processing is suspended.
+- All descendants of the actor are suspended.
+- The actor's parent handles the failure.
+
+Proper tuning leads to a self-healing system. Some exceptions are worth stopping the actor while others are worth recovering.
+
+** Full Lifecycle
+
+[[file:_20201012_203109screenshot.png]]
+
+* Ask vs Tell
+
+Ask: ~actorRef ? Message~
+Tell: ~actorRef ! Message~
+
+Use Ask when:
+- Bridging non-actor code to actor-code (e.g., bridging with HTTP controllers ?).
+- We are expecting a response within a timeout. In this case we use ~actorRef ? Message pipeTo self~ which in turn will will handle the response, e.g., ~val receive: Receive = { case MessageResponse => stuff }~.
+
+Use tell when:
+- We do not care about the response.
+
+Neverthless, when using the ask operator, always ue pipeTo within the actor system to avoid breaking the single thread illusion.
+
+* Testing
+
+See [[file:akka_testing.org][Akka Testing]].

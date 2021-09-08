@@ -1,0 +1,7 @@
+#+TITLE: Thinking Tools
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: work
+#+ROAM_ALIAS:
+
+Follows some interesting resources:
+- https://untools.co/

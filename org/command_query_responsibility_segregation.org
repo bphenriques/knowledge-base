@@ -1,0 +1,94 @@
+#+TITLE: Command Query Responsibility Segregation (CQRS)
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: system-design
+#+ROAM_ALIAS:
+
+Command Query Responsibility Segregation (CQRS) is a architectural pattern that aims to split applications between two models: ~Command Model~ (writes) and ~Query Model~ (reads). Some use cases:
+- Auditing (e.g., banking, accounting)
+- High Scalability
+- High Resiliency
+
+This separation allows both concerns to evolve separately depending on the requirements. For example, some Aggregate Roots are a better fit for write models but do not fit other read models.
+
+This pattern is often combined with [[file:event_sourcing_es_es.org][Event Sourcing (ES)]].
+
+Eventually consistent by design which always present but now is explicit about it.
+
+* How:
+
+Application is split between two models:
+- *Command Model*: Handles requests to change the state of the application and decide its side-effects, e.g., events or new commands.
+- *Query Model* (or View Model or Projection): Focus on data and not on behavior and are modelled to satisfy a very specific need, therefore it is usual having multiple of them.
+
+#+BEGIN_SRC
+API -Queries-> Read Model <- Data Store
+API -Commands-> Write Model -> Data Store
+#+END_SRC
+
+Separate process consumes the written events and persists on a denormalized event store, which is called /Projection/ used by the read model like so:
+
+#+BEGIN_SRC
+API -Queries-> Read Model <- Data Store
+API -Commands-> Write Model -> Data Store
+
+Data Store -Events-> Denormalized Data Store (with Projections)
+#+END_SRC
+
+The Data Store is usually denormalized to make sure that queries are faster.
+
+* Summary
+
+- Write model are optimized for writes
+- Read models are optimized for reads
+- Read and write models are decoupled which implies that they may use different data stores.
+- New /Projections/ are easy in CQRD/ES.
+- New projections are retroactive because we have the fully history.
+
+* Models as Microservices
+
+- Write Model can become a microservice
+- Read Model can become a microservice
+
+This assumes that it uses different databases (as expected from proper microservices). Otherwise the database may become the bottleneck.
+
+Better yet: Each projection in its own Microservice. $$$$$$$$$$$$ and maintentance.
+
+
+* Consistency
+
+Simple (without ES) has the same consistency as non-CQRS systems.
+CQRD/ES can have different consistency models for the read or the write models.
+
+** Write Model
+
+Strong is often important here because we want that those write be based on the current state. This consistency is usually implemented through locks or sharding in a more reactive way.
+
+** Read Model
+
+Pure reads are never consistent as they are often working with stale data. These reads do not need strong consistency.
+
+* Availability
+
+** Write Model
+
+Due to the higher consistency, availability is lower.
+
+** Read Model
+
+Due to the eventual consistency, we can leverage technicques to increase availability.
+
+
+* Cost
+
+CQRD/ES is often criticized for being more complex but it can be simpler.
+Without this, models are more bloated, complex and rigid.
+CQRD allow smaller models that are easier to modify and understand.
+Eventual consistency in CQRS can be isolated to where it is necessary.
+
+
+- More databases to maintain
+- More classes/objects to maintain
+- Support older versions can be challenging
+- Additinonal storage
+- Data duplication may result in desyncs that often solved by rebuilding project - Question: *when* ? Do we have monitoring over this? Can this be automatic? How often does this occur?
+- UI must be designed to be eventually consistent (which was always there in the past, it is now explicit)

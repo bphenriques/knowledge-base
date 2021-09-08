@@ -1,8 +1,0 @@
-#+TITLE: Amdah's Law
-#+SETUPFILE: ./_index.org
-#+ROAM_TAGS: concurrency
-#+ROAM_ALIAS:
-
-In short, contention limits paralelization.
-
-Defines the maximum improvement gaines by parallel procesing. Improvements from paralelization are limited to the code that can be paralelized. Contention limits such paralism reducing the advantages of the improvements. Does not matter as long as the contention exist.

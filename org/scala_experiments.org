@@ -1,0 +1,29 @@
+#+TITLE: Scala Experiments
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: scala data-structures
+#+ROAM_ALIAS:
+
+* Implementing ~Tree~
+
+#+begin_src scala :eval never-export
+sealed class Tree[T] {
+  def stream(): LazyList[T] = this match {
+    case Leaf(value) => LazyList(value)
+    case Branch(left, right) => left.stream() #::: right.stream()
+  }
+}
+case class Branch[T](left: Tree[T], right: Tree[T]) extends Tree[T]
+case class Leaf[T](value: T) extends Tree[T]
+
+val tree =
+  Branch(
+    Leaf(1),
+    Branch(
+      Leaf(2),
+      Leaf(3)
+    )
+  )
+
+val nextInOrder = tree.stream().dropWhile(_ != 2).drop(1).headOption
+println(nextInOrder)
+#+end_src

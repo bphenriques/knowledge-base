@@ -1,0 +1,8 @@
+#+TITLE: Saga
+#+HUGO_SECTION: notes
+#+HUGO_TAGS: system-design
+#+ROAM_ALIAS:
+
+Applied in microservices to manage complex workflows that may fail and need to be rolledback.
+
+This document requires more details.

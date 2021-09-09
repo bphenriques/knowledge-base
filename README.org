@@ -44,6 +44,6 @@ There are several personal Wikis made by other people that inspired me to make o
 
 * Theme
 
-The theme is [[https://github.com/bphenriques/tagged-notes-hugo-theme][Tagged Digital Garden]], a theme heavily based on [[https://github.com/alex-shpak/hugo-book][Hugo Book Theme]] with a twist of [[https://github.com/mrmartineau/gatsby-theme-code-notes][Gatsby Theme Code Nodes]] and [[https://www.maggiedelano.com/garden/][Maggie Delano's digital garden]].
+The theme is [[https://github.com/bphenriques/explorer-hugo-theme][Explorer]], a theme made by me heavily based on [[https://github.com/alex-shpak/hugo-book][Hugo Book Theme]] with a twist of [[https://github.com/mrmartineau/gatsby-theme-code-notes][Gatsby Theme Code Nodes]] and [[https://www.maggiedelano.com/garden/][Maggie Delano's digital garden]].
 
 I am no front-end expert so I look forward for your help improving the theme if you like it!

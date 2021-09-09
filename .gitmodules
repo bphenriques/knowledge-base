@@ -1,0 +1,3 @@
+[submodule "themes/explorer"]
+	path = themes/explorer
+	url = git@github.com:bphenriques/explorer-hugo-theme.git

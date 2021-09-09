@@ -28,11 +28,15 @@ build-site:
 .PHONY: build
 build: build-content build-site
 
+.PHONY: deploy
+deploy: build-content normalize-rel-urls build-site
+
 # Fixes bad URLs when the baseURL (this case) is not the root URL.
 # There is the option to change the template but I think the solution shouldn't be changing the layout as it is seems to
 # be a bug within HUGO.
 # https://github.com/kaushalmodi/ox-hugo/issues/460
-deploy: build
+.PHONY: normalize-rel-urls
+normalize-rel-urls:
 	find $(BASE_DIR)/content -type f -exec sed -i '' -e 's|figure src="/ox-hugo/|figure src="ox-hugo/|g' {} \;
 
 update-sub-modules:

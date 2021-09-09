@@ -36,7 +36,7 @@ jobs:
         run: rm static/.gitignore
 
       - name: Build
-        run: make build
+        run: make deploy
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

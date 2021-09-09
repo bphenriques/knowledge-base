@@ -1,7 +1,7 @@
-BASE_DIR=$(shell pwd)
-EMACS_BUILD_SRC=$(shell pwd)/tools
-EMACS_BUILD_DIR=/tmp/knowledge-base-home-build
-BASE_URL=https://bphenriques.github.io/knowledge-base
+BASE_DIR := $(shell pwd)
+EMACS_BUILD_SRC := $(shell pwd)/tools
+EMACS_BUILD_DIR := /tmp/knowledge-base-home-build
+BASE_URL := https://bphenriques.github.io/knowledge-base
 
 all: clean build-content serve
 
@@ -27,6 +27,13 @@ build-site:
 
 .PHONY: build
 build: build-content build-site
+
+# Fixes bad URLs when the baseURL (this case) is not the root URL.
+# There is the option to change the template but I think the solution shouldn't be changing the layout as it is seems to
+# be a bug within HUGO.
+# https://github.com/kaushalmodi/ox-hugo/issues/460
+deploy: build
+	find $(BASE_DIR)/content -type f -exec sed -i '' -e 's|figure src="/ox-hugo/|figure src="ox-hugo/|g' {} \;
 
 update-sub-modules:
 	git submodule update --init --recursive

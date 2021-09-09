@@ -32,12 +32,11 @@ jobs:
         with:
           version: ${{ env.EMACS_VERSION }}
 
+      - name: Force ox-hugo publish
+        run: rm static/.gitignore
+
       - name: Build
         run: make build
-
-      - name: Force ox-hugo publish
-        working-directory: public
-        run: git add --force ox-hugo
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

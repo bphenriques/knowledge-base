@@ -1,4 +1,4 @@
-theme = "tagged-digital-garden"
+theme = "explorer"
 title = "Bruno Henriques's Digital Garden 🌱"
 
 [markup.goldmark.renderer]

@@ -33,7 +33,11 @@ jobs:
           version: ${{ env.EMACS_VERSION }}
 
       - name: Build
-        run: make build 
+        run: make build
+
+      - name: Force ox-hugo publish
+        working-directory: public
+        run: git add --force ox-hugo
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -41,4 +45,3 @@ jobs:
           personal_token: ${{ secrets.DEPLOY_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages
-

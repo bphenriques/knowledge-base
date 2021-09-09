@@ -1,6 +1,5 @@
 theme = "tagged-digital-garden"
 title = "Bruno Henriques's Digital Garden 🌱"
-canonifyURLs = true
 
 [markup.goldmark.renderer]
   unsafe = true

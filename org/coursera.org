@@ -1,7 +1,0 @@
-#+TITLE: Coursera
-#+HUGO_SECTION: notes
-#+HUGO_TAGS: learning
-#+ROAM_ALIAS:
-
-Interested in:
-- https://www.coursera.org/learn/learning-how-to-learn

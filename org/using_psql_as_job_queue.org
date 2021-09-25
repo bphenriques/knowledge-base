@@ -1,16 +1,8 @@
 #+TITLE: Using PSQL as job queue
 #+HUGO_SECTION: posts
 #+HUGO_TAGS: psql queue
-#+ROAM_ALIAS:
-#+HUGO_DRAFT: true
 
-Use-case: Process event queue stored in PSQL:
-1. Dequeue ~size~ item.
-2. Process each item.
-
-As expected, resiliency and concurrent systems leads to devious details where the resolution largely depends on the use-case:
-- Multiple nodes accessing the same queue.
-- What happens if the node crashes while it processes the item. Will the event loss?
+Use-case: Fault Tolerant event queue in Postgres.
 
 Consider the following table:
 #+BEGIN_SRC SQL
@@ -37,16 +29,7 @@ WHERE id IN (
 RETURNING *
 #+END_SRC
 
-- One can simplify this to solely fetch one element at at a time but this reduces the connections done in the DB. It depends on the use-case.
-
 Breaking down:
 - ~UPDATE event_queue SET dequeued_at = current_timestamp + ~FOR UPDATE SKIP LOCKED~ - Guarantees that multiple nodes reading N elements from the queue will have disjoint sets.
-- ~WHERE dequeued_at IS NULL~ - Condition to check if the item was dequeued.
-- ~current_timestamp >= (dequeued_at + interval '1 second' second * :seconds)~ - Guarantees that multiple nodes will not process the same elements.
-
-
-Alternatives:
-- Just delete the entity, however it incurs the risk if processing the element fails leading to the loss.
-
-References:
--
+- ~WHERE dequeued_at IS NULL~ - Check if the item was already or not dequeued.
+- ~current_timestamp >= (dequeued_at + interval '1 second' second * :seconds)~ - Guarantees that multiple nodes will not process the same elements. Does ~SKIP LOCKED~ already safe-guards this?

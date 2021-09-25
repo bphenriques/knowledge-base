@@ -12,5 +12,4 @@
 
 * Balancing Work/Life
 
-There is much in life beyond working. Follows an interesting article that contrasts with the tendency:
--  https://1x.engineer/
+There is much in life beyond working. Follows an interesting [[https://1x.engineer/][article]] that contrasts with the tendency.

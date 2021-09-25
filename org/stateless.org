@@ -3,11 +3,8 @@
 #+HUGO_TAGS: system-design
 #+ROAM_ALIAS:
 
-- Requests are self-contained and have all the information required to be completed.
-- Requests can be processed on any instance of the application.
+Stateless systems means that:
+- The system contains all the required information to complete requests.
+- Requests can be processed on any instance of of the application.
 
-
-Some "Stateless" systems are not trully stateless as the state is contained in a database:
-- Required to have strong consistency (the single source of truth).
-- However this means that the database may become the bottleneck.
-- The database also represents the single point of failure which may lead to an unresponsive systems.
+Note that, some "stateless" systems can't be considered as such as the state is contained in a database.

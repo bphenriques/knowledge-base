@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578e0
+:END:
 #+TITLE: Reactive Streams
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 Components of a Reactive Stream:
 - *Publisher*: Publishes data to stream
@@ -9,4 +12,4 @@ Components of a Reactive Stream:
 - *Processor*: Acts as both a publisher and a subscriber, obeying the contract for each.
 - *Subscription*: Connects a subscriber to a publisher to initiate a message flow.
 
-[[file:./akka_streams.org][Akka Streams]] is built on these concepts but provides a different API (albeit is possible to bridge).
+[[id:2fa03d4f-948e-4a6e-a38b-178456b578b7][Akka Streams]] is built on these concepts but provides a different API (albeit is possible to bridge).

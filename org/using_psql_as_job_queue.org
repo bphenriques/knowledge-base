@@ -1,4 +1,8 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578e8
+:END:
 #+TITLE: Using PSQL as job queue
+#+filetags: psql queue
 #+HUGO_SECTION: posts
 #+HUGO_TAGS: psql queue
 

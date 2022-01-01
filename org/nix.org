@@ -1,6 +1,9 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d9
+:END:
 #+HUGO_TAGS: uncategorized
+#+filetags: uncategorized
 #+HUGO_SECTION: notes
-#+ROAM_ALIAS:
 #+TITLE: Nix
 
 [[https://nixos.org/][Nix]] is a declarative language aiming produce reproducible systems. In can be used to produce ~dotfiles~.

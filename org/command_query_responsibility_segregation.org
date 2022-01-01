@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       3fa03d4f-948e-4a6e-a38b-178456b578c1
+:END:
 #+TITLE: Command Query Responsibility Segregation (CQRS)
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 Command Query Responsibility Segregation (CQRS) is a architectural pattern that aims to split applications between two models: ~Command Model~ (writes) and ~Query Model~ (reads). Some use cases:
 - Auditing (e.g., banking, accounting)
@@ -10,7 +13,7 @@ Command Query Responsibility Segregation (CQRS) is a architectural pattern that 
 
 This separation allows both concerns to evolve separately depending on the requirements. For example, some Aggregate Roots are a better fit for write models but do not fit other read models.
 
-This pattern is often combined with [[file:event_sourcing_es_es.org][Event Sourcing (ES)]].
+This pattern is often combined with [[id:2fa03d4f-948e-4a6e-a38b-178456b578c7][Event Sourcing (ES)]].
 
 Eventually consistent by design which always present but now is explicit about it.
 

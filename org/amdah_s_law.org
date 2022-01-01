@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578b9
+:END:
 #+TITLE: Amdah's Law
+#+filetags: concurrency
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: concurrency
-#+ROAM_ALIAS:
 
 In short, contention limits paralelization.
 

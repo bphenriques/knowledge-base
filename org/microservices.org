@@ -1,17 +1,19 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d7
+:END:
 #+TITLE: Microservices
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
-Subset of [[file:service_oriented_architecture_soa.org][Service Oriented Architecture (SOA)]] where each service is deployed separately:
+Subset of Service Oriented Architecture (SOA) where each service is deployed separately:
 - Microservices can be physically separated and independently deployed.
 - Each have its own data store.
 - Independent and self governing.
-- Communication is syncronous or asyncronous (e.g., through [[file:~/Documents/repos/knowledge-base/org/messaging-systems/messaging-systems-overview.org][messaging systems]]).
+- Communication is syncronous or asyncronous (e.g., through messaging systems).
 - Loose coupling between components (more or less by experience but that is design flaw likely :thinking:).
 - Shorter development and release cycles.
 - Each scale independently (either through physical or virtual machines).
-
 
 * Advantages
 
@@ -32,7 +34,7 @@ Mention that cross team coordination become less necessary. That is true but oft
 
 * Designing one
 
-Business domains are typically large and complicated. Several ideas, actions and rules interact with one another in complex ways. A good approach on understanding such complex systems and how to model them is through a process named [[file:domain_driven_design.org][Domain Driven Design]].
+Business domains are typically large and complicated. Several ideas, actions and rules interact with one another in complex ways. A good approach on understanding such complex systems and how to model them is through a process named [[id:2fa03d4f-948e-4a6e-a38b-178456b578c5][Domain Driven Design]].
 
 A correct separation of concerns (i.e., clear and single responsibilities) leads to smoother workflows. Awkarwdness when modelling may indicate lack of understanding of the domain.
 
@@ -108,9 +110,6 @@ How:
 - Avoid direct, syncronous dependencies on external services.
 
 ** API Gateway Services
-:PROPERTIES:
-:ID:       c5b773a4-a9bd-4260-9ed0-5aad137619d9
-:END:
 
 Microservices can lead to complexity in the API. How can we manage complex APIs that access many microservices?
 

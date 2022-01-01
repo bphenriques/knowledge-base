@@ -1,12 +1,12 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c3
+:END:
 #+TITLE: Consistency And Availability
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 * Scalability
-:PROPERTIES:
-:ID:       cc71a1d5-8e8e-4878-b525-5cd6fbbbcbaf
-:END:
 
 It can meets increases in demand while remaining responsive.
 
@@ -53,8 +53,8 @@ Definition: Any two things that contend for a single limited resource and only o
 As the number of resources disputing for the resource, more time time it will take to finally free up the resources.
 
 See:
-- [[file:./amdah_s_law.org][Amdah's Law.]]
-- [[file:./gunther_s_universal_scalability_law.org][Gunther's Universal Scalability Law]]
+-[[id:2fa03d4f-948e-4a6e-a38b-178456b578b9][ Amdah's Law]]
+- [[id:2fa03d4f-948e-4a6e-a38b-178456b578d1][Gunther's Universal Scalability Law]]
 
 **** Coherence Delay
 
@@ -159,9 +159,6 @@ Careful choice of shard keys is important to maintain a good scalability.
 Sharding sacrifices availability. Once a shard goes down, there will be a period of time where it is unavailable and wil migrate to another node eventually.
 
 * CRDTs provide a availability solution based on async replication
-:PROPERTIES:
-:ID:       738479e3-c2ba-4b68-85bb-727568bcd610
-:END:
 
 Conflict-free Replicated Data
 

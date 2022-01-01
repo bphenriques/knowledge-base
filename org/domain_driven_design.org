@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c5
+:END:
 #+TITLE: Domain Driven Design
+#+filetags: system-design lightbend
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design lightbend
-#+ROAM_ALIAS:
 
 Approach on Software Development focused on the design of a shared Model understood by domain experts and by who implements it. Being a model, it means that it can be implemented in different ways, from diagrams to software.
 
@@ -11,7 +14,7 @@ Approach on Software Development focused on the design of a shared Model underst
 - *Domain*: Sphere of knowledge, influence or activity (aka /area/).
 - *Model*: System of abstractions that describes a part of the domain.
 - *Ubiquitous Language*: Common language between domain experts and developers.
-- *Aggregate*: Entity or group of entities bounded a root entity (Aggregate Root) that are always consistent (within a ACID transaction). Serves as a building block to implement ~Command~ within [[file:command_query_responsibility_segregation.org][CQRS]].
+- *Aggregate*: Entity or group of entities bounded a root entity (Aggregate Root) that are always consistent (within a ACID transaction). Serves as a building block to implement ~Command~ within [[id:3fa03d4f-948e-4a6e-a38b-178456b578c1][Command Query Responsibility Segregation (CQRS)]].
 
 * Strategies
 
@@ -26,7 +29,7 @@ Concepts may change from one context to another. It is important to be explicit 
 
 Maintain these boundaries strong allows smoother workflows.
 
-Typically [[file:microservices.org][Microservices]] are build around these contexts. Follows some tips to define them:
+Typically [[id:2fa03d4f-948e-4a6e-a38b-178456b578d7][Microservices]] are build around these contexts. Follows some tips to define them:
 - Define use-cases.
 - Look how different groups of people interact with a given entity.
 - Look for variations of the ubiquitous language as they may suggest a new context.
@@ -91,7 +94,7 @@ All of these represent the types of messages in a Reactive System and form the A
 
 - *Value objects*: Defined by its attribute. Immuatable. Messages in Reactive Systems are implemented as Value Objects.
 - *Entity*: Defined by an unique identity. The fields may change but not its identitity. Are the source of truth - Actors in Akka or Entitities in Lagom
-[[file:monolith.org][Monolith]]- *Aggregate*: Collection of domain objects bound to a root entity:
+[[id:2fa03d4f-948e-4a6e-a38b-178456b578d8][Monolith]] - *Aggregate*: Collection of domain objects bound to a root entity:
   - Example: Person (Aggregate Root), Name (Aggregate), Address (Aggregate).
   - Transactions should not span multiple aggregate roots.
   - The Aggregate Root may change between bounded contexts. Aggregate Root == Root Entity.

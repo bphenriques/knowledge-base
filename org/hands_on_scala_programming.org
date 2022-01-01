@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d2
+:END:
 #+TITLE: Hands-on Scala Programming
+#+filetags: scala
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: scala
-#+ROAM_ALIAS:
 
 Follows my notes on the Haoyi Li.'s book: "Hands-on Scala Programming" (https://www.handsonscala.com/).
 
@@ -20,9 +23,6 @@ As an experiment, I coding directly in the org-mode file using Babel to execute 
 * Exercises 3.5
 
 ** 3.63
-:PROPERTIES:
-:ID:       b96b1d1d-f7bf-4399-a38a-7f30def759f8
-:END:
 #+begin_quote
 “Write a short program that prints each number from 1 to 100 on a new line.
 

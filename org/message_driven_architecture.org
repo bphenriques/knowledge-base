@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d6
+:END:
 #+TITLE: Message Driven Architecture
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 Asyncronous and non-blocking. The sender does not actively wait for a response.
 

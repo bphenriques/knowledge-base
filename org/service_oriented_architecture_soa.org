@@ -1,8 +1,0 @@
-#+TITLE: Service Oriented Architecture (SOA)
-#+HUGO_SECTION: notes
-#+HUGO_TAGS: system-design
-#+ROAM_ALIAS: SOA
-
-* TODO REVIEW THESE NOTES - Architectural Patterns
-
-As opposed to [[file:monolith.org][Monolith]], services do not share a database and all access must be done through a API exposed by the service. They may be in the same process ([[file:monolith.org][Monolith]]) or may be separated ([[file:microservices.org][Microservices]]). This reduces coupling.

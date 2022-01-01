@@ -1,11 +1,14 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578b5
+:END:
 #+TITLE: Akka Router
+#+filetags: akka router
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: akka router
-#+ROAM_ALIAS:
 
 * Intro
 
-In Akka, Router routes messages to destination [[file:akka_actors.org][Akka Actors]] called routees that can process messages in parallel to improve throughput. The way routing is done may be configured to fit the use-case.
+In Akka, Router routes messages to destination [[id:2fa03d4f-948e-4a6e-a38b-178456b578b2][Akka Actors]] called routees that can process messages in parallel to improve throughput. The way routing is done may be configured to fit the use-case.
 
 * Routing Strategies
 

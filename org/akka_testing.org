@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578b8
+:END:
 #+TITLE: Akka Testing
+#+filetags: akka
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: akka
-#+ROAM_ALIAS:
 
 How to test actors in Akka.
 

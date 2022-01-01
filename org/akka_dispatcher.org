@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578b4
+:END:
 #+TITLE: Akka Dispatcher
+#+filetags: akka dispatcher
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: akka dispatcher
-#+ROAM_ALIAS:
 
 The engine of Akka as it decides when a actor should process messsages and when it must yield the thread for others. It means that dispatchers are in control of the thread time and of the threads themselves.
 

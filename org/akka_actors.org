@@ -1,4 +1,8 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578b2
+:END:
 #+TITLE: Akka Actors
+#+filetags: akka
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: akka
 
@@ -29,7 +33,7 @@ The actor is created assyncronously and available right away through the ~ActorR
 Stopping an actor will:
 - Finishes the processing the current message.
 - Suspends message processing.
-- *Stop its children* - See [[file:actor-model.org][Actor Model]].
+- *Stop its children* - See [[id:2fa03d4f-948e-4a6e-a38b-178456b578b0][Actor Model]].
 - Waits for their termination confirmations and then stops himself.
 
 How to stop: ~PoisonPill~ (~context.stop(self())~) and ~actorRef ! Kill~ messages (throw ~ActorKilledException~). They are *not* appropriate to perform a cleanup before shutting down as the Actor does not "see" those messages (it is handled internally). It is best to use a dedicated message such as ~StopMeGraciouslyMessage~.
@@ -80,4 +84,4 @@ Neverthless, when using the ask operator, always ue pipeTo within the actor syst
 
 * Testing
 
-See [[file:akka_testing.org][Akka Testing]].
+See [[id:2fa03d4f-948e-4a6e-a38b-178456b578b8][Akka Testing]].

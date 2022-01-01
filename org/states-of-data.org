@@ -1,4 +1,8 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578e6
+:END:
 #+TITLE: States of Data
+#+filetags: data
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: data
 

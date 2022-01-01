@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d4
+:END:
 #+TITLE: Jackson
+#+filetags: jvm json
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: jvm json
-#+ROAM_ALIAS:
 
 Jackson is a library to serialize and deserialize JSON in the JVM world.
 

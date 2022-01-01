@@ -1,9 +1,12 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c9
+:END:
 #+TITLE: Gossip Protocol
+#+filetags: protocols
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: protocols
-#+ROAM_ALIAS:
 
-Some of these text may be interwined with specifities of the Gossip Protocol within [[file:akka_cluster.org][Akka]].
+Some of these text may be interwined with specifities of the Gossip Protocol within [[id:2fa03d4f-948e-4a6e-a38b-178456b578b3][Akka Cluster]].
 
 Context: TODO
 
@@ -45,7 +48,7 @@ Unreachable (F) ----> Down (F) ------------
 
 When a new member is disconnected, it is marked as Unreachable until it recovers. If it is permanent, it is flagged as Down and it moves to state Removed and can never come back.
 
-Each node is monitored for failures by at most 5 nodes using [[file:heartbeat.org][Heartbeat]]. Once a member is deemed unreachable, then than information will be gossiped to the cluster. The member will remain like that until all nodes flag the node as ~Reachabe~ again.
+Each node is monitored for failures by at most 5 nodes using [[id:2fa03d4f-948e-4a6e-a38b-178456b578d3][Heartbeat]]. Once a member is deemed unreachable, then than information will be gossiped to the cluster. The member will remain like that until all nodes flag the node as ~Reachabe~ again.
 
 Reasons:
  - Crashes

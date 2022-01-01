@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c7
+:END:
 #+TITLE: Event Sourcing (ES)
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 Representing the application's state through the history of events that have happened in the past. Use cases:
 - *Audit Logs*: Build tailored reports from the event stream.
@@ -33,4 +36,4 @@ When we need to perform queries that involve several aggregate roots. Because en
 The model used to persist are not compatible with the model required during queries.
 #+end_quote
 
-See [[file:./command_query_responsibility_segregation.org][Command Query Responsibility Segregation]].
+See [[id:3fa03d4f-948e-4a6e-a38b-178456b578c1][Command Query Responsibility Segregation (CQRS)]].

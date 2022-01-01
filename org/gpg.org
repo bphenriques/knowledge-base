@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d0
+:END:
 #+TITLE: GPG
+#+filetags: security signing
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: security signing
-#+ROAM_ALIAS:
 
 Automatically export public key to a server:
 #+begin_src

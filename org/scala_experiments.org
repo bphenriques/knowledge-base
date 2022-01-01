@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578e2
+:END:
 #+TITLE: Scala Experiments
+#+filetags: scala data-structures
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: scala data-structures
-#+ROAM_ALIAS:
 
 * Implementing ~Tree~
 

@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d3
+:END:
 #+TITLE: Heartbeat
+#+filetags: protocols
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: protocols
-#+ROAM_ALIAS:
 
 In order to detect failures, systems communicate with one another to verify communication. If the communication is deemed broken, then
 the system may be considered as ~Unreachable~ depending on he heartbeat history and how the Failure Detection is configured. I.e., a single heartbeat does not mean that the member is ~Unreachable~.

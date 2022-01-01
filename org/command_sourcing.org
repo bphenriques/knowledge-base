@@ -1,11 +1,14 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c2
+:END:
 #+TITLE: Command Sourcing
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 * Command Sourcing
 
-Similar to [[file:event_sourcing_es_es.org][Event Sourcing (ES)]] but persists commands as opposed to events so:
+Similar to [[id:2fa03d4f-948e-4a6e-a38b-178456b578c7][Event Sourcing (ES)]] but persists commands as opposed to events so:
 1. Issue command
 2. Persist command
 3. Run asyncronous the command

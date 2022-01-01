@@ -1,13 +1,14 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c4
+:END:
 #+TITLE: Digital Garden
+#+filetags: note zettelkasten
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: note zettelkasten
-#+ROAM_ALIAS:
 
 Digital gardening is a different take to blogging as it shifts the focus of publishing content to a public to the writing.
 
-Like gardening, digital gardens start with raw notes and, as we tend to it, connections will start to emerge. But it is
-personal and informal. There is no pressure on having complete thoughts. You can always circle back to the notes you made
-in the past and refine them.
+Like gardening, digital gardens start with raw notes and, as we tend to it, connections will start to emerge. But it is personal and informal. There is no pressure on having complete thoughts. You can always circle back to the notes you made in the past and refine them.
 
 // TODO: Note on how entropy grows and correlate with gardening. See https://joelhooks.com/digital-garden
 

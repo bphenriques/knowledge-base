@@ -1,3 +1,0 @@
-#+TITLE: ${title}
-#+HUGO_TAGS: 
-#+ROAM_ALIAS:

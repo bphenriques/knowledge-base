@@ -1,11 +1,14 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b678b0
+:ROAM_EXCLUDE: t
+:END:
 #+TITLE: Home
 #+HUGO_SECTION:
-#+HUGO_TAGS:
 #+hugo_custom_front_matter: :ContentMenu false
 
 * Hi! 🌱
 
-Welcome to my [[file:digital_garden.org][digital garden]]! A frictionless writing space where I collect, arrange, and connect my thoughts as I explore
+Welcome to my [[id:2fa03d4f-948e-4a6e-a38b-178456b578c4][Digital Garden]]! A frictionless writing space where I collect, arrange, and connect my thoughts as I explore
 new or existing topics.
 
 Learning can be hard. Having incremental notes and linking them is a great way to turn insights into knowledge, and with

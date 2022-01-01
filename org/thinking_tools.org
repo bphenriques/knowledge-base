@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578e7
+:END:
 #+TITLE: Thinking Tools
+#+filetags: work
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: work
-#+ROAM_ALIAS:
 
 Follows some interesting resources:
 - https://untools.co/

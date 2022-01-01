@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578e4
+:END:
 #+TITLE: SLI/SLO
+#+filetags: system-design
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
-#+ROAM_ALIAS:
 
 - *Service Level Indicator (SLI)*: Performance indicator measured as a ratio of two numbers.
 - *Service Level Objective (SLO)*: Defines a target SLI as measurment of the systems's reliability.

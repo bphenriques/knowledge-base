@@ -1,13 +1,16 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578b1
+:END:
 #+TITLE: Akka
+#+filetags: akka
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: akka
-#+ROAM_ALIAS:
 
 * Akka
 
-Toolkit and runtime for building highly concurrent, distributed and fault tolerant message-driven application in the JVM. It can be used to build [[file:reactive_systems.org][Reactive Systems.]]
+Toolkit and runtime for building highly concurrent, distributed and fault tolerant message-driven application in the JVM. It can be used to build [[id:2fa03d4f-948e-4a6e-a38b-178456b578e1][Reactive Systems]].
 
 Proposes unified programming model for:
 - Simpler concurrency: single threaded illusion as each actor processes a message at a time (no need to locks or synchronization strategies).
-- Simpler distribution: is distributed by default (see more on [[file:akka_cluster.org][Akka Cluster]]).
+- Simpler distribution: is distributed by default (see more on [[id:2fa03d4f-948e-4a6e-a38b-178456b578b3][Akka Cluster]]).
 - Simpler fault tolerance: Decouples communication from failure handling.

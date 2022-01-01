@@ -1,4 +1,8 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578d5
+:END:
 #+TITLE: Kotlin
+#+filetags: snippets kotlin
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: snippets kotlin
 

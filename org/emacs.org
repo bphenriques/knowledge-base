@@ -1,7 +1,10 @@
+:PROPERTIES:
+:ID:       2fa03d4f-948e-4a6e-a38b-178456b578c6
+:END:
 #+TITLE: Emacs
+#+filetags: editors
 #+HUGO_SECTION: notes
 #+HUGO_TAGS: editors
-#+ROAM_ALIAS:
 
 * Org-Mode
 

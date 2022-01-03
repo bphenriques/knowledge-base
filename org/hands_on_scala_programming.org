@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Hands-on Scala Programming
 #+filetags: scala
-#+HUGO_TAGS: scala
 
 Follows my notes on the Haoyi Li.'s book: "Hands-on Scala Programming" (https://www.handsonscala.com/).
 

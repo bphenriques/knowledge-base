@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Microservices
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 Subset of Service Oriented Architecture (SOA) where each service is deployed separately:
 - Microservices can be physically separated and independently deployed.

@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Akka Sharding
 #+filetags: akka
-#+HUGO_TAGS: akka
 
 * Akka Cluster Sharding
 

@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Message Driven Architecture
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 Asyncronous and non-blocking. The sender does not actively wait for a response.
 

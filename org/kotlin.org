@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Kotlin
 #+filetags: snippets kotlin
-#+HUGO_TAGS: snippets kotlin
 
 * Asserting asynchronous task
 

@@ -4,7 +4,6 @@
 #+TITLE: Using PSQL as job queue
 #+filetags: psql queue
 #+HUGO_SECTION: posts
-#+HUGO_TAGS: psql queue
 
 Use-case: Fault Tolerant event queue in Postgres.
 

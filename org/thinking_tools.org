@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Thinking Tools
 #+filetags: work
-#+HUGO_TAGS: work
 
 Follows some interesting resources:
 - https://untools.co/

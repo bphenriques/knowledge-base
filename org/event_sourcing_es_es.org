@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Event Sourcing (ES)
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 Representing the application's state through the history of events that have happened in the past. Use cases:
 - *Audit Logs*: Build tailored reports from the event stream.

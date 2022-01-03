@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Reactive Streams
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 Components of a Reactive Stream:
 - *Publisher*: Publishes data to stream

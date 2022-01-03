@@ -3,7 +3,6 @@
 :END:
 #+TITLE: States of Data
 #+filetags: data
-#+HUGO_TAGS: data
 
 States of data:
 - *At Rest*: Data that is not consumed at the time is ingested. It is stored and then consumed later in a batch process.

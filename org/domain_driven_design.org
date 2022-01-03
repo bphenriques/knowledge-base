@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Domain Driven Design
 #+filetags: system-design lightbend
-#+HUGO_TAGS: system-design lightbend
 
 Approach on Software Development focused on the design of a shared Model understood by domain experts and by who implements it. Being a model, it means that it can be implemented in different ways, from diagrams to software.
 

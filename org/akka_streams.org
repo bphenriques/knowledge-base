@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Akka Streams
 #+filetags: akka stream
-#+HUGO_TAGS: akka stream
 
 Actor Streams leverage the actor system to consume streams of data. In fact, each element of a stream is a Message within the Actor System
 

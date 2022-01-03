@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Reactive Systems
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 * Goal
 

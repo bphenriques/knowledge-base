@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Jackson
 #+filetags: jvm json
-#+HUGO_TAGS: jvm json
 
 Jackson is a library to serialize and deserialize JSON in the JVM world.
 

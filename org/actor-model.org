@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Actor Model
 #+filetags: concurrency
-#+HUGO_TAGS: concurrency
 
 Concept from 1973 by Carl Hewitt:
 #+begin_quote

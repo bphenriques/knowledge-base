@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Akka Dispatcher
 #+filetags: akka dispatcher
-#+HUGO_TAGS: akka dispatcher
 
 The engine of Akka as it decides when a actor should process messsages and when it must yield the thread for others. It means that dispatchers are in control of the thread time and of the threads themselves.
 

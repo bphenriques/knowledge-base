@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Scala Experiments
 #+filetags: scala data-structures
-#+HUGO_TAGS: scala data-structures
 
 * Implementing ~Tree~
 

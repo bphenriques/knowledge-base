@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Stateless
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 Stateless systems means that:
 - The system contains all the required information to complete requests.

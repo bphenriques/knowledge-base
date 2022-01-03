@@ -4,8 +4,6 @@
 #+TITLE: Way of work
 #+filetags: work
 
-#+HUGO_TAGS: work
-
 * It's not about being right nor prove others wrong
 
 - *Corollary 1*: if it's wrong but it works, then it's not wrong.

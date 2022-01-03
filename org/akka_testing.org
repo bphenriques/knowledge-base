@@ -4,8 +4,6 @@
 #+TITLE: Akka Testing
 #+filetags: akka
 
-#+HUGO_TAGS: akka
-
 How to test actors in Akka.
 
 * Test Actor Ref

@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Consistency And Availability
 #+filetags: system-design
-#+HUGO_TAGS: system-design
 
 * Scalability
 

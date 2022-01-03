@@ -17,10 +17,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Install org-roam dependencies
-        run: |
-          sudo apt-get install sqlite3
-
       - name: Install Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -32,6 +28,7 @@ jobs:
         with:
           version: ${{ env.EMACS_VERSION }}
 
+      # Files under static/ox-hugo are automatic and should be published but not version controlled (they are a copy).
       - name: Force ox-hugo publish
         run: rm static/.gitignore
 

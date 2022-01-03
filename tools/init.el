@@ -10,7 +10,7 @@
 
 (require 'subr-x)
 
-(toggle-debug-on-error)                                       ;; Show debug informaton as soon as error occurs.
+(toggle-debug-on-error)                                       ;; Show debug information as soon as error occurs.
 (setq
  make-backup-files nil                                        ;; Disable "<file>~" backups.
 )
@@ -50,7 +50,7 @@
   :straight (:type git :host github :repo "kaushalmodi/ox-hugo"))
 
 (setf org-hugo-base-dir knowledge-base-dir)
-(setf org-id-extra-files (directory-files-recursively knowledge-base-dir "org"))
+(setf org-id-extra-files (directory-files-recursively knowledge-base-dir "\.org$"))
 
 ;;;
 ;;; Public functions

@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Akka Testing
 #+filetags: akka
-#+HUGO_SECTION: notes
+
 #+HUGO_TAGS: akka
 
 How to test actors in Akka.

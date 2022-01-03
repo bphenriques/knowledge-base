@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Gunther's Universal Scalability Law
 #+filetags: concurrency
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: concurrency
 
 Increasing concurrency can cause negative resutrns due to contention and coherency delay.

@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Stateless
 #+filetags: system-design
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
 
 Stateless systems means that:

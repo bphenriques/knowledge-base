@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Digital Garden
 #+filetags: note zettelkasten
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: note zettelkasten
 
 Digital gardening is a different take to blogging as it shifts the focus of publishing content to a public to the writing.

@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Akka Actors
 #+filetags: akka
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: akka
 
 * Handling Messages Asyncronously

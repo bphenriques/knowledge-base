@@ -3,8 +3,8 @@
 :END:
 #+TITLE: Git
 #+filetags: snippets
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: snippets
+
 * Get Previous Tag
 
 #+begin_src

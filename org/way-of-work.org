@@ -3,7 +3,7 @@
 :END:
 #+TITLE: Way of work
 #+filetags: work
-#+HUGO_SECTION: notes
+
 #+HUGO_TAGS: work
 
 * It's not about being right nor prove others wrong

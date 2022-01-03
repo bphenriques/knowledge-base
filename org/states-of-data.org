@@ -3,7 +3,6 @@
 :END:
 #+TITLE: States of Data
 #+filetags: data
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: data
 
 States of data:

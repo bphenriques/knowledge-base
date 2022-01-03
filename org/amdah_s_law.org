@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Amdah's Law
 #+filetags: concurrency
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: concurrency
 
 In short, contention limits paralelization.

@@ -3,7 +3,6 @@
 :END:
 #+TITLE: GPG
 #+filetags: security signing
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: security signing
 
 Automatically export public key to a server:

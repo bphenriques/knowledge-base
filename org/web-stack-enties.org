@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Resources to (re)-read
 #+filetags: reference
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: reference
 
 * Things I Wished More Developers Knew About Databases

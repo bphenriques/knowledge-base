@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Emacs
 #+filetags: editors
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: editors
 
 * Org-Mode

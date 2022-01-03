@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Sharding or Partitioning
 #+filetags: databases system-design
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: databases system-design
 
 Technique used by some data stores to reduce contention without sacrificing consistency.

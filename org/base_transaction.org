@@ -3,7 +3,6 @@
 :END:
 #+TITLE: BASE Transaction
 #+filetags: system-design
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
 
 Sometimes ACID transactions are not possible in some cases, e.g., microservices. As alternative, we use BASE transactions:

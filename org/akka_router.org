@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Akka Router
 #+filetags: akka router
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: akka router
 
 * Intro

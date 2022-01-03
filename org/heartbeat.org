@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Heartbeat
 #+filetags: protocols
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: protocols
 
 In order to detect failures, systems communicate with one another to verify communication. If the communication is deemed broken, then

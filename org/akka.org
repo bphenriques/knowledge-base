@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Akka
 #+filetags: akka
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: akka
 
 * Akka

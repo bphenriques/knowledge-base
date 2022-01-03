@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Command Sourcing
 #+filetags: system-design
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
 
 * Command Sourcing

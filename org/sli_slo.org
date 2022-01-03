@@ -3,7 +3,6 @@
 :END:
 #+TITLE: SLI/SLO
 #+filetags: system-design
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
 
 - *Service Level Indicator (SLI)*: Performance indicator measured as a ratio of two numbers.

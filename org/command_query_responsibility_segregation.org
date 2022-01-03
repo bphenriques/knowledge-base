@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Command Query Responsibility Segregation (CQRS)
 #+filetags: system-design
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: system-design
 
 Command Query Responsibility Segregation (CQRS) is a architectural pattern that aims to split applications between two models: ~Command Model~ (writes) and ~Query Model~ (reads). Some use cases:

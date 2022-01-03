@@ -15,6 +15,10 @@
  make-backup-files nil                                        ;; Disable "<file>~" backups.
 )
 
+; Force emacs directory as setting the HOME beforehand is not enough.
+(setq user-init-file (or load-file-name (buffer-file-name)))
+(setq user-emacs-directory (file-name-directory user-init-file))
+
 (defconst knowledge-base-dir
   (let* ((env-key "KNOWLEDGE_BASE_DIR")
          (env-value (getenv env-key)))
@@ -49,8 +53,10 @@
 (use-package ox-hugo
   :straight (:type git :host github :repo "kaushalmodi/ox-hugo"))
 
-(setf org-hugo-base-dir knowledge-base-dir)
-(setf org-id-extra-files (directory-files-recursively knowledge-base-dir "\.org$"))
+(setq
+  org-hugo-base-dir knowledge-base-dir
+  org-hugo-default-section-directory "notes"
+  org-id-extra-files (directory-files-recursively knowledge-base-dir "\.org$"))
 
 ;;;
 ;;; Public functions

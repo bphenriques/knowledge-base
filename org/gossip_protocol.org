@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Gossip Protocol
 #+filetags: protocols
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: protocols
 
 Some of these text may be interwined with specifities of the Gossip Protocol within [[id:2fa03d4f-948e-4a6e-a38b-178456b578b3][Akka Cluster]].

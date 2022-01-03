@@ -3,7 +3,6 @@
 :END:
 #+TITLE: Bug Management
 #+filetags: monitoring
-#+HUGO_SECTION: notes
 #+HUGO_TAGS: monitoring
 
 Some personal notes on simplifying the process so that one can focus on getting back to the other tasks at hand.

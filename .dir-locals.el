@@ -1,4 +1,5 @@
 ((nil . ((eval . (setq-local org-roam-directory (concat (file-name-as-directory (projectile-project-root)) "org")))
+         (eval . (setq-local org-hugo-base-dir (projectile-project-root)))
+         (org-hugo-section . "notes")
          (org-roam-file-exclude-regexp . "_index.org")))
- ("org" . ((org-mode . ((eval . (org-hugo-auto-export-mode 1)))))))
-
+ ("org" . ((org-mode . ((eval . (org-hugo-auto-export-mode)))))))

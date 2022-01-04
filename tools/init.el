@@ -55,7 +55,7 @@
 
 (setq
   org-hugo-base-dir knowledge-base-dir
-  org-hugo-default-section-directory "notes"
+  org-hugo-section "notes"
   org-id-extra-files (directory-files-recursively knowledge-base-dir "\.org$"))
 
 ;;;

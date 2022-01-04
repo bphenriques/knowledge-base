@@ -1,5 +1,5 @@
 ; Must be consistent with: https://github.com/bphenriques/dotfiles/blob/master/emacs/.config/doom/packages.el
 (
  ; https://github.com/kaushalmodi/ox-hugo
- ("ox-hugo" . "2bd84cc1f1dcd2e61fd9a7e272ec97a474e6863e"))
+ ("ox-hugo" . "87024bdf7199869120788522cea08fa77635afcf"))
 :beta

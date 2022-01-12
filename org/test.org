@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       bd3ce5c5-b492-4343-ad68-9553514b34a8
+:END:
+#+title: Test
+#+filetags: test
+
+* Test :ATTACH:
+
+
+[[attachment:_20220112_214316screenshot.png]]
+
+* Other :ATTACH:
+
+
+[[attachment:_20220112_214847screenshot.png]]

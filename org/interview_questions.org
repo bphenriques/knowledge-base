@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       c67c6089-ecab-4cc1-94a9-d671760b8dde
+:END:
+#+title: Interview Questions
+#+filetags:
+
+* Behaviour Questions
+
+Follows a snippet made by Michael Kusters (link):
+#+begin_src
+Interviewer: "Can you give us an example of a situation where you had to resolve a conflict?"
+Candidate: "What does your management do to create a friendly environment where conflicts are easy to address and resolve?"
+
+Interviewer: "Could you tell us about a situation where you had to deal with a difficult coworker?"
+Candidate: "Do I have to worry about difficult coworkers here?"
+
+Interviewer: "How do you perform under pressure?"
+Candidate: "Since you're HR: what are you doing to reduce pressure?"
+
+Interviewer: "Tell us about your greatest weakness."
+Candiate: "I really love working with people where teamwork is understood as building upon each others' strengths. How do you build teams?"
+
+Interviewer: "What will you contribute to this company?"
+Candidate: "I love doing a great job and bringing my talents in. How do you define, doing a great job - and which of my talents do you currently need most?"
+
+Interviewer: "Why do you want to work here?"
+Candidate: "I'm here to find out. What do you think makes this place better than the competitors?"
+
+Interviewer: "Why do you want to leave your current company?"
+Candidate: "What's the main reason why people leave your company?"
+#+end_src
+
+I find it it interesting as it may provide further insights about the companies culture. We should be prepared to continue the conversation if we really want to challenge the interviewer's questions.

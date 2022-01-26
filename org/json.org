@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       db01a80a-e0f1-4068-b3cf-20008af86be1
+:END:
+#+title: Json Processing Cookbook
+#+filetags: json data jq
+
+* Flatten Json
+
+#+begin_src bash
+jq -r '. | tostream
+| select(length==2)
+| (.[0] | join(".")) as $k
+| .[1] as $v
+| "\"\($k)\" = \"\($v)\";"'
+#+end_src

@@ -4,7 +4,7 @@
 
 * Digital Garden
 
-My digital garden is available at [[https://bphenriques.github.io/knowledge-base][bphenriques.github.io/knowledge-base]].
+My digital garden is available at [[https://bphenriques.github.io/knowledge-base][bphenriques.github.io/knowledge-base]] and uses the [[https://github.com/bphenriques/explorer-hugo-theme][Explorer Book Theme]].
 
 * How it works
 
@@ -27,6 +27,7 @@ Feel free to send feedback! I look forward to include your insights on my notes 
 * Reference
 
 - [[https://gohugo.io/][Hugo Static Page Generator]]
+- [[https://github.com/bphenriques/explorer-hugo-theme][Explorer Book Theme]]
 - [[https://github.com/alex-shpak/hugo-book][Hugo Book Theme]]
 - [[https://ox-hugo.scripter.co/][Ox-Hugo]]
 

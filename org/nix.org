@@ -2,7 +2,7 @@
 :ID:       2fa03d4f-948e-4a6e-a38b-178456b578d9
 :END:
 #+TITLE: Nix
-#+filetags: uncategorized
+#+filetags: nix dotfiles flakes
 
 [[https://nixos.org/][Nix]] is a declarative language aiming produce reproducible systems. In can be used to produce ~dotfiles~.
 

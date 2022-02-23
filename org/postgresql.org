@@ -2,7 +2,7 @@
 :ID:       9535c94a-83b7-4dda-abc0-1aa524842fbd
 :END:
 #+title: PostgreSQL
-#+filetags:
+#+filetags: psql postgres docker docker-compose
 
 Relational database.
 

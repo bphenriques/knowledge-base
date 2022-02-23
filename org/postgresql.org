@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       9535c94a-83b7-4dda-abc0-1aa524842fbd
+:END:
+#+title: PostgreSQL
+#+filetags:
+
+Relational database.
+
+One can run in a docker-compose environment like this:
+#+begin_src yaml
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13.3 # Version must be consistent with infrastructure
+    environment:
+      - "PGUSER=test"
+      - "POSTGRES_USER=test"
+      - "POSTGRES_PASSWORD=test"
+      - "POSTGRES_DB=test"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+#+end_src

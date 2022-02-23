@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       ced9d57d-5884-4932-8753-3f9ca593f7f8
+:END:
+#+title: Referential Transparency
+#+filetags: FP functional-programming IO scala
+
+Referential transparency: replacing an expression by its bound value doesn't alter the behaviour of your program. This gives huge benefits, which I'll talk about later.
+
+
+* References
+- https://www.reddit.com/r/scala/comments/8ygjcq/can_someone_explain_to_me_the_benefits_of_io/
+- https://www.youtube.com/watch?v=x3GLwl1FxcA&t=189s

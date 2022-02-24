@@ -14,7 +14,7 @@ new or existing topics.
 Learning can be hard. Having incremental notes and linking them is a great way to turn insights into knowledge, and with
 experience, make good use of it!
 
-#+ATTR_HTML: :alt Connecting insights dots leads to building knowledge
+#+ATTR_HTML: :alt Connecting insights dots leads to building knowledge :class center width-85
 [[file:from-data-to-knowledge.png]]
 
 * Navigation

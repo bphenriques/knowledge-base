@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       7a28e879-b7f3-4cfd-b78c-381d66253825
+:END:
+#+title: Cloud Testing
+#+filetags: AWS Testing
+
+In order to test AWS services locally, we can use https://docs.localstack.cloud/ which runs locally and offline.

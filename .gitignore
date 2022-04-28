@@ -3,3 +3,4 @@ public/
 resources/_gen/
 content/
 *.db
+.hugo_build.lock

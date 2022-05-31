@@ -1,23 +1,444 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Scalability #  It can meets increases in demand while remaining responsive.
+<!doctype html><html lang=en>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Scalability #  It can meets increases in demand while remaining responsive.
 This is different from performance. Performance optimizes response time (latency) while scalability optimizes ability to handle load. Requests per second actually measures both but we do not know which aspect was improved.
-Note Scalability is not the number of requests qwe can handle a in a given period of time (req/sec) but he number of requests itself (load)."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="Consistency And Availability"><meta property="og:description" content="Scalability #  It can meets increases in demand while remaining responsive.
+Note Scalability is not the number of requests qwe can handle a in a given period of time (req/sec) but he number of requests itself (load).">
+<meta name=theme-color content="#FFFFFF">
+<meta name=color-scheme content="light dark"><meta property="og:title" content="Consistency And Availability">
+<meta property="og:description" content="Scalability #  It can meets increases in demand while remaining responsive.
 This is different from performance. Performance optimizes response time (latency) while scalability optimizes ability to handle load. Requests per second actually measures both but we do not know which aspect was improved.
-Note Scalability is not the number of requests qwe can handle a in a given period of time (req/sec) but he number of requests itself (load)."><meta property="og:type" content="article"><meta property="og:url" content="https://bphenriques.github.io/knowledge-base/notes/consistency_and_availability/"><meta property="article:section" content="notes"><title>Consistency And Availability | Bruno Henriques's Digital Garden 🌱</title><link rel=icon href=/knowledge-base/favicon.png type=image/x-icon><link rel=stylesheet href=/knowledge-base/scss/explorer.min.81227fe14d47ca25b022b9b15feec75f9eb2a749e8453568ef9edad255a06da9.css integrity="sha256-gSJ/4U1HyiWwIrmxX+7HX56yp0noRTVo757a0lWgbak=" crossorigin=anonymous><script defer src=/knowledge-base/js/vendor/flexsearch.bundle.js></script><script defer src=/knowledge-base/js/search.min.f194e85d309adae058282f0ea2266359fe8ec0a80095467ac13c18625cd3a197.js integrity="sha256-8ZToXTCa2uBYKC8OoiZjWf6OwKgAlUZ6wTwYYlzToZc=" crossorigin=anonymous></script></head><body><input type=checkbox class="hidden toggle" id=site-menu-control>
-<input type=checkbox class="hidden toggle" id=content-menu-control><main class="container flex"><aside class=site-menu><div class=site-menu-content><nav><h2 class=brand><a class="flex align-center" href=/knowledge-base/><span>Bruno Henriques</span></a></h2><div class=search><input type=text id=search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="search-spinner hidden"></div><ul id=search-results class=item-preview-list></ul></div><a class=site-menu-shortcut-link href=/knowledge-base/notes>Recent Notes</a><p class=site-menu-tags-title><b>Tags</b></p><ul><li><a class=list-tag-item href=/knowledge-base/tags/akka><div class=tag-dot style=background-color:#ffecb3></div>Akka</a></li><li><a class=list-tag-item href=/knowledge-base/tags/aws><div class=tag-dot style=background-color:#f5f5f5></div>Aws</a></li><li><a class=list-tag-item href=/knowledge-base/tags/concurrency><div class=tag-dot style=background-color:#f5f5f5></div>Concurrency</a></li><li><a class=list-tag-item href=/knowledge-base/tags/data><div class=tag-dot style=background-color:#ffe0b2></div>Data</a></li><li><a class=list-tag-item href=/knowledge-base/tags/data-structures><div class=tag-dot style=background-color:#ffcdd2></div>Data structures</a></li><li><a class=list-tag-item href=/knowledge-base/tags/databases><div class=tag-dot style=background-color:#f1f8e9></div>Databases</a></li><li><a class=list-tag-item href=/knowledge-base/tags/dispatcher><div class=tag-dot style=background-color:#c8e6c9></div>Dispatcher</a></li><li><a class=list-tag-item href=/knowledge-base/tags/docker><div class=tag-dot style=background-color:#b9f6ca></div>Docker</a></li><li><a class=list-tag-item href=/knowledge-base/tags/docker-compose><div class=tag-dot style=background-color:#ffe0b2></div>Docker compose</a></li><li><a class=list-tag-item href=/knowledge-base/tags/dotfiles><div class=tag-dot style=background-color:#ab9df2></div>Dotfiles</a></li><li><a class=list-tag-item href=/knowledge-base/tags/editors><div class=tag-dot style=background-color:#ffb74d></div>Editors</a></li><li><a class=list-tag-item href=/knowledge-base/tags/flakes><div class=tag-dot style=background-color:#c8e6c9></div>Flakes</a></li><li><a class=list-tag-item href=/knowledge-base/tags/functional-programming><div class=tag-dot style=background-color:#ffebee></div>Functional programming</a></li><li><a class=list-tag-item href=/knowledge-base/tags/jq><div class=tag-dot style=background-color:#e1f5fe></div>Jq</a></li><li><a class=list-tag-item href=/knowledge-base/tags/json><div class=tag-dot style=background-color:#ffebee></div>JSON</a></li><li><a class=list-tag-item href=/knowledge-base/tags/jvm><div class=tag-dot style=background-color:#90caf9></div>Jvm</a></li><li><a class=list-tag-item href=/knowledge-base/tags/kotlin><div class=tag-dot style=background-color:#ffe57f></div>Kotlin</a></li><li><a class=list-tag-item href=/knowledge-base/tags/lightbend><div class=tag-dot style=background-color:#f0f4c3></div>Lightbend</a></li><li><a class=list-tag-item href=/knowledge-base/tags/monitoring><div class=tag-dot style=background-color:#e3f2fd></div>Monitoring</a></li><li><a class=list-tag-item href=/knowledge-base/tags/nix><div class=tag-dot style=background-color:#c5e1a5></div>Nix</a></li><li><a class=list-tag-item href=/knowledge-base/tags/note><div class=tag-dot style=background-color:#bbdefb></div>Note</a></li><li><a class=list-tag-item href=/knowledge-base/tags/postgres><div class=tag-dot style=background-color:#b2dfdb></div>Postgres</a></li><li><a class=list-tag-item href=/knowledge-base/tags/protocols><div class=tag-dot style=background-color:#ab9df2></div>Protocols</a></li><li><a class=list-tag-item href=/knowledge-base/tags/psql><div class=tag-dot style=background-color:#e0f2f1></div>Psql</a></li><li><a class=list-tag-item href=/knowledge-base/tags/queue><div class=tag-dot style=background-color:#ffebee></div>Queue</a></li><li><a class=list-tag-item href=/knowledge-base/tags/reference><div class=tag-dot style=background-color:#00bfa5></div>Reference</a></li><li><a class=list-tag-item href=/knowledge-base/tags/router><div class=tag-dot style=background-color:#c8e6c9></div>Router</a></li><li><a class=list-tag-item href=/knowledge-base/tags/scala><div class=tag-dot style=background-color:#ffd180></div>Scala</a></li><li><a class=list-tag-item href=/knowledge-base/tags/security><div class=tag-dot style=background-color:#b3e5fc></div>Security</a></li><li><a class=list-tag-item href=/knowledge-base/tags/signing><div class=tag-dot style=background-color:#ffd866></div>Signing</a></li><li><a class=list-tag-item href=/knowledge-base/tags/snippets><div class=tag-dot style=background-color:#e1f5fe></div>Snippets</a></li><li><a class=list-tag-item href=/knowledge-base/tags/stream><div class=tag-dot style=background-color:#d1c4e9></div>Stream</a></li><li><a class=list-tag-item href=/knowledge-base/tags/system-design><div class=tag-dot style=background-color:#ffebee></div>System design</a></li><li><a class=list-tag-item href=/knowledge-base/tags/testing><div class=tag-dot style=background-color:#e0e0e0></div>Testing</a></li><li><a class=list-tag-item href=/knowledge-base/tags/work><div class=tag-dot style=background-color:#f5f5f5></div>Work</a></li><li><a class=list-tag-item href=/knowledge-base/tags/zettelkasten><div class=tag-dot style=background-color:#e3f2fd></div>Zettelkasten</a></li></ul></nav></div></aside><div class=page><header class=mobile-navigation-header><div class="flex align-center justify-between"><label for=site-menu-control><img src=/knowledge-base/svg/menu-page.svg class=icon alt="Page Menu"></label>
+Note Scalability is not the number of requests qwe can handle a in a given period of time (req/sec) but he number of requests itself (load).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bphenriques.github.io/knowledge-base/notes/consistency_and_availability/"><meta property="article:section" content="notes">
+<title>Consistency And Availability | Bruno Henriques's Digital Garden 🌱</title>
+<link rel=icon href=/knowledge-base/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/knowledge-base/scss/explorer.min.d39230602abe455b56223f06168b94a989828d37ee855c76de9463fe78ac05c9.css integrity="sha256-05IwYCq+RVtWIj8GFouUqYmCjTfuhVx23pRj/nisBck=" crossorigin=anonymous>
+<script defer src=/knowledge-base/js/vendor/flexsearch.bundle.js></script>
+<script defer src=/knowledge-base/js/search.min.f50688865dba53ce2d561f0cbe93233d1563fc90ae0aec76c519c591f3ab51eb.js integrity="sha256-9QaIhl26U84tVh8MvpMjPRVj/JCuCux2xRnFkfOrUes=" crossorigin=anonymous></script>
+</head>
+<body>
+<input type=checkbox class="hidden toggle" id=site-menu-control>
+<input type=checkbox class="hidden toggle" id=content-menu-control>
+<main class="container flex">
+<aside class=site-menu>
+<div class=site-menu-content>
+<nav>
+<h2 class=brand>
+<a class="flex align-center" href=/knowledge-base/><span>Bruno Henriques</span>
+</a>
+</h2>
+<div class=search>
+<input type=text id=search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="search-spinner hidden"></div>
+<ul id=search-results class=item-preview-list></ul>
+</div>
+<a class=site-menu-shortcut-link href=/knowledge-base/notes>Recent Notes</a><p class=site-menu-tags-title><b>Tags</b></p>
+<ul><li>
+<a class=list-tag-item href=/knowledge-base/tags/akka>
+<div class=tag-dot style=background-color:#ffecb3></div>
+Akka
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/aws>
+<div class=tag-dot style=background-color:#f5f5f5></div>
+Aws
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/concurrency>
+<div class=tag-dot style=background-color:#f5f5f5></div>
+Concurrency
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/data>
+<div class=tag-dot style=background-color:#ffe0b2></div>
+Data
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/data-structures>
+<div class=tag-dot style=background-color:#ffcdd2></div>
+Data structures
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/databases>
+<div class=tag-dot style=background-color:#f1f8e9></div>
+Databases
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/dispatcher>
+<div class=tag-dot style=background-color:#c8e6c9></div>
+Dispatcher
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/docker>
+<div class=tag-dot style=background-color:#b9f6ca></div>
+Docker
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/docker-compose>
+<div class=tag-dot style=background-color:#ffe0b2></div>
+Docker compose
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/dotfiles>
+<div class=tag-dot style=background-color:#ab9df2></div>
+Dotfiles
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/editors>
+<div class=tag-dot style=background-color:#ffb74d></div>
+Editors
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/flakes>
+<div class=tag-dot style=background-color:#c8e6c9></div>
+Flakes
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/functional-programming>
+<div class=tag-dot style=background-color:#ffebee></div>
+Functional programming
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/jq>
+<div class=tag-dot style=background-color:#e1f5fe></div>
+Jq
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/json>
+<div class=tag-dot style=background-color:#ffebee></div>
+JSON
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/jvm>
+<div class=tag-dot style=background-color:#90caf9></div>
+Jvm
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/kotlin>
+<div class=tag-dot style=background-color:#ffe57f></div>
+Kotlin
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/lightbend>
+<div class=tag-dot style=background-color:#f0f4c3></div>
+Lightbend
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/monitoring>
+<div class=tag-dot style=background-color:#e3f2fd></div>
+Monitoring
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/nix>
+<div class=tag-dot style=background-color:#c5e1a5></div>
+Nix
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/note>
+<div class=tag-dot style=background-color:#bbdefb></div>
+Note
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/postgres>
+<div class=tag-dot style=background-color:#b2dfdb></div>
+Postgres
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/protocols>
+<div class=tag-dot style=background-color:#ab9df2></div>
+Protocols
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/psql>
+<div class=tag-dot style=background-color:#e0f2f1></div>
+Psql
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/queue>
+<div class=tag-dot style=background-color:#ffebee></div>
+Queue
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/reference>
+<div class=tag-dot style=background-color:#00bfa5></div>
+Reference
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/router>
+<div class=tag-dot style=background-color:#c8e6c9></div>
+Router
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/scala>
+<div class=tag-dot style=background-color:#ffd180></div>
+Scala
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/security>
+<div class=tag-dot style=background-color:#b3e5fc></div>
+Security
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/signing>
+<div class=tag-dot style=background-color:#ffd866></div>
+Signing
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/snippets>
+<div class=tag-dot style=background-color:#e1f5fe></div>
+Snippets
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/stream>
+<div class=tag-dot style=background-color:#d1c4e9></div>
+Stream
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/system-design>
+<div class=tag-dot style=background-color:#ffebee></div>
+System design
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/testing>
+<div class=tag-dot style=background-color:#e0e0e0></div>
+Testing
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/work>
+<div class=tag-dot style=background-color:#f5f5f5></div>
+Work
+</a>
+</li><li>
+<a class=list-tag-item href=/knowledge-base/tags/zettelkasten>
+<div class=tag-dot style=background-color:#e3f2fd></div>
+Zettelkasten
+</a>
+</li></ul>
+</nav>
+</div>
+</aside>
+<div class=page>
+<header class=mobile-navigation-header>
+<div class="flex align-center justify-between">
+<label for=site-menu-control>
+<img src=/knowledge-base/svg/menu-page.svg class=icon alt="Page Menu">
+</label>
 <strong>Consistency And Availability</strong>
-<label for=content-menu-control><img src=/knowledge-base/svg/menu-content.svg class=icon alt="Content Menu"></label></div></header><article class=markdown><h1 class=post-title><a href=/knowledge-base/notes/consistency_and_availability/>Consistency And Availability</a></h1><h2 id=scalability>Scalability
-<a class=anchor href=#scalability>#</a></h2><p>It can meets increases in demand while remaining responsive.</p><p>This is different from performance. Performance optimizes response time (latency) while scalability optimizes ability to handle load. Requests per second actually measures both but we do not know which aspect was improved.</p><p><strong>Note</strong> Scalability is not the number of requests qwe can handle a in a given period of time (req/sec) but he number of requests itself (load).</p><p>If x axis is number of requests (Load) and y axis is response time. Improving performance leads to decrease in the y axis. Improving scalability means a shift on the x axis meaning that we can handle more requests with the same response time.</p><p>Still confused as if I improve performance I should free up resources to handle more requests..</p><p>Reactive Microservices focus on improving scalability.</p><h2 id=consistency>Consistency:
-<a class=anchor href=#consistency>#</a></h2><p>All members of the system have the same view or state. This does not factors time.</p><h3 id=eventual-consistency>Eventual Consistency
-<a class=anchor href=#eventual-consistency>#</a></h3><p>Guarantees that, in the absence of new updates, all accesses to a specific piece of data will eventually return the most recent data.</p><p>Different forms:</p><ul><li>Eventual Consistency</li><li>Causal Consistency</li><li>Sequential Conssitency</li><li>others</li></ul><p>E.g., Source control are eventually consistent. All the code reading is potentially out-of-date and a merge operations is relied upon to bring the local state back to speed.</p><h4 id=todo-check-each-one>TODO: Check each one
-<a class=anchor href=#todo-check-each-one>#</a></h4><h3 id=strong-consistency>Strong Consistency
-<a class=anchor href=#strong-consistency>#</a></h3><p>An update to a piece of data needs agreement from all nodes before it becomes visible.</p><p>Physically it is impossible therefore we simulate: Locks that introduce overhead in the form of contention. Now it becomes a single resource which eliminates the distributed nature. Tying the distributed problem to a non-distributed resource.</p><p>Traditionally, monoliths are based around strong consistency.</p><h4 id=effects-of-contention>Effects of contention
-<a class=anchor href=#effects-of-contention>#</a></h4><p>Definition: Any two things that contend for a single limited resource and only one will win and the other will be forced to wait.</p><p>As the number of resources disputing for the resource, more time time it will take to finally free up the resources.</p><p>See:
--<a href=/knowledge-base/notes/amdah_s_law/> Amdah&rsquo;s Law</a></p><ul><li><a href=/knowledge-base/notes/gunther_s_universal_scalability_law/>Gunther&rsquo;s Universal Scalability Law</a></li></ul><ul><li><p>Coherence Delay</p><p>Definition: Time it takes for synchronization to complete on a distributed systems - My definition following below notes:</p><p>Syncronization is done using crosstalk or gossip - Each system sends messages to each other node informing of any state changes. The time it takes for the cynscronization to complete is called <strong>Coeherency Delay</strong>.</p><p>Increasing the number of nodes increases the delay.</p></li></ul><ul><li><p>Laws of scalability</p><p>Both these laws demonstrate that linear scalability is almost always unachivable. Such is only possible if the system lieve in total isolation.</p></li></ul><ul><li><p>Reactive Systems</p><p>Reduce contention by:</p><ul><li>Isolating locks</li><li>Eliminating transactions</li><li>Avoiding blocking operations</li></ul><p>Mitigate coherency delays by:</p><ul><li>Embracing Eventual Consistency</li><li>Building in Autonmy</li></ul><p>This allows for higher scalability as we reduce or eliminate these factors.</p></li></ul><h2 id=cap-theorem>CAP Theorem
-<a class=anchor href=#cap-theorem>#</a></h2><p>States that a distributed system cannnot provide more than than two of the following:</p><ul><li>Consistency</li><li>Availability</li><li>Partition Tolerance</li></ul><p>One has to pick one of the following combinations:</p><ul><li>(CP) Consistent and Partition Tolerance</li><li>(AP) Available and Partition Tolerance.</li></ul><p>In practice, they may claim CP/AP except for some edge-cases. It is a balance.</p><h3 id=partition-tolerance>Partition Tolerance
-<a class=anchor href=#partition-tolerance>#</a></h3><p>The system continues to operate despite an arbitrary number of messages being dropped (or delayed) by the network.</p><p>They can occur due to:</p><ul><li>Problems in the network.</li><li>When a node goes down.</li></ul><p>May be short or long lived.</p><p>Two options:</p><ul><li>(AP) Sacrifice Consistency: Allow writes to both sides of the partition. This require merging the data in order to restore consistency.</li><li>(CP) Sacrifice Availability: Disabling or terminating on side of the partitions. During this, some or all of your system will be unavailable.</li></ul><h2 id=sharding-as-a-way-to-have-strong-consistency>Sharding as a way to have strong consistency
-<a class=anchor href=#sharding-as-a-way-to-have-strong-consistency>#</a></h2><p>Limit the scope of the contention and reduce crosstalk. Is applied within the application. It is not the same type of sharding used in some databases, the technique is similar though.</p><p>Allows strong consistency.</p><p>Partitions entities (or Actors) in the domain according to their id.</p><p>Groups of entities are called a shard and each entity only exists in one shard.</p><p>Each shard exists in only one location. This fact eliminates the distributed systems problem.</p><p>The entity acts as a consistency boundary.</p><p>In order for this to work, we need to have a coordinator that ensures that traffic for a particular entity is routed to the correct location. The coordinator uses the ID to calculate the appropriate shard.</p><p>Aggregate Roots are good candidate for sharding.</p><p>It is important to have a balanced shards and that requires a good sharding key - UUIDs or hashcodes. Poor key selections will result in hotspots.</p><p>Rule of thumb: 10x as many shards as nodes.</p><p>Akka provides this as a means to distribute actors across a cCLuster in a shared setup. Lagom persistent entities levarage akka cluster sharding to distribute the entities across the cluster.</p><p>What about resharding? when a system goes down&mldr;</p><p>Sharding allows a great caching solution as:</p><ul><li>We can store the cache results after writing to the database</li><li>Databases is effectively write-only which can speed up things</li><li>We only consult the cache during reads.</li><li>Begs the question: How many items and what is the TTL? Well.. it for certain reduces the read on the DB but that is not forever unless we have infinite memory.</li></ul><h3 id=effects>Effects
-<a class=anchor href=#effects>#</a></h3><ul><li>Does not eliminate contention. It solely isolates to a single entity.</li><li>The router/coordinator represents a source of contention as well.</li><li>A shareded system minimizes contention by:<ul><li>Limiting the amounf of work the router/coordinator performs - By storing where the shard is after asking the coordinator - How to invalidate that cache due to failures?</li><li>Isolates contention to individual entities</li></ul></li></ul><p>Scalability is doen by distributing the shards over mode machines.
+<label for=content-menu-control><img src=/knowledge-base/svg/menu-content.svg class=icon alt="Content Menu"></label>
+</div>
+</header>
+<article class=markdown>
+<h1 class=post-title>
+<a href=/knowledge-base/notes/consistency_and_availability/>Consistency And Availability</a>
+</h1><h2 id=scalability>
+Scalability
+<a class=anchor href=#scalability>#</a>
+</h2>
+<p>It can meets increases in demand while remaining responsive.</p>
+<p>This is different from performance. Performance optimizes response time (latency) while scalability optimizes ability to handle load. Requests per second actually measures both but we do not know which aspect was improved.</p>
+<p><strong>Note</strong> Scalability is not the number of requests qwe can handle a in a given period of time (req/sec) but he number of requests itself (load).</p>
+<p>If x axis is number of requests (Load) and y axis is response time. Improving performance leads to decrease in the y axis. Improving scalability means a shift on the x axis meaning that we can handle more requests with the same response time.</p>
+<p>Still confused as if I improve performance I should free up resources to handle more requests..</p>
+<p>Reactive Microservices focus on improving scalability.</p>
+<h2 id=consistency>
+Consistency:
+<a class=anchor href=#consistency>#</a>
+</h2>
+<p>All members of the system have the same view or state. This does not factors time.</p>
+<h3 id=eventual-consistency>
+Eventual Consistency
+<a class=anchor href=#eventual-consistency>#</a>
+</h3>
+<p>Guarantees that, in the absence of new updates, all accesses to a specific piece of data will eventually return the most recent data.</p>
+<p>Different forms:</p>
+<ul>
+<li>Eventual Consistency</li>
+<li>Causal Consistency</li>
+<li>Sequential Conssitency</li>
+<li>others</li>
+</ul>
+<p>E.g., Source control are eventually consistent. All the code reading is potentially out-of-date and a merge operations is relied upon to bring the local state back to speed.</p>
+<h4 id=todo-check-each-one>
+TODO: Check each one
+<a class=anchor href=#todo-check-each-one>#</a>
+</h4>
+<h3 id=strong-consistency>
+Strong Consistency
+<a class=anchor href=#strong-consistency>#</a>
+</h3>
+<p>An update to a piece of data needs agreement from all nodes before it becomes visible.</p>
+<p>Physically it is impossible therefore we simulate: Locks that introduce overhead in the form of contention. Now it becomes a single resource which eliminates the distributed nature. Tying the distributed problem to a non-distributed resource.</p>
+<p>Traditionally, monoliths are based around strong consistency.</p>
+<h4 id=effects-of-contention>
+Effects of contention
+<a class=anchor href=#effects-of-contention>#</a>
+</h4>
+<p>Definition: Any two things that contend for a single limited resource and only one will win and the other will be forced to wait.</p>
+<p>As the number of resources disputing for the resource, more time time it will take to finally free up the resources.</p>
+<p>See:
+-<a href=/knowledge-base/notes/amdah_s_law/> Amdah&rsquo;s Law</a>
+</p>
+<ul>
+<li><a href=/knowledge-base/notes/gunther_s_universal_scalability_law/>Gunther&rsquo;s Universal Scalability Law</a>
+</li>
+</ul>
+<ul>
+<li>
+<p>Coherence Delay</p>
+<p>Definition: Time it takes for synchronization to complete on a distributed systems - My definition following below notes:</p>
+<p>Syncronization is done using crosstalk or gossip - Each system sends messages to each other node informing of any state changes. The time it takes for the cynscronization to complete is called <strong>Coeherency Delay</strong>.</p>
+<p>Increasing the number of nodes increases the delay.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>Laws of scalability</p>
+<p>Both these laws demonstrate that linear scalability is almost always unachivable. Such is only possible if the system lieve in total isolation.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p>Reactive Systems</p>
+<p>Reduce contention by:</p>
+<ul>
+<li>Isolating locks</li>
+<li>Eliminating transactions</li>
+<li>Avoiding blocking operations</li>
+</ul>
+<p>Mitigate coherency delays by:</p>
+<ul>
+<li>Embracing Eventual Consistency</li>
+<li>Building in Autonmy</li>
+</ul>
+<p>This allows for higher scalability as we reduce or eliminate these factors.</p>
+</li>
+</ul>
+<h2 id=cap-theorem>
+CAP Theorem
+<a class=anchor href=#cap-theorem>#</a>
+</h2>
+<p>States that a distributed system cannnot provide more than than two of the following:</p>
+<ul>
+<li>Consistency</li>
+<li>Availability</li>
+<li>Partition Tolerance</li>
+</ul>
+<p>One has to pick one of the following combinations:</p>
+<ul>
+<li>(CP) Consistent and Partition Tolerance</li>
+<li>(AP) Available and Partition Tolerance.</li>
+</ul>
+<p>In practice, they may claim CP/AP except for some edge-cases. It is a balance.</p>
+<h3 id=partition-tolerance>
+Partition Tolerance
+<a class=anchor href=#partition-tolerance>#</a>
+</h3>
+<p>The system continues to operate despite an arbitrary number of messages being dropped (or delayed) by the network.</p>
+<p>They can occur due to:</p>
+<ul>
+<li>Problems in the network.</li>
+<li>When a node goes down.</li>
+</ul>
+<p>May be short or long lived.</p>
+<p>Two options:</p>
+<ul>
+<li>(AP) Sacrifice Consistency: Allow writes to both sides of the partition. This require merging the data in order to restore consistency.</li>
+<li>(CP) Sacrifice Availability: Disabling or terminating on side of the partitions. During this, some or all of your system will be unavailable.</li>
+</ul>
+<h2 id=sharding-as-a-way-to-have-strong-consistency>
+Sharding as a way to have strong consistency
+<a class=anchor href=#sharding-as-a-way-to-have-strong-consistency>#</a>
+</h2>
+<p>Limit the scope of the contention and reduce crosstalk. Is applied within the application. It is not the same type of sharding used in some databases, the technique is similar though.</p>
+<p>Allows strong consistency.</p>
+<p>Partitions entities (or Actors) in the domain according to their id.</p>
+<p>Groups of entities are called a shard and each entity only exists in one shard.</p>
+<p>Each shard exists in only one location. This fact eliminates the distributed systems problem.</p>
+<p>The entity acts as a consistency boundary.</p>
+<p>In order for this to work, we need to have a coordinator that ensures that traffic for a particular entity is routed to the correct location. The coordinator uses the ID to calculate the appropriate shard.</p>
+<p>Aggregate Roots are good candidate for sharding.</p>
+<p>It is important to have a balanced shards and that requires a good sharding key - UUIDs or hashcodes. Poor key selections will result in hotspots.</p>
+<p>Rule of thumb: 10x as many shards as nodes.</p>
+<p>Akka provides this as a means to distribute actors across a cCLuster in a shared setup. Lagom persistent entities levarage akka cluster sharding to distribute the entities across the cluster.</p>
+<p>What about resharding? when a system goes down&mldr;</p>
+<p>Sharding allows a great caching solution as:</p>
+<ul>
+<li>We can store the cache results after writing to the database</li>
+<li>Databases is effectively write-only which can speed up things</li>
+<li>We only consult the cache during reads.</li>
+<li>Begs the question: How many items and what is the TTL? Well.. it for certain reduces the read on the DB but that is not forever unless we have infinite memory.</li>
+</ul>
+<h3 id=effects>
+Effects
+<a class=anchor href=#effects>#</a>
+</h3>
+<ul>
+<li>Does not eliminate contention. It solely isolates to a single entity.</li>
+<li>The router/coordinator represents a source of contention as well.</li>
+<li>A shareded system minimizes contention by:
+<ul>
+<li>Limiting the amounf of work the router/coordinator performs - By storing where the shard is after asking the coordinator - How to invalidate that cache due to failures?</li>
+<li>Isolates contention to individual entities</li>
+</ul>
+</li>
+</ul>
+<p>Scalability is doen by distributing the shards over mode machines.
 Strong consistency is achiaved by isolating operations to a specific entity.
-Careful choice of shard keys is important to maintain a good scalability.</p><h3 id=failure>Failure
-<a class=anchor href=#failure>#</a></h3><p>Sharding sacrifices availability. Once a shard goes down, there will be a period of time where it is unavailable and wil migrate to another node eventually.</p><h2 id=crdts-provide-a-availability-solution-based-on-async-replication>CRDTs provide a availability solution based on async replication
-<a class=anchor href=#crdts-provide-a-availability-solution-based-on-async-replication>#</a></h2><p>Conflict-free Replicated Data</p><p>On the application level.</p><p>Highly available and eventually consistent.</p><p>Specially designed data type.</p><p>Updates are applied on one replica and then copied async.</p><p>Udpdates are merged to determine the final state.</p><p>Two types:</p><ul><li>CvRDT - Convergent Replicated Data Type copy state between replicas. Requires a merge operation that understands how to combine two states. These operations must be: commutative, associative and idempotent.</li><li>CmRDT - Commutative Replicated Data Types. These copy operations isntead of state.</li></ul></article><footer class=page-footer></footer><label for=site-menu-control class="hidden site-menu-overlay"></label><label for=content-menu-control class="hidden content-menu-overlay"></label></div><aside class=content-menu><div class=content-menu-content><div class=toc-tags><p class=toc-title>Tags</p><div class=list-item-tag style=background-color:#ffebee>System design</div></div><p class=toc-title>Table Of Contents</p><nav id=TableOfContents><ul><li><a href=#scalability>Scalability</a></li><li><a href=#consistency>Consistency:</a><ul><li><a href=#eventual-consistency>Eventual Consistency</a></li><li><a href=#strong-consistency>Strong Consistency</a></li></ul></li><li><a href=#cap-theorem>CAP Theorem</a><ul><li><a href=#partition-tolerance>Partition Tolerance</a></li></ul></li><li><a href=#sharding-as-a-way-to-have-strong-consistency>Sharding as a way to have strong consistency</a><ul><li><a href=#effects>Effects</a></li><li><a href=#failure>Failure</a></li></ul></li><li><a href=#crdts-provide-a-availability-solution-based-on-async-replication>CRDTs provide a availability solution based on async replication</a></li></ul></nav></div></aside></main></body></html>
+Careful choice of shard keys is important to maintain a good scalability.</p>
+<h3 id=failure>
+Failure
+<a class=anchor href=#failure>#</a>
+</h3>
+<p>Sharding sacrifices availability. Once a shard goes down, there will be a period of time where it is unavailable and wil migrate to another node eventually.</p>
+<h2 id=crdts-provide-a-availability-solution-based-on-async-replication>
+CRDTs provide a availability solution based on async replication
+<a class=anchor href=#crdts-provide-a-availability-solution-based-on-async-replication>#</a>
+</h2>
+<p>Conflict-free Replicated Data</p>
+<p>On the application level.</p>
+<p>Highly available and eventually consistent.</p>
+<p>Specially designed data type.</p>
+<p>Updates are applied on one replica and then copied async.</p>
+<p>Udpdates are merged to determine the final state.</p>
+<p>Two types:</p>
+<ul>
+<li>CvRDT - Convergent Replicated Data Type copy state between replicas. Requires a merge operation that understands how to combine two states. These operations must be: commutative, associative and idempotent.</li>
+<li>CmRDT - Commutative Replicated Data Types. These copy operations isntead of state.</li>
+</ul>
+</article>
+<footer class=page-footer>
+</footer>
+<label for=site-menu-control class="hidden site-menu-overlay"></label><label for=content-menu-control class="hidden content-menu-overlay"></label></div><aside class=content-menu>
+<div class=content-menu-content>
+<div class=toc-tags>
+<p class=toc-title>Tags</p>
+<div class=list-item-tag style=background-color:#ffebee>System design</div>
+</div><p class=toc-title>Table Of Contents</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#scalability>Scalability</a></li>
+<li><a href=#consistency>Consistency:</a>
+<ul>
+<li><a href=#eventual-consistency>Eventual Consistency</a></li>
+<li><a href=#strong-consistency>Strong Consistency</a></li>
+</ul>
+</li>
+<li><a href=#cap-theorem>CAP Theorem</a>
+<ul>
+<li><a href=#partition-tolerance>Partition Tolerance</a></li>
+</ul>
+</li>
+<li><a href=#sharding-as-a-way-to-have-strong-consistency>Sharding as a way to have strong consistency</a>
+<ul>
+<li><a href=#effects>Effects</a></li>
+<li><a href=#failure>Failure</a></li>
+</ul>
+</li>
+<li><a href=#crdts-provide-a-availability-solution-based-on-async-replication>CRDTs provide a availability solution based on async replication</a></li>
+</ul>
+</nav>
+</div>
+</aside></main>
+</body>
+</html>

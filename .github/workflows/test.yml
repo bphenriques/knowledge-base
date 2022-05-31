@@ -6,7 +6,7 @@ on:
 
 env:
   HUGO_VERSION: 0.88.1
-  EMACS_VERSION: 27.1
+  EMACS_VERSION: 28.1
 
 jobs:
   build_page:

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       4331316e-00b1-44fd-9c56-466de9122b70
+:END:
+#+title: linux
+#+filetags:
+
+How to format:
+#+begin_src
+```
+$ sudo mkfs.ext4 -L data /dev/sdb1
+```
+#+end_src
+
+If having problems writing to disk, review permissions:
+#+begin_src
+sudo chmod -R a+rwX /mnt/data
+#+end_src

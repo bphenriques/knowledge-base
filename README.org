@@ -1,6 +1,4 @@
-Archived: Migrating out of emacs. Archiving.
-
----
+* Archived: Migrating out of emacs. Feel free to re-use the [[https://github.com/bphenriques/explorer-hugo-theme][Explorer theme]].
 
 [[https://img.shields.io/badge/hugo-0.85.0-blue.svg]]
 [[https://github.com/bphenriques/knowledge-base/workflows/Build%20&%20Deploy/badge.svg?event=push]]
